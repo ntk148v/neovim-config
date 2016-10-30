@@ -26,7 +26,8 @@ Complete instructions to Neovim as your IDE:
 3. Clone init.vim - neovim configuration file to specific path, in this case is `~/.config/nvim/init.vim`:
 
   ```
-  $ git clone https://github.com/ntk148v/neovim_config/init.vim ~/.config/nvim/init.vim
+  $ git clone https://github.com/ntk148v/neovim_config/
+  $ mv neovim_config/init.vim ~/.config/nvim/
   $ nvim +PluginInstall +q
   ```
 4. Enjoy it!

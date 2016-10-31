@@ -42,6 +42,14 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 " Git Integration
 Plugin 'tpope/vim-fugitive'
+" Vim-airline Themes
+Plugin 'vim-airline/vim-airline-themes'
+" Tagbar
+Plugin 'majutsushi/tagbar'
+" Python Mode
+Plugin 'klen/python-mode'
+" Vim Markdown
+Plugin 'tpope/vim-markdown'
 
 " After all plugins...
 call vundle#end()
@@ -76,6 +84,9 @@ set mouse-=a
 set completeopt=menuone,preview,noinsert
 " Let vim-gitgutter do its thing on large files
 let g:gitgutter_max_signs=10000
+
+let g:airline_powerline_fonts = 1
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
 " If your terminal's background is white (light theme), uncomment the following
 " to make EasyMotion's cues much easier to read.
@@ -120,6 +131,8 @@ nnoremap <space> za
 
 autocmd BufNewFile,BufRead *.tex,*.bib noremap <buffer> <C-b> :w<cr>:new<bar>r !make<cr>:setlocal buftype=nofile<cr>:setlocal bufhidden=hide<cr>:setlocal noswapfile<cr>
 autocmd BufNewFile,BufRead *.tex,*.bib imap <buffer> <C-b> <Esc><C-b>
+
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 " UTF8 Support
 set encoding=utf-8

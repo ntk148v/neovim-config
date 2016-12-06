@@ -50,7 +50,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'klen/python-mode'
 " Vim Markdown
 Plugin 'tpope/vim-markdown'
-
+Plugin 'jmcantrell/vim-virtualenv'
 " After all plugins...
 call vundle#end()
 filetype plugin indent on
@@ -136,17 +136,6 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 " UTF8 Support
 set encoding=utf-8
-
-" Virtualenv Support
-" python with virtualenv support
-py << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
-EOF
 
 " Hide .pyc when browsing files
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree

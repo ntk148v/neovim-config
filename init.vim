@@ -40,6 +40,7 @@ Plugin 'jnurmine/Zenburn'
 " File Browsing
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 " Git Integration
 Plugin 'tpope/vim-fugitive'
 " Vim-airline Themes
@@ -47,7 +48,7 @@ Plugin 'vim-airline/vim-airline-themes'
 " Tagbar
 Plugin 'majutsushi/tagbar'
 " Python Mode
-Plugin 'klen/python-mode'
+" Plugin 'klen/python-mode'
 " Vim Markdown
 Plugin 'tpope/vim-markdown'
 Plugin 'jmcantrell/vim-virtualenv'
@@ -72,8 +73,14 @@ endfunction
 
 
 """"""" General coding stuff """""""
+set list
+set listchars=tab:>-,trail:-,extends:#,nbsp:-
+set modeline
+set tw=78
+set tabstop=8 expandtab shiftwidth=4 softtabstop=4
+
 " Highlight 80th column
-set colorcolumn=80
+set colorcolumn=79
 " Always show status bar
 set laststatus=2
 " Let plugins show effects after 500ms, not 4s
@@ -122,6 +129,9 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+"Specific key or shortcut to open NERDTree
+map <C-n> :NERDTreeToggle<CR>
+
 " Enable folding
 set foldmethod=indent
 set foldlevel=99
@@ -133,6 +143,10 @@ autocmd BufNewFile,BufRead *.tex,*.bib noremap <buffer> <C-b> :w<cr>:new<bar>r !
 autocmd BufNewFile,BufRead *.tex,*.bib imap <buffer> <C-b> <Esc><C-b>
 
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" Open NERDTree automatically when nvim starts up on opening a directory
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 
 " UTF8 Support
 set encoding=utf-8

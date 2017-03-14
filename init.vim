@@ -52,6 +52,8 @@ Plugin 'majutsushi/tagbar'
 " Vim Markdown
 Plugin 'tpope/vim-markdown'
 Plugin 'jmcantrell/vim-virtualenv'
+" Auto-close bracket...
+Plugin 'Raimondi/delimitMate'
 " After all plugins...
 call vundle#end()
 filetype plugin indent on

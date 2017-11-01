@@ -31,3 +31,6 @@ Complete instructions to Neovim as your IDE:
   $ nvim +PluginInstall +q
   ```
 4. Enjoy it!
+
+
+> NOTE: You can use it by clone this repo and run install.sh script as well.

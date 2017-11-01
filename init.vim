@@ -2,8 +2,8 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin('~/.vim/bundle')
+set rtp+=~/.config/nvim/bundle/Vundle.vim
+call vundle#begin('~/.config/nvim/bundle')
 
 Plugin 'VundleVim/Vundle.vim'
 
@@ -13,10 +13,12 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'easymotion/vim-easymotion'
 " Ctrl-P - Fuzzy file search
 Plugin 'kien/ctrlp.vim'
+" Neomake build tool (mapped below to <c-b>)
+Plugin 'benekastah/neomake'
 " Autocomplete for python
 " This plugin cache a lot of thing and make vim start slowly
 " Therefore I decided to turn it off.
-"Plugin 'davidhalter/jedi-vim'
+Plugin 'davidhalter/jedi-vim'
 " Remove extraneous whitespace when edit mode is exited
 Plugin 'thirtythreeforty/lessspace.vim'
 " LaTeX editing
@@ -65,13 +67,17 @@ filetype plugin indent on
 
 """"""" Jedi-VIM """""""
 " Don't mess up undo history
-" let g:jedi#show_call_signatures = "0"
+let g:jedi#show_call_signatures = "0"
 
 
 """"""" SuperTab configuration """""""
+let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
 function! Completefunc(findstart, base)
     return "\<c-x>\<c-p>"
 endfunction
+
+call SuperTabChain(Completefunc, '<c-n>')
+let g:SuperTabCompletionContexts = ['g:ContextText2']
 
 " Incremential search & highlight search
 set incsearch hlsearch

@@ -1,6 +1,6 @@
-# Using Neovim as an IDE
+# Using NeoVim as an Python IDE
 
-Neovim is a pretty cool successor to Vim, focusing on compatibility while adding asynchronous plugin functionality and trying to clean up the code base. Having been fed up at various times with both Sublime Text (2 and 3) and Atom, and after realizing how much development I do over SSH, it seemed reasonable to check out using vim (or nvim, in this case) as my IDE. The advantages essentially boil down to:
+[Neovim](https://neovim.io/) is a pretty cool successor to Vim, focusing on compatibility while adding asynchronous plugin functionality and trying to clean up the code base. Having been fed up at various times with both Sublime Text (2 and 3) and Atom, and after realizing how much development I do over SSH, it seemed reasonable to check out using vim (or nvim, in this case) as my IDE. The advantages essentially boil down to:
 
   - Consistent IDE over SSH or locally,
   - No need to ever use the mouse while coding (takes longer to learn, but is faster; this is aided by vim-easymotion and Ctrl-P),
@@ -20,7 +20,7 @@ Complete instructions to Neovim as your IDE:
   ```
   $ sudo add-apt-repository ppa:neovim-ppa/unstable
   $ sudo apt-get update
-  $ sudo apt-get install neovim  
+  $ sudo apt-get install neovim -y
   ```
 
 3. Clone init.vim - neovim configuration file to specific path, in this case is `~/.config/nvim/init.vim`:
@@ -31,5 +31,3 @@ Complete instructions to Neovim as your IDE:
   $ nvim +PluginInstall +q
   ```
 4. Enjoy it!
-
-P/s: Of course, this config will suitable with `vim`. Change `nvim` to `vim` in init.vim and it'll works.

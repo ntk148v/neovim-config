@@ -2,8 +2,8 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.config/nvim/bundle/Vundle.vim
-call vundle#begin('~/.config/nvim/bundle')
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin('~/.vim/bundle')
 
 Plugin 'VundleVim/Vundle.vim'
 
@@ -13,16 +13,16 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'easymotion/vim-easymotion'
 " Ctrl-P - Fuzzy file search
 Plugin 'kien/ctrlp.vim'
-" Neomake build tool (mapped below to <c-b>)
-Plugin 'benekastah/neomake'
 " Autocomplete for python
-Plugin 'davidhalter/jedi-vim'
+" This plugin cache a lot of thing and make vim start slowly
+" Therefore I decided to turn it off.
+"Plugin 'davidhalter/jedi-vim'
 " Remove extraneous whitespace when edit mode is exited
 Plugin 'thirtythreeforty/lessspace.vim'
 " LaTeX editing
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 " Status bar mods
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
 Plugin 'airblade/vim-gitgutter'
 " Tab completion
 Plugin 'ervandew/supertab'
@@ -31,12 +31,10 @@ Plugin 'tmhedberg/SimpylFold'
 " Auto-Indentation
 Plugin 'vim-scripts/indentpython.vim'
 " Syntax Checking/Highlighting
-Plugin 'scrooloose/syntastic'
+"Plugin 'vim-syntastic/syntastic'
 Plugin 'nvie/vim-flake8'
 " Color Schemes
-Plugin 'tomasr/molokai'
-Plugin 'dracula/vim'
-Plugin 'jnurmine/Zenburn'
+Plugin 'chriskempson/base16-vim'
 " File Browsing
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
@@ -54,25 +52,29 @@ Plugin 'tpope/vim-markdown'
 Plugin 'jmcantrell/vim-virtualenv'
 " Auto-close bracket...
 Plugin 'Raimondi/delimitMate'
+" Solarized color
+Plugin 'altercation/vim-colors-solarized'
+" Fuzzy search
+Plugin 'junegunn/fzf'
+" Vim ansible yaml
+Plugin 'chase/vim-ansible-yaml'
+
 " After all plugins...
 call vundle#end()
 filetype plugin indent on
 
 """"""" Jedi-VIM """""""
 " Don't mess up undo history
-let g:jedi#show_call_signatures = "0"
+" let g:jedi#show_call_signatures = "0"
 
 
 """"""" SuperTab configuration """""""
-"let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
 function! Completefunc(findstart, base)
     return "\<c-x>\<c-p>"
 endfunction
 
-"call SuperTabChain(Completefunc, '<c-n>')
-
-"let g:SuperTabCompletionContexts = ['g:ContextText2']
-
+" Incremential search & highlight search
+set incsearch hlsearch
 
 """"""" General coding stuff """""""
 set list
@@ -82,7 +84,11 @@ set tw=78
 set tabstop=8 expandtab shiftwidth=4 softtabstop=4
 
 " Highlight 80th column
-set colorcolumn=79
+if exists('+colorcolumn')
+    set colorcolumn=79
+else
+    au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
 " Always show status bar
 set laststatus=2
 " Let plugins show effects after 500ms, not 4s
@@ -112,7 +118,15 @@ set shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent
 let python_highlight_all = 1
 
 """" Color Schemes """"""
-colorscheme molokai
+"colorscheme molokai
+set background=dark
+colorscheme solarized
+set t_Co=256
+
+let base16colorspace=256
+
+"""" Airline Theme """"""
+let g:airline_theme = 'dark'
 
 """"""" Keybindings """""""
 " Set up leaders

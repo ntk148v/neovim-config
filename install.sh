@@ -8,9 +8,9 @@ sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt update
 sudo apt install neovim -y
 
-echo "Install Vundle as Package Manager"
-mkdir -p ~/.config/nvim/bundle
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
+echo "Install Vim-plug as Package Manager"
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 echo "Get init.vim"
 cd ~/.config/nvim/

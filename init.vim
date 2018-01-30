@@ -1,177 +1,250 @@
-""""""" Plugin management stuff """""""
 set nocompatible
 filetype off
+set hidden
+set showtabline=0
 
-set rtp+=~/.config/nvim/bundle/Vundle.vim
-call vundle#begin('~/.config/nvim/bundle')
+" Specify a directory for plugins
+set rtp+=~/.local/share/nvim/plugged
+call plug#begin('~/.local/share/nvim/plugged')
 
-Plugin 'VundleVim/Vundle.vim'
+" Add all your plugins here
+"-------------------=== Code/Project navigation ===-------------
 
-" Custom plugins...
-" EasyMotion - Allows <leader><leader>(b|e) to jump to (b)eginning or (end)
-" of words.
-Plugin 'easymotion/vim-easymotion'
-" Ctrl-P - Fuzzy file search
-Plugin 'kien/ctrlp.vim'
-" Neomake build tool (mapped below to <c-b>)
-Plugin 'benekastah/neomake'
-" Autocomplete for python
-" This plugin cache a lot of thing and make vim start slowly
-" Therefore I decided to turn it off.
-Plugin 'davidhalter/jedi-vim'
-" Remove extraneous whitespace when edit mode is exited
-Plugin 'thirtythreeforty/lessspace.vim'
-" LaTeX editing
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
-" Status bar mods
-Plugin 'vim-airline/vim-airline'
-Plugin 'airblade/vim-gitgutter'
-" Tab completion
-Plugin 'ervandew/supertab'
-" Code Folding
-Plugin 'tmhedberg/SimpylFold'
-" Auto-Indentation
-Plugin 'vim-scripts/indentpython.vim'
-" Syntax Checking/Highlighting
-"Plugin 'vim-syntastic/syntastic'
-Plugin 'nvie/vim-flake8'
-" Color Schemes
-Plugin 'chriskempson/base16-vim'
-" File Browsing
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-" Git Integration
-Plugin 'tpope/vim-fugitive'
-" Vim-airline Themes
-Plugin 'vim-airline/vim-airline-themes'
-" Tagbar
-Plugin 'majutsushi/tagbar'
-" Python Mode
-" Plugin 'klen/python-mode'
-" Vim Markdown
-Plugin 'tpope/vim-markdown'
-Plugin 'jmcantrell/vim-virtualenv'
-" Auto-close bracket...
-Plugin 'Raimondi/delimitMate'
-" Solarized color
-Plugin 'altercation/vim-colors-solarized'
-" Fuzzy search
-Plugin 'junegunn/fzf'
-" Vim ansible yaml
-Plugin 'chase/vim-ansible-yaml'
+Plug 'scrooloose/nerdtree'                " Project and file navigation
+Plug 'Xuyuanp/nerdtree-git-plugin'        " NerdTree git functionality
+Plug 'neomake/neomake'                    " Asynchronous Linting and Make Framework
+Plug 'Shougo/deoplete.nvim'               " Asynchronous Completion
+Plug 'vim-ctrlspace/vim-ctrlspace'        " Tabs/Buffers/Fuzzy/Workspaces/Bookmarks
+Plug 'mileszs/ack.vim'                    " Ag/Grep
+Plug 'vim-airline/vim-airline'            " Lean & mean status/tabline for vim
+Plug 'vim-airline/vim-airline-themes'     " Themes for airline
+Plug 'yuttie/comfortable-motion.vim'      " Smooth scrolling
+Plug 'thaerkh/vim-indentguides'           " Visual representation of indents
 
-" After all plugins...
-call vundle#end()
+"-------------------=== Fancy things ===----------------------------
+Plug 'flazz/vim-colorschemes'             " Colorschemes
+Plug 'jreybert/vimagit'                   " Git Operations
+Plug 'kien/rainbow_parentheses.vim'       " Rainbow Parentheses
+Plug 'chriskempson/base16-vim'            " Base 16 colors
+Plug 'ryanoasis/vim-devicons'             " Dev Icons
+
+"-------------------=== Snippets support ===------------------------
+Plug 'honza/vim-snippets'                 " snippets repo
+Plug 'Raimondi/delimitMate'               " Auto-close brackets
+
+"-------------------=== Languages support ===-----------------------
+Plug 'scrooloose/nerdcommenter'           " Easy code documentation
+Plug 'mitsuhiko/vim-sparkup'              " Sparkup(XML/jinja/htlm-django/etc.) support
+Plug 'w0rp/ale'
+
+"-------------------=== Python ===----------------------------------
+Plug 'klen/python-mode'                   " Python mode (docs, refactor, lints...)
+Plug 'jmcantrell/vim-virtualenv'
+
+" Initialize plugin system
+call plug#end()
+filetype on
+filetype plugin on
 filetype plugin indent on
 
-""""""" Jedi-VIM """""""
-" Don't mess up undo history
-let g:jedi#show_call_signatures = "0"
-
-
-""""""" SuperTab configuration """""""
-let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
-function! Completefunc(findstart, base)
-    return "\<c-x>\<c-p>"
-endfunction
-
-call SuperTabChain(Completefunc, '<c-n>')
-let g:SuperTabCompletionContexts = ['g:ContextText2']
-
-" Incremential search & highlight search
-set incsearch hlsearch
-
-""""""" General coding stuff """""""
-set list
-set listchars=tab:>-,trail:-,extends:#,nbsp:-
-set modeline
-set tw=78
-set tabstop=8 expandtab shiftwidth=4 softtabstop=4
-
-" Highlight 80th column
-if exists('+colorcolumn')
-    set colorcolumn=79
-else
-    au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-endif
-" Always show status bar
-set laststatus=2
-" Let plugins show effects after 500ms, not 4s
-set updatetime=500
-" Disable mouse click to go to position
-set mouse-=a
-" Don't let autocomplete affect usual typing habits
-set completeopt=menuone,preview,noinsert
-" Let vim-gitgutter do its thing on large files
-let g:gitgutter_max_signs=10000
-
-let g:airline_powerline_fonts = 1
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
-
-" If your terminal's background is white (light theme), uncomment the following
-" to make EasyMotion's cues much easier to read.
-" hi link EasyMotionTarget String
-" hi link EasyMotionShade Comment
-" hi link EasyMotionTarget2First String
-" hi link EasyMotionTarget2Second Statement
-
-
-""""""" Python stuff """""""
-syntax enable
-set number showmatch
-set shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent
-let python_highlight_all = 1
-
-"""" Color Schemes """"""
-"colorscheme molokai
-set background=dark
-colorscheme solarized
+"-------------------
+" General settings
+"-------------------
+set guicursor=
+set encoding=utf8
 set t_Co=256
-
 let base16colorspace=256
+set background=dark
+set guifont=<FONT_NAME> <FONT_SIZE>
+colorscheme solarized
+syntax enable                             " enable syntaax highlighting
 
-"""" Airline Theme """"""
-let g:airline_theme = 'dark'
+let g:loaded_python_provider=1
+set shell=/bin/zsh
+set number                                " show line numbers
+set ruler
+set ttyfast                               " terminal acceleration
 
-""""""" Keybindings """""""
-" Set up leaders
-let mapleader=","
-let maplocalleader="\\"
+set tabstop=4                             " 4 whitespaces for tabs visual presentation
+set shiftwidth=4                          " shift lines by 4 spaces
+set smarttab                              " set tabs for a shifttabs logic
+set expandtab                             " expand tabs into spaces
+set autoindent                            " indent when moving to the next line
 
-" Neomake and other build commands (ctrl-b)
-nnoremap <C-b> :w<cr>:Neomake<cr>
-"split navigations
-" Ctrl-j move to the split below
-" Ctrl-k move to the split above
-" Ctrl-l move to the split to the right
-" Ctrl-h move to the split to the left
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+set cursorline                            " show line under the cursor's line
+set showmatch                             " show matching part of bracket parts (), [], {}
 
-"Specific key or shortcut to open NERDTree
-map <C-n> :NERDTreeToggle<CR>
+set enc=utf-8                             " utf-8 by default
 
-" Enable folding
-set foldmethod=indent
-set foldlevel=99
+set nobackup                              " no backup files
+set noswapfile
 
-" Enable folding with the spacebar
-nnoremap <space> za
+set backspace=indent,eol,start            " backspace removes all
 
-autocmd BufNewFile,BufRead *.tex,*.bib noremap <buffer> <C-b> :w<cr>:new<bar>r !make<cr>:setlocal buftype=nofile<cr>:setlocal bufhidden=hide<cr>:setlocal noswapfile<cr>
-autocmd BufNewFile,BufRead *.tex,*.bib imap <buffer> <C-b> <Esc><C-b>
+set scrolloff=20
+set clipboard=unnamed                     " use system clipboard
+set listchars=tab:>\ ,trail:•,extends:#,nbsp:." Indent guides settings
 
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+" -----------------------
+" Tab / Buffers settings
+" ----------------------
+tab sball
+set switchbuf=useopen
+set laststatus=2
+nmap <F9> :bprev<CR>
+nmap <F10> :bnext<CR>
+nmap <silent> <leader>q: SyntasticCheck # <CR> :bp <BAR> bd #<CR>
 
-" Open NERDTree automatically when nvim starts up on opening a directory
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+" -----------------------
+" Neomake settings
+" -----------------------
+call neomake#configure#automake('w')
+let g:neomake_open_list=2
 
-" UTF8 Support
-set encoding=utf-8
+" -----------------------
+" Deoplete settings
+" -----------------------
+let g:deoplete#enable_at_startup=1
 
-" Hide .pyc when browsing files
-let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+" -----------------------
+" Search settings
+" -----------------------
+set incsearch	                            " incremental search
+set hlsearch	                            " highlight search results
+
+" ---------------------------
+" Comfortable Motion settings
+" ---------------------------
+let g:comfortable_motion_scroll_down_key="j"
+let g:comfortable_motion_scroll_up_key="k"
+let g:comfortable_motion_no_default_key_mappings=1
+let g:comfortable_motion_impulse_multiplier=25  " Feel free to increase/decrease this value.
+nnoremap <silent> <C-d> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 2)<CR>
+nnoremap <silent> <C-u> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -2)<CR>
+nnoremap <silent> <C-f> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 4)<CR>
+nnoremap <silent> <C-b> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -4)<CR>
+
+" --------------------------
+" Airline settings
+" --------------------------
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#formatter='unique_tail'
+let g:airline_powerline_fonts=1
+
+"------------------------
+" NERDTree settings
+" -----------------------
+let NERDTreeIgnore=['\.pyc$', '\.pyo$', '__pycache__$']     " Ignore files in NERDTree
+let NERDTreeWinSize=40
+autocmd VimEnter * if !argc() | NERDTree | endif  " Load NERDTree only if vim is run without arguments
+nmap " :NERDTreeToggle<CR>
+
+" -----------------------
+" NERDComment settings
+" -----------------------
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims=1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" -----------------------
+" DevIcon settings
+" -----------------------
+" loading the plugin 
+let g:webdevicons_enable = 1
+
+" adding the flags to NERDTree 
+let g:webdevicons_enable_nerdtree = 1
+
+" adding to vim-airline's tabline
+let g:webdevicons_enable_airline_tabline = 1
+
+" adding to vim-airline's statusline
+let g:webdevicons_enable_airline_statusline = 1
+
+" -----------------------
+" SnipMate settings
+" -----------------------
+let g:snippets_dir='~/.local/share/nvim/plugged/vim-snippets/snippets/'
+
+" ----------------------------
+" Rainbow Parentheses Autoload
+" ----------------------------
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+" -----------------------
+" Python
+" -----------------------
+
+" python executables for different plugins
+let g:pymode_python='python'
+
+" lints
+let g:pymode_lint=0
+
+" virtualenv
+let g:pymode_virtualenv=1
+
+" breakpoints
+let g:pymode_breakpoint=1
+let g:pymode_breakpoint_key='<leader>b'
+
+" syntax highlight
+let g:pymode_syntax=1
+let g:pymode_syntax_slow_sync=1
+let g:pymode_syntax_all=1
+let g:pymode_syntax_print_as_function=g:pymode_syntax_all
+let g:pymode_syntax_highlight_async_await=g:pymode_syntax_all
+let g:pymode_syntax_highlight_equal_operator=g:pymode_syntax_all
+let g:pymode_syntax_highlight_stars_operator=g:pymode_syntax_all
+let g:pymode_syntax_highlight_self=g:pymode_syntax_all
+let g:pymode_syntax_indent_errors=g:pymode_syntax_all
+let g:pymode_syntax_string_formatting=g:pymode_syntax_all
+let g:pymode_syntax_space_errors=g:pymode_syntax_all
+let g:pymode_syntax_string_format=g:pymode_syntax_all
+let g:pymode_syntax_string_templates=g:pymode_syntax_all
+let g:pymode_syntax_doctests=g:pymode_syntax_all
+let g:pymode_syntax_builtin_objs=g:pymode_syntax_all
+let g:pymode_syntax_builtin_types=g:pymode_syntax_all
+let g:pymode_syntax_highlight_exceptions=g:pymode_syntax_all
+let g:pymode_syntax_docstrings=g:pymode_syntax_all
+
+augroup vimrc_autocmds
+    autocmd!
+    autocmd FileType python,rst,c,cpp highlight Excess ctermbg=DarkGrey guibg=Black
+    autocmd FileType python,rst,c,cpp match Excess /\%81v.*/
+    autocmd FileType python,rst,c,cpp set nowrap
+    autocmd FileType python,rst,c,cpp set colorcolumn=8
+augroup END
+
+" code running
+let g:pymode_run=1
+let g:pymode_run_bind='<F5>'
+let g:ale_sign_column_always=0
+let g:ale_emit_conflict_warnings=0
+let g:airline#extensions#ale#enabled = 1
+let g:pymode_rope_lookup_project = 0
+let g:airline#extensions#tabline#enabled = 1
+
+imap <F5> <Esc>:w<CR>:!clear;python %<CR>
+

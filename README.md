@@ -21,6 +21,9 @@ Complete instructions to Neovim as your IDE - Inspired by [Jarol Rodriguez's vim
   $ sudo add-apt-repository ppa:neovim-ppa/unstable
   $ sudo apt-get update
   $ sudo apt-get install neovim -y
+  # The following lines is needed for python-mode
+  $ pip2 install --user -U neovim
+  $ pip3 install --user -U neovim
   ```
 
 3. Install [powerline-status](https://powerline.readthedocs.io/en/latest/installation.html):

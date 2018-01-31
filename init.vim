@@ -20,6 +20,7 @@ Plug 'vim-airline/vim-airline'            " Lean & mean status/tabline for vim
 Plug 'vim-airline/vim-airline-themes'     " Themes for airline
 Plug 'yuttie/comfortable-motion.vim'      " Smooth scrolling
 Plug 'thaerkh/vim-indentguides'           " Visual representation of indents
+Plug 'majutsushi/tagbar'                  " Class/module browser
 
 "-------------------=== Fancy things ===----------------------------
 Plug 'flazz/vim-colorschemes'             " Colorschemes
@@ -55,7 +56,7 @@ set encoding=utf8
 set t_Co=256
 let base16colorspace=256
 set background=dark
-set guifont=<FONT_NAME> <FONT_SIZE>
+set guifont=DroidSansMono\ Nerd\ Font\ 12
 colorscheme solarized
 syntax enable                             " enable syntaax highlighting
 
@@ -142,6 +143,15 @@ autocmd VimEnter * if !argc() | NERDTree | endif  " Load NERDTree only if vim is
 nmap " :NERDTreeToggle<CR>
 
 " -----------------------
+" TagBar
+" -----------------------
+let g:tagbar_autofocus=0
+let g:tagbar_width=42
+autocmd BufEnter *.py :call tagbar#autoopen(0)
+autocmd BufWinLeave *.py :TagbarClose
+nmap <F8> :TagbarToggle<CR>
+
+" -----------------------
 " NERDComment settings
 " -----------------------
 
@@ -180,6 +190,41 @@ let g:webdevicons_enable_airline_tabline = 1
 
 " adding to vim-airline's statusline
 let g:webdevicons_enable_airline_statusline = 1
+
+" turn on/off file node glyph decorations (not particularly useful)
+let g:WebDevIconsUnicodeDecorateFileNodes = 1
+
+" use double-width(1) or single-width(0) glyphs 
+" only manipulates padding, has no effect on terminal or set(guifont) font
+let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
+
+" whether or not to show the nerdtree brackets around flags 
+let g:webdevicons_conceal_nerdtree_brackets = 0
+
+" the amount of space to use after the glyph character (default ' ')
+let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
+
+" Force extra padding in NERDTree so that the filetype icons line up vertically
+let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1 
+
+" change the default character when no match found
+let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = 'ƛ'
+
+" set a byte character marker (BOM) utf-8 symbol when retrieving file encoding
+" disabled by default with no value
+let g:WebDevIconsUnicodeByteOrderMarkerDefaultSymbol = ''
+
+" enable folder/directory glyph flag (disabled by default with 0)
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+
+" enable open and close folder/directory glyph flags (disabled by default with 0)
+let g:DevIconsEnableFoldersOpenClose = 1
+
+" enable pattern matching glyphs on folder/directory (enabled by default with 1)
+let g:DevIconsEnableFolderPatternMatching = 1
+
+" enable file extension pattern matching glyphs on folder/directory (disabled by default with 0)
+let g:DevIconsEnableFolderExtensionPatternMatching = 0
 
 " -----------------------
 " SnipMate settings

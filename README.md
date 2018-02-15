@@ -24,6 +24,8 @@ Complete instructions to Neovim as your IDE - Inspired by [Jarol Rodriguez's vim
   # The following lines is needed for python-mode
   $ pip2 install --user -U neovim
   $ pip3 install --user -U neovim
+  # Install the silversearcher
+  $ sudo apt-get install silversearcher-ag -y
   ```
 
 3. Install [powerline-status](https://powerline.readthedocs.io/en/latest/installation.html):

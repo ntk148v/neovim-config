@@ -42,6 +42,8 @@ Plug 'w0rp/ale'
 Plug 'klen/python-mode'                   " Python mode (docs, refactor, lints...)
 Plug 'jmcantrell/vim-virtualenv'
 
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
 " Initialize plugin system
 call plug#end()
 filetype on
@@ -57,7 +59,7 @@ set t_Co=256
 let base16colorspace=256
 set background=dark
 set guifont=DroidSansMono\ Nerd\ Font\ 12
-colorscheme solarized
+colorscheme onedark
 syntax enable                             " enable syntaax highlighting
 
 "let g:loaded_python_provider=1
@@ -291,7 +293,12 @@ let g:ale_sign_column_always=0
 let g:ale_emit_conflict_warnings=0
 let g:airline#extensions#ale#enabled = 1
 let g:pymode_rope_lookup_project = 0
+let g:pymode_rope=0
 let g:airline#extensions#tabline#enabled = 1
 
 imap <F5> <Esc>:w<CR>:!clear;python %<CR>
 
+" ag.vim
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif

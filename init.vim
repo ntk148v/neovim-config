@@ -59,6 +59,7 @@ set t_Co=256
 let base16colorspace=256
 set background=dark
 set guifont=DroidSansMono\ Nerd\ Font\ 12
+set termguicolors
 colorscheme onedark
 syntax enable                             " enable syntaax highlighting
 
@@ -89,6 +90,15 @@ set backspace=indent,eol,start            " backspace removes all
 set scrolloff=20
 set clipboard=unnamed                     " use system clipboard
 set listchars=tab:>\ ,trail:•,extends:#,nbsp:." Indent guides settings
+
+" Auto update
+set autoread
+set autowrite
+
+" Use mouse
+if has('mouse')
+    set mouse=a
+endif
 
 " -----------------------
 " Tab / Buffers settings
@@ -293,12 +303,11 @@ let g:ale_sign_column_always=0
 let g:ale_emit_conflict_warnings=0
 let g:airline#extensions#ale#enabled = 1
 let g:pymode_rope_lookup_project = 0
-let g:pymode_rope=0
+let g:pymode_rope = 0
 let g:airline#extensions#tabline#enabled = 1
 
 imap <F5> <Esc>:w<CR>:!clear;python %<CR>
 
-" ag.vim
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+    let g:ackprg = 'ag --vimgrep'
 endif

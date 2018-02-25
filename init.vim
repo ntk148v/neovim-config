@@ -59,7 +59,8 @@ set t_Co=256
 let base16colorspace=256
 set background=dark
 set guifont=DroidSansMono\ Nerd\ Font\ 12
-set termguicolors
+" Uncomment it if you want to display true color
+" set termguicolors
 colorscheme onedark
 syntax enable                             " enable syntaax highlighting
 
@@ -95,10 +96,10 @@ set listchars=tab:>\ ,trail:•,extends:#,nbsp:." Indent guides settings
 set autoread
 set autowrite
 
-" Use mouse
-if has('mouse')
-    set mouse=a
-endif
+" Uncomment it if you want to use mouse
+" if has('mouse')
+"     set mouse=a
+" endif
 
 " -----------------------
 " Tab / Buffers settings

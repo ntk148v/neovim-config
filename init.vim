@@ -28,6 +28,10 @@ Plug 'jreybert/vimagit'                   " Git Operations
 Plug 'kien/rainbow_parentheses.vim'       " Rainbow Parentheses
 Plug 'chriskempson/base16-vim'            " Base 16 colors
 Plug 'ryanoasis/vim-devicons'             " Dev Icons
+Plug 'arcticicestudio/nord-vim'           " Nord colorscheme
+Plug 'ayu-theme/ayu-vim'                  " Ayu colorscheme
+Plug 'sonph/onehalf', {'rtp': 'vim/'}     " One1/2 colorschme
+Plug 'mhartington/oceanic-next'           " Oceanic-next colorscheme
 
 "-------------------=== Snippets support ===------------------------
 Plug 'honza/vim-snippets'                 " snippets repo
@@ -59,9 +63,14 @@ set t_Co=256
 let base16colorspace=256
 set background=dark
 set guifont=DroidSansMono\ Nerd\ Font\ 12
-" Uncomment it if you want to display true color
-" set termguicolors
-colorscheme onedark
+" NOTE: This is only compatible with Guake 3.X.
+" Check issue: https://github.com/Guake/guake/issues/772
+if (has("termguicolors"))
+   set termguicolors
+endif
+
+colorscheme ayu
+let ayucolor="dark"
 syntax enable                             " enable syntaax highlighting
 
 "let g:loaded_python_provider=1

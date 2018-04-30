@@ -69,7 +69,7 @@ if (has("termguicolors"))
    set termguicolors
 endif
 
-colorscheme ayu
+colorscheme sol
 let ayucolor="dark"
 syntax enable                             " enable syntaax highlighting
 
@@ -169,7 +169,9 @@ nmap " :NERDTreeToggle<CR>
 " -----------------------
 let g:tagbar_autofocus=0
 let g:tagbar_width=42
-autocmd BufEnter *.py :call tagbar#autoopen(0)
+" Always open TagBar when open python files. I don't like it much so let's
+" comment it.
+" autocmd BufEnter *.py :call tagbar#autoopen(0)
 autocmd BufWinLeave *.py :TagbarClose
 nmap <F8> :TagbarToggle<CR>
 
@@ -260,6 +262,32 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+
+" ------------------------
+" CtrlSpace - Fuzzy search
+" ------------------------
+if has("gui_running")
+    let g:CtrlSpaceSymbols = { "File": "◯", "CTab": "▣", "Tabs": "▢" }
+endif
+
+" Require install silversearcher-ag
+if executable("ag")
+    let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
+endif
+" Colors
+hi link CtrlSpaceNormal   PMenu
+hi link CtrlSpaceSelected PMenuSel
+hi link CtrlSpaceSearch   Search
+hi link CtrlSpaceStatus   StatusLine
+hi link CtrlSpaceSearch IncSearch
+" We need this line to work around with neovim: https://github.com/vim-ctrlspace/vim-ctrlspace/issues/188<Paste>
+let g:CtrlSpaceDefaultMappingKey = "<C-space> "
+" Fuzzy Search
+nnoremap <silent><C-p> :CtrlSpace O<CR>
+" Automatically Saving Workspace
+let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
+let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
+let g:CtrlSpaceSaveWorkspaceOnExit = 1
 
 " -----------------------
 " Python

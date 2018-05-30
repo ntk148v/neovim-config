@@ -56,8 +56,13 @@ filetype plugin indent on
 
 "-------------------
 " General settings
-"-------------------
-set guicursor=
+"------------
+highlight Cursor guifg=white guibg=black
+highlight iCursor guifg=white guibg=steelblue
+set guicursor=n-v-c:block-Cursor
+set guicursor+=i:ver100-iCursor
+set guicursor+=n-v-c:blinkon0
+set guicursor+=i:blinkwait10
 set encoding=utf8
 set t_Co=256
 let base16colorspace=256
@@ -69,8 +74,8 @@ if (has("termguicolors"))
    set termguicolors
 endif
 
-colorscheme sol
-let ayucolor="dark"
+colorscheme ayu
+let ayucolor="light"
 syntax enable                             " enable syntaax highlighting
 
 "let g:loaded_python_provider=1

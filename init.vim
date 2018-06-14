@@ -16,8 +16,10 @@ Plug 'neomake/neomake'                    " Asynchronous Linting and Make Framew
 Plug 'Shougo/deoplete.nvim'               " Asynchronous Completion
 Plug 'vim-ctrlspace/vim-ctrlspace'        " Tabs/Buffers/Fuzzy/Workspaces/Bookmarks
 Plug 'mileszs/ack.vim'                    " Ag/Grep
-Plug 'vim-airline/vim-airline'            " Lean & mean status/tabline for vim
-Plug 'vim-airline/vim-airline-themes'     " Themes for airline
+" Uncomment if you want to use vim-airline over lightline
+" Plug 'vim-airline/vim-airline'            " Lean & mean status/tabline for vim
+" Plug 'vim-airline/vim-airline-themes'     " Themes for airline
+Plug 'itchyny/lightline.vim'
 Plug 'yuttie/comfortable-motion.vim'      " Smooth scrolling
 Plug 'thaerkh/vim-indentguides'           " Visual representation of indents
 Plug 'majutsushi/tagbar'                  " Class/module browser
@@ -74,8 +76,9 @@ if (has("termguicolors"))
    set termguicolors
 endif
 
-colorscheme ayu
-let ayucolor="light"
+colorscheme onehalfdark
+" colorscheme ayu
+" let ayucolor="dark"
 syntax enable                             " enable syntaax highlighting
 
 "let g:loaded_python_provider=1
@@ -114,6 +117,9 @@ set autowrite
 " if has('mouse')
 "     set mouse=a
 " endif
+
+" By the way, -- INSERT -- is unnecessary anymore because the mode information is displayed in the statusline.
+set noshowmode
 
 " -----------------------
 " Tab / Buffers settings
@@ -155,11 +161,31 @@ nnoremap <silent> <C-f> :call comfortable_motion#flick(g:comfortable_motion_impu
 nnoremap <silent> <C-b> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -4)<CR>
 
 " --------------------------
-" Airline settings
+" Airline settings - uncomment if you want to use vim-airline over lightline
 " --------------------------
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tabline#formatter='unique_tail'
-let g:airline_powerline_fonts=1
+" let g:airline#extensions#tabline#enabled=1
+" let g:airline#extensions#tabline#formatter='unique_tail'
+" let g:airline_powerline_fonts=1
+" let g:airline#extensions#ale#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
+
+" --------------------
+" Lightline settings
+" ---------------------
+let g:lightline = {
+    \ 'colorscheme': 'one',
+    \ 'active': {
+    \   'left': [ ['mode', 'paste'],
+    \             ['gitbranch', 'readonly', 'filename', 'modified'] ],
+    \  },
+    \  'component': {
+    \     'lineinfo': ' %3l:%-2v',
+    \  },
+    \  'component_function': {
+    \     'gitbranch': 'gitbranch#name'
+    \  }
+    \ }
+let g:lightline.colorscheme = 'one'
 
 "------------------------
 " NERDTree settings
@@ -215,10 +241,10 @@ let g:webdevicons_enable = 1
 let g:webdevicons_enable_nerdtree = 1
 
 " adding to vim-airline's tabline
-let g:webdevicons_enable_airline_tabline = 1
+" let g:webdevicons_enable_airline_tabline = 1
 
 " adding to vim-airline's statusline
-let g:webdevicons_enable_airline_statusline = 1
+" let g:webdevicons_enable_airline_statusline = 1
 
 " turn on/off file node glyph decorations (not particularly useful)
 let g:WebDevIconsUnicodeDecorateFileNodes = 1
@@ -344,10 +370,8 @@ let g:pymode_run=1
 let g:pymode_run_bind='<F5>'
 let g:ale_sign_column_always=0
 let g:ale_emit_conflict_warnings=0
-let g:airline#extensions#ale#enabled = 1
 let g:pymode_rope_lookup_project = 0
 let g:pymode_rope = 0
-let g:airline#extensions#tabline#enabled = 1
 
 imap <F5> <Esc>:w<CR>:!clear;python %<CR>
 

@@ -188,7 +188,10 @@ let g:lightline.colorscheme = 'nord'
 " NERDTree settings
 " -----------------------
 let NERDTreeIgnore=['\.pyc$', '\.pyo$', '__pycache__$']     " Ignore files in NERDTree
-let NERDTreeWinSize=40
+let NERDTreeWinSize=35
+let NERDTreeChDirMode=2
+let g:NERDTreeHijackNetrw=0
+let NERDTreeCascadeOpenSingleChildDir=1
 autocmd VimEnter * if !argc() | NERDTree | endif  " Load NERDTree only if vim is run without arguments
 nmap " :NERDTreeToggle<CR>
 

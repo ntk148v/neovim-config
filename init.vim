@@ -23,17 +23,17 @@ Plug 'itchyny/lightline.vim'
 Plug 'yuttie/comfortable-motion.vim'      " Smooth scrolling
 Plug 'thaerkh/vim-indentguides'           " Visual representation of indents
 Plug 'majutsushi/tagbar'                  " Class/module browser
+Plug 'bling/vim-bufferline'               " Buffer-line vim - show list of buffers in command bar
 
 "-------------------=== Fancy things ===----------------------------
 Plug 'flazz/vim-colorschemes'             " Colorschemes
 Plug 'jreybert/vimagit'                   " Git Operations
-Plug 'kien/rainbow_parentheses.vim'       " Rainbow Parentheses
 Plug 'chriskempson/base16-vim'            " Base 16 colors
 Plug 'ryanoasis/vim-devicons'             " Dev Icons
 Plug 'arcticicestudio/nord-vim'           " Nord colorscheme
 Plug 'ayu-theme/ayu-vim'                  " Ayu colorscheme
 Plug 'sonph/onehalf', {'rtp': 'vim/'}     " One1/2 colorschme
-Plug 'mhartington/oceanic-next'           " Oceanic-next colorscheme
+Plug 'iCyMind/NeoSolarized'
 
 "-------------------=== Snippets support ===------------------------
 Plug 'honza/vim-snippets'                 " snippets repo
@@ -49,6 +49,7 @@ Plug 'klen/python-mode'                   " Python mode (docs, refactor, lints..
 Plug 'jmcantrell/vim-virtualenv'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Initialize plugin system
 call plug#end()
@@ -68,7 +69,7 @@ set guicursor+=i:blinkwait10
 set encoding=utf8
 set t_Co=256
 let base16colorspace=256
-set background=dark
+" set background=dark
 set guifont=DroidSansMono\ Nerd\ Font\ 12
 " NOTE: This is only compatible with Guake 3.X.
 " Check issue: https://github.com/Guake/guake/issues/772
@@ -76,7 +77,7 @@ if (has("termguicolors"))
    set termguicolors
 endif
 
-colorscheme onehalfdark
+colorscheme NeoSolarized
 syntax enable                             " enable syntaax highlighting
 
 "let g:loaded_python_provider=1
@@ -173,16 +174,18 @@ nnoremap <silent> <C-b> :call comfortable_motion#flick(g:comfortable_motion_impu
 let g:lightline = {
     \ 'active': {
     \   'left': [ ['mode', 'paste'],
-    \             ['gitbranch', 'readonly', 'filename', 'modified'] ],
+    \             ['gitbranch', 'readonly', 'filename', 'modified'],
+    \             ['bufferline']],
     \  },
     \  'component': {
     \     'lineinfo': ' %3l:%-2v',
+    \     'bufferline': '%{bufferline#refresh_status()}%{g:bufferline_status_info.before . g:bufferline_status_info.current . g:bufferline_status_info.after}'
     \  },
     \  'component_function': {
     \     'gitbranch': 'gitbranch#name'
     \  }
     \ }
-let g:lightline.colorscheme = 'nord'
+let g:lightline.colorscheme = 'OldHope'
 
 "------------------------
 " NERDTree settings
@@ -286,14 +289,6 @@ let g:DevIconsEnableFolderExtensionPatternMatching = 0
 " -----------------------
 let g:snippets_dir='~/.local/share/nvim/plugged/vim-snippets/snippets/'
 
-" ----------------------------
-" Rainbow Parentheses Autoload
-" ----------------------------
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
-
 " ------------------------
 " CtrlSpace - Fuzzy search
 " ------------------------
@@ -319,6 +314,11 @@ nnoremap <silent><C-p> :CtrlSpace O<CR>
 let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
 let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
 let g:CtrlSpaceSaveWorkspaceOnExit = 1
+
+" ----------------------
+" Fuzzysearch - fzf
+" ----------------------
+map ; :Files<CR>
 
 " -----------------------
 " Python
@@ -372,6 +372,8 @@ let g:ale_sign_column_always=0
 let g:ale_emit_conflict_warnings=0
 let g:pymode_rope_lookup_project = 0
 let g:pymode_rope = 0
+
+let b:ale_linters = ['pylakes', 'flake8', 'pylint']
 
 imap <F5> <Esc>:w<CR>:!clear;python %<CR>
 

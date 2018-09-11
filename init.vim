@@ -50,6 +50,9 @@ Plug 'w0rp/ale'
 Plug 'klen/python-mode'                   " Python mode (docs, refactor, lints...)
 Plug 'jmcantrell/vim-virtualenv'
 
+"-------------------=== Go ===---------------------------------------
+Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'}
+
 " Initialize plugin system
 call plug#end()
 filetype on

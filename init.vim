@@ -16,6 +16,8 @@ Plug 'neomake/neomake'                    " Asynchronous Linting and Make Framew
 Plug 'Shougo/deoplete.nvim'               " Asynchronous Completion
 Plug 'vim-ctrlspace/vim-ctrlspace'        " Tabs/Buffers/Fuzzy/Workspaces/Bookmarks
 Plug 'mileszs/ack.vim'                    " Ag/Grep
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 " Uncomment if you want to use vim-airline over lightline
 " Plug 'vim-airline/vim-airline'            " Lean & mean status/tabline for vim
 " Plug 'vim-airline/vim-airline-themes'     " Themes for airline
@@ -47,9 +49,6 @@ Plug 'w0rp/ale'
 "-------------------=== Python ===----------------------------------
 Plug 'klen/python-mode'                   " Python mode (docs, refactor, lints...)
 Plug 'jmcantrell/vim-virtualenv'
-
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 
 " Initialize plugin system
 call plug#end()

@@ -1,4 +1,5 @@
 set nocompatible
+set completeopt+=noselect
 filetype off
 set hidden
 set showtabline=0
@@ -14,6 +15,7 @@ Plug 'scrooloose/nerdtree'                " Project and file navigation
 Plug 'Xuyuanp/nerdtree-git-plugin'        " NerdTree git functionality
 Plug 'neomake/neomake'                    " Asynchronous Linting and Make Framework
 Plug 'Shougo/deoplete.nvim'               " Asynchronous Completion
+Plug 'zchee/deoplete-go', { 'do': 'make'} " Asynchronous completion for go
 Plug 'vim-ctrlspace/vim-ctrlspace'        " Tabs/Buffers/Fuzzy/Workspaces/Bookmarks
 Plug 'mileszs/ack.vim'                    " Ag/Grep
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -26,6 +28,7 @@ Plug 'yuttie/comfortable-motion.vim'      " Smooth scrolling
 Plug 'thaerkh/vim-indentguides'           " Visual representation of indents
 Plug 'majutsushi/tagbar'                  " Class/module browser
 Plug 'bling/vim-bufferline'               " Buffer-line vim - show list of buffers in command bar
+Plug 'junegunn/limelight.vim'             " Hyperfocus-writing in Vim
 
 "-------------------=== Fancy things ===----------------------------
 Plug 'flazz/vim-colorschemes'             " Colorschemes
@@ -36,6 +39,7 @@ Plug 'arcticicestudio/nord-vim'           " Nord colorscheme
 Plug 'ayu-theme/ayu-vim'                  " Ayu colorscheme
 Plug 'sonph/onehalf', {'rtp': 'vim/'}     " One1/2 colorschme
 Plug 'iCyMind/NeoSolarized'
+Plug 'kamwitsta/flatwhite-vim'            " Flatwhite
 
 "-------------------=== Snippets support ===------------------------
 Plug 'honza/vim-snippets'                 " snippets repo
@@ -71,15 +75,14 @@ set guicursor+=i:blinkwait10
 set encoding=utf8
 set t_Co=256
 let base16colorspace=256
-" set background=dark
-set guifont=DroidSansMono\ Nerd\ Font\ 12
+set background=dark
 " NOTE: This is only compatible with Guake 3.X.
 " Check issue: https://github.com/Guake/guake/issues/772
 if (has("termguicolors"))
    set termguicolors
 endif
 
-colorscheme NeoSolarized
+colorscheme flatwhite
 syntax enable                             " enable syntaax highlighting
 
 "let g:loaded_python_provider=1
@@ -142,6 +145,9 @@ let g:neomake_open_list=2
 " Deoplete settings
 " -----------------------
 let g:deoplete#enable_at_startup=1
+" deoplete-go settings
+let g:deoplete#sources#go#gocode_binary = '$GOPATH/bin/gocode'
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 
 " -----------------------
 " Search settings
@@ -187,7 +193,7 @@ let g:lightline = {
     \     'gitbranch': 'gitbranch#name'
     \  }
     \ }
-let g:lightline.colorscheme = 'OldHope'
+let g:lightline.colorscheme = 'darcula'
 
 "------------------------
 " NERDTree settings
@@ -382,3 +388,5 @@ imap <F5> <Esc>:w<CR>:!clear;python %<CR>
 if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
+
+let g:go_version_warning = 0

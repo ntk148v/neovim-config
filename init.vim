@@ -1,376 +1,346 @@
-set nocompatible
-set completeopt+=noselect
-filetype off
-set hidden
-set showtabline=0
+" File              : init.vim
+" Author            : Kien Nguyen-Tuan <kiennt2609@gmail.com>
 
-" Specify a directory for plugins
-set rtp+=~/.local/share/nvim/plugged
-call plug#begin('~/.local/share/nvim/plugged')
-
-" Add all your plugins here
-"-------------------=== Code/Project navigation ===-------------
-
-Plug 'scrooloose/nerdtree'                " Project and file navigation
-Plug 'Xuyuanp/nerdtree-git-plugin'        " NerdTree git functionality
-Plug 'neomake/neomake'                    " Asynchronous Linting and Make Framework
-Plug 'Shougo/deoplete.nvim'               " Asynchronous Completion
-Plug 'zchee/deoplete-go', { 'do': 'make'} " Asynchronous completion for go
-Plug 'vim-ctrlspace/vim-ctrlspace'        " Tabs/Buffers/Fuzzy/Workspaces/Bookmarks
-Plug 'mileszs/ack.vim'                    " Ag/Grep
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-" Uncomment if you want to use vim-airline over lightline
-" Plug 'vim-airline/vim-airline'            " Lean & mean status/tabline for vim
-" Plug 'vim-airline/vim-airline-themes'     " Themes for airline
-Plug 'itchyny/lightline.vim'
-Plug 'yuttie/comfortable-motion.vim'      " Smooth scrolling
-Plug 'thaerkh/vim-indentguides'           " Visual representation of indents
-Plug 'majutsushi/tagbar'                  " Class/module browser
-Plug 'bling/vim-bufferline'               " Buffer-line vim - show list of buffers in command bar
-Plug 'junegunn/limelight.vim'             " Hyperfocus-writing in Vim
-Plug 'brooth/far.vim'                     " Find and replace
-Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'} "An intellisense engine
-
-"-------------------=== Fancy things ===----------------------------
-Plug 'flazz/vim-colorschemes'             " Colorschemes
-Plug 'jreybert/vimagit'                   " Git Operations
-Plug 'chriskempson/base16-vim'            " Base 16 colors
-Plug 'ryanoasis/vim-devicons'             " Dev Icons
-Plug 'iCyMind/NeoSolarized'
-Plug 'kamwitsta/flatwhite-vim'            " Flatwhite
-Plug 'nightsense/cosmic_latte'            " Cosmic Latte
-Plug 'nightsense/snow'                    " Snow
-
-"-------------------=== Snippets support ===------------------------
-Plug 'honza/vim-snippets'                 " snippets repo
-Plug 'Raimondi/delimitMate'               " Auto-close brackets
-
-"-------------------=== Languages support ===-----------------------
-Plug 'scrooloose/nerdcommenter'           " Easy code documentation
-Plug 'mitsuhiko/vim-sparkup'              " Sparkup(XML/jinja/htlm-django/etc.) support
-Plug 'w0rp/ale'
-
-"-------------------=== Python ===----------------------------------
-Plug 'klen/python-mode'                   " Python mode (docs, refactor, lints...)
-Plug 'jmcantrell/vim-virtualenv'
-
-"-------------------=== Go ===---------------------------------------
-Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'}
-
-" Initialize plugin system
-call plug#end()
-filetype on
-filetype plugin on
-filetype plugin indent on
-
-"-------------------
-" General settings
-"------------
-highlight Cursor guifg=white guibg=black
-highlight iCursor guifg=white guibg=steelblue
-set guicursor=n-v-c:block-Cursor
-set guicursor+=i:ver100-iCursor
-set guicursor+=n-v-c:blinkon0
-set guicursor+=i:blinkwait10
-set encoding=utf8
-set t_Co=256
-let base16colorspace=256
-" NOTE: This is only compatible with Guake 3.X.
-" Check issue: https://github.com/Guake/guake/issues/772
-if (has("termguicolors"))
-   set termguicolors
+" auto-install vim-plug
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source ~/.config/nvim/init.vim
 endif
 
-syntax enable                             " enable syntaax highlighting
-colorscheme cosmic_latte
+set rtp+=~/.local/share/nvim/plugged
+call plug#begin('~/.local/share/nvim/plugged')
+Plug 'tpope/vim-fugitive'
+Plug 'sheerun/vim-polyglot'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'preservim/nerdtree'
+Plug 'itchyny/lightline.vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'ntk148v/auto-pairs'
+Plug 'haya14busa/incsearch.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug 'eugen0329/vim-esearch'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --no-bash' }
+Plug 'junegunn/fzf.vim'
+Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'mileszs/ack.vim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'folke/twilight.nvim'
+if has('nvim') || has('patch-8.0.902')
+  Plug 'mhinz/vim-signify'
+else
+  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+endif
+" Colorscheme
+Plug 'arcticicestudio/nord-vim'
+Plug 'folke/tokyonight.nvim'
+call plug#end()
 
-"let g:loaded_python_provider=1
-let g:python2_host_prog='/usr/bin/python'
-let g:python3_host_prog='/usr/bin/python3'
-set shell=/bin/zsh
-set number                                " show line numbers
-set ruler
-set ttyfast                               " terminal acceleration
+filetype plugin indent on
 
-set tabstop=4                             " 4 whitespaces for tabs visual presentation
-set shiftwidth=4                          " shift lines by 4 spaces
-set smarttab                              " set tabs for a shifttabs logic
-set expandtab                             " expand tabs into spaces
-set autoindent                            " indent when moving to the next line
+" ---- General config -----
 
-set cursorline                            " show line under the cursor's line
-set showmatch                             " show matching part of bracket parts (), [], {}
+" Todo file
+autocmd BufNewFile,BufRead *.todo set syntax=todo
+" Python file
+autocmd BufRead,BufNewFile *.py setlocal textwidth=80
+" Auto remove trailing spaces
+autocmd BufWritePre * %s/\s\+$//e
 
-set enc=utf-8                             " utf-8 by default
-
-set nobackup                              " no backup files
-set noswapfile
-
-set backspace=indent,eol,start            " backspace removes all
-
-set scrolloff=20
-set clipboard=unnamed                     " use system clipboard
-set listchars=tab:>\ ,trail:•,extends:#,nbsp:." Indent guides settings
-
-" Auto update
-set autoread
-set autowrite
-
+set encoding=UTF-8
+set hidden
+set nobackup
+set nowritebackup
+set cursorline
 " Uncomment it if you want to use mouse
 " if has('mouse')
 "     set mouse=a
 " endif
-
 " By the way, -- INSERT -- is unnecessary anymore because the mode information is displayed in the statusline.
 set noshowmode
-
-" -----------------------
-" Tab / Buffers settings
-" ----------------------
-tab sball
-set switchbuf=useopen
+set foldmethod=indent
+set foldlevel=99
+set conceallevel=0
+let g:is_posix = 1
+set noswapfile
+set nojoinspaces
+set wrap
+set linebreak
+set number
+set ttyfast
 set laststatus=2
-nmap <F9> :bprev<CR>
-nmap <F10> :bnext<CR>
-nmap <silent> <leader>q: SyntasticCheck # <CR> :bp <BAR> bd #<CR>
+set ttimeout
+set ttimeoutlen=10
+set ignorecase
+" Signify default updatetime 4000ms is not good for async update
+set updatetime=100
 
-" -----------------------
-" Neomake settings
-" -----------------------
-call neomake#configure#automake('w')
-let g:neomake_open_list=2
+" I don't use recording, don't judge me
+map q <Nop>
+inoremap jk <ESC>
+vnoremap <M-/> <Esc>/\%V
+nnoremap <ESC><ESC> :nohlsearch<CR>
+" Word instead of character movement
+" nnoremap L l
+" nnoremap H h
+" nnoremap l w
+" nnoremap h b
 
-" -----------------------
-" Deoplete settings
-" -----------------------
-let g:deoplete#enable_at_startup=1
-" deoplete-go settings
-let g:deoplete#sources#go#gocode_binary = '$GOPATH/bin/gocode'
-let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+vnoremap p "_dP
 
-" -----------------------
-" Search settings
-" -----------------------
-set incsearch	                            " incremental search
-set hlsearch	                            " highlight search results
+" Remap scrolling
+nnoremap <C-k> <C-u>
+nnoremap <C-j> <C-d>
 
-" ---------------------------
-" Comfortable Motion settings
-" ---------------------------
-let g:comfortable_motion_scroll_down_key="j"
-let g:comfortable_motion_scroll_up_key="k"
-let g:comfortable_motion_no_default_key_mappings=1
-let g:comfortable_motion_impulse_multiplier=25  " Feel free to increase/decrease this value.
-nnoremap <silent> <C-d> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 2)<CR>
-nnoremap <silent> <C-u> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -2)<CR>
-nnoremap <silent> <C-f> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 4)<CR>
-nnoremap <silent> <C-b> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -4)<CR>
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{StatusDiagnostic()}
 
-" --------------------------
-" Airline settings - uncomment if you want to use vim-airline over lightline
-" --------------------------
-" let g:airline#extensions#tabline#enabled=1
-" let g:airline#extensions#tabline#formatter='unique_tail'
-" let g:airline_powerline_fonts=1
-" let g:airline#extensions#ale#enabled = 1
-" let g:airline#extensions#tabline#enabled = 1
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+if (has("termguicolors"))
+    set termguicolors
+endif
+set background=dark
+colo tokyonight
+if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
+  syntax on
+endif
 
-" --------------------
-" Lightline settings
-" ---------------------
+set listchars=tab:>·,trail:~,extends:>,precedes:<
+set list
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set shiftround
+set smarttab
+set expandtab
+set autoindent
+set smartindent
+" Persistent undo
+" Don't forget mkdir folder $HOME/.local/share/nvim/undo
+set undofile
+set undodir=$HOME/.local/share/nvim/undo
+set undolevels=1000
+set undoreload=10000
+set updatetime=300
+" Turn off whitespaces compare and folding in vimdiff
+set splitright
+silent! set splitvertical
+set diffopt+=iwhite
+set diffopt+=vertical
+set shortmess+=c
+set signcolumn=yes
+set clipboard=unnamed
+set wildoptions=pum
+set pumblend=1
+
+" Vim color highlighting
+let g:Hexokinase_highlighters = ['virtual']
+let g:Hexokinase_virtualText = '▩'
+
+" FZF config
+let g:fzf_layout = { 'window': {
+      \ 'width': 0.9,
+      \ 'height': 0.7,
+      \ 'highlight': 'Comment',
+      \ 'rounded': v:false } }
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+" [Tags] Command to generate tags file
+let g:fzf_tags_command = 'ctags -R'
+
+" [Commands] --expect expression for directly executing the command
+let g:fzf_commands_expect = 'alt-enter,ctrl-x'
+
+" Esearch config
+let g:esearch = {
+  \ 'adapter': 'rg',
+  \ 'backend': 'nvim'
+  \}
+call esearch#out#win#map('<Enter>', 'tab')
+
+" Custom icon for coc.nvim statusline
+let g:coc_status_error_sign=" "
+let g:coc_status_warning_sign=" "
+
+
+" --------- Floating  ---------
+let s:float_term_border_win = 0
+let s:float_term_win = 0
+function! FloatTerm(...)
+  " Configuration
+  let height = float2nr((&lines - 2) * 0.6)
+  let row = float2nr((&lines - height) / 2)
+  let width = float2nr(&columns * 0.6)
+  let col = float2nr((&columns - width) / 2)
+  " Border Window
+  let border_opts = {
+        \ 'relative': 'editor',
+        \ 'row': row - 1,
+        \ 'col': col - 2,
+        \ 'width': width + 4,
+        \ 'height': height + 2,
+        \ 'style': 'minimal'
+        \ }
+  " Terminal Window
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': row,
+        \ 'col': col,
+        \ 'width': width,
+        \ 'height': height,
+        \ 'style': 'minimal'
+        \ }
+  let top = "╭" . repeat("─", width + 2) . "╮"
+  let mid = "│" . repeat(" ", width + 2) . "│"
+  let bot = "╰" . repeat("─", width + 2) . "╯"
+  let lines = [top] + repeat([mid], height) + [bot]
+  let bbuf = nvim_create_buf(v:false, v:true)
+  call nvim_buf_set_lines(bbuf, 0, -1, v:true, lines)
+  let s:float_term_border_win = nvim_open_win(bbuf, v:true, border_opts)
+  let buf = nvim_create_buf(v:false, v:true)
+  let s:float_term_win = nvim_open_win(buf, v:true, opts)
+  " Styling
+  hi FloatWinBorder guifg=#87bb7c
+  call setwinvar(s:float_term_border_win, '&winhl', 'Normal:FloatWinBorder')
+  call setwinvar(s:float_term_win, '&winhl', 'Normal:Normal')
+  if a:0 == 0
+    terminal
+  else
+    call termopen(a:1)
+  endif
+  startinsert
+  " Close border window when terminal window close
+  autocmd TermClose * ++once :bd! | call nvim_win_close(s:float_term_border_win, v:true)
+endfunction
+
+" ------- Key binding ---------
+let mapleader=" "
+map mm <Plug>NERDCommenterToggle
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+nnoremap <Leader>1 :diffget 1<CR>:diffupdate<CR>
+nnoremap <Leader>2 :diffget 2<CR>:diffupdate<CR>
+nnoremap <Leader>s :Ack<CR>
+nnoremap <Leader>l :vsplit<CR>
+nnoremap <Leader>k :split<CR>
+nnoremap <Leader>wh :wincmd h<CR>
+nnoremap <Leader>wl :wincmd l<CR>
+nnoremap <Leader>wk :wincmd k<CR>
+nnoremap <Leader>wj :wincmd j<CR>
+nnoremap <Leader>w= :wincmd =<CR>
+nnoremap <Leader>wb :e#<CR>
+nnoremap <Leader>qq :bd<CR>
+nnoremap <Leader>qk :call DeleteCurrentFileAndBuffer()<CR>
+nnoremap <Leader>ss :mksession! .vimsession<CR>
+nnoremap <Leader>sr :so .vimsession<CR>
+nnoremap <Leader><Leader>r :so ~/.config/nvim/init.vim<CR>
+nnoremap <Leader>n :NERDTree<CR>
+nnoremap <Leader>f :NERDTreeFind<CR>
+" Tabs
+nnoremap <Leader>tn :tabn<CR>
+nnoremap <Leader>tp :tabp<CR>
+nnoremap <Leader>tc :tabe<CR>
+nnoremap <Leader>tx :tabclose<CR>
+" Buffers
+nnoremap <Leader>qq :bd<CR>
+" Open terminal
+nnoremap <Leader>at :call FloatTerm()<CR>
+" Open tig, yes TIG, A FLOATING TIGGGG!!!!!!
+nnoremap <Leader>ag :call FloatTerm('"tig"')<CR>
+nnoremap <silent> <Leader>pf :Files<CR>
+nnoremap <silent> <Leader>pb :Buffers<CR>
+nnoremap <silent> <Leader>pr :History<CR>
+nnoremap <silent> <c-\> :call esearch#init()<CR>
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+nnoremap <silent> \ :Rg<CR>
+nnoremap <silent> <c-o> :CocList outline<CR>
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+" ------ NERDTree config ------
+let NERDTreeMinimalUI=1
+let g:NERDSpaceDelims = 1
+
+" ------ Lightline ------
+function! DeleteCurrentFileAndBuffer()
+  call delete(expand('%'))
+  bdelete!
+endfunction
+
+function! DrawGitBranchInfo()
+  let branch = fugitive#head()
+  return len(branch) > 0 ? " " . branch : ""
+endfunction
+
+function! MyFiletype()
+  " return winwidth(0) > 70 ? (strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() : '') : ''
+  return ''
+endfunction
+
+function! LightLineFilename()
+  let name = ""
+  let subs = split(expand('%'), "/")
+  let i = 1
+  for s in subs
+    let parent = name
+    if  i == len(subs)
+      let name = len(parent) > 0 ? parent . '/' . s : s
+    elseif i == 1
+      let name = s
+    else
+      let part = strpart(s, 0, 10)
+      let name = len(parent) > 0 ? parent . '/' . part : part
+    endif
+    let i += 1
+  endfor
+  return name
+endfunction
+
 let g:lightline = {
-    \ 'active': {
-    \   'left': [ ['mode', 'paste'],
-    \             ['gitbranch', 'readonly', 'filename', 'modified'],
-    \             ['bufferline']],
-    \  },
-    \  'component': {
-    \     'lineinfo': ' %3l:%-2v',
-    \     'bufferline': '%{bufferline#refresh_status()}%{g:bufferline_status_info.before . g:bufferline_status_info.current . g:bufferline_status_info.after}'
-    \  },
-    \  'component_function': {
-    \     'gitbranch': 'gitbranch#name'
-    \  }
-    \ }
-" Set version automatically based on vim (neovim) launch time
-if strftime('%H') >= 7 && strftime('%H') < 19
-    set background=light
-    let g:lightline.colorscheme = 'cosmic_latte_light'
-else
-    set background=dark
-    let g:lightline.colorscheme = 'cosmic_latte_light'
-endif
+      \ 'colorscheme': 'tokyonight',
+      \ 'active': {
+      \   'left': [ ['mode'], ['filename'] ],
+      \   'right': [ [], ['cocstatus', 'lineinfo', 'icongitbranch'] ]
+      \ },
+      \ 'inactive': {
+      \   'left': [ ['fileicon'], [ 'filename' ] ],
+      \   'right': []
+      \ },
+      \ 'component': { 'lineinfo': ' %2p%% %3l:%-2v' },
+      \ 'component_function': {
+      \   'fileicon': 'MyFiletype',
+      \   'icongitbranch': 'DrawGitBranchInfo',
+      \   'iconline': 'DrawLineInfo',
+      \   'gitbranch': 'fugitive#head',
+      \   'cocstatus': 'coc#status',
+      \   'filename': 'LightLineFilename',
+      \ },
+      \ }
 
-"------------------------
-" NERDTree settings
-" -----------------------
-let NERDTreeIgnore=['\.pyc$', '\.pyo$', '__pycache__$']     " Ignore files in NERDTree
-let NERDTreeWinSize=35
-let NERDTreeChDirMode=2
-let g:NERDTreeHijackNetrw=0
-let NERDTreeCascadeOpenSingleChildDir=1
-autocmd VimEnter * if !argc() | NERDTree | endif  " Load NERDTree only if vim is run without arguments
-nmap " :NERDTreeToggle<CR>
-
-" -----------------------
-" TagBar
-" -----------------------
-let g:tagbar_autofocus=0
-let g:tagbar_width=42
-" Always open TagBar when open python files. I don't like it much so let's
-" comment it.
-" autocmd BufEnter *.py :call tagbar#autoopen(0)
-autocmd BufWinLeave *.py :TagbarClose
-nmap <F8> :TagbarToggle<CR>
-
-" -----------------------
-" NERDComment settings
-" -----------------------
-
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims=1
-
-" Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
-
-" Align line-wise comment delimiters flush left instead of following code indentation
-let g:NERDDefaultAlign = 'left'
-
-" Set a language to use its alternate delimiters by default
-let g:NERDAltDelims_java = 1
-
-" Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
-
-" Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
-
-" Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
-
-" -----------------------
-" DevIcon settings
-" -----------------------
-" loading the plugin 
-let g:webdevicons_enable = 1
-
-" adding the flags to NERDTree 
-let g:webdevicons_enable_nerdtree = 1
-
-" adding to vim-airline's tabline
-" let g:webdevicons_enable_airline_tabline = 1
-
-" adding to vim-airline's statusline
-" let g:webdevicons_enable_airline_statusline = 1
-
-" turn on/off file node glyph decorations (not particularly useful)
-let g:WebDevIconsUnicodeDecorateFileNodes = 1
-
-" use double-width(1) or single-width(0) glyphs 
-" only manipulates padding, has no effect on terminal or set(guifont) font
-let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
-
-" whether or not to show the nerdtree brackets around flags 
-let g:webdevicons_conceal_nerdtree_brackets = 0
-
-" the amount of space to use after the glyph character (default ' ')
-let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
-
-" Force extra padding in NERDTree so that the filetype icons line up vertically
-let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1 
-
-" change the default character when no match found
-let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = 'ƛ'
-
-" set a byte character marker (BOM) utf-8 symbol when retrieving file encoding
-" disabled by default with no value
-let g:WebDevIconsUnicodeByteOrderMarkerDefaultSymbol = ''
-
-" enable folder/directory glyph flag (disabled by default with 0)
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-
-" enable open and close folder/directory glyph flags (disabled by default with 0)
-let g:DevIconsEnableFoldersOpenClose = 1
-
-" enable pattern matching glyphs on folder/directory (enabled by default with 1)
-let g:DevIconsEnableFolderPatternMatching = 1
-
-" enable file extension pattern matching glyphs on folder/directory (disabled by default with 0)
-let g:DevIconsEnableFolderExtensionPatternMatching = 0
-
-" -----------------------
-" SnipMate settings
-" -----------------------
-let g:snippets_dir='~/.local/share/nvim/plugged/vim-snippets/snippets/'
-
-" ------------------------
-" CtrlSpace - Fuzzy search
-" ------------------------
-if has("gui_running")
-    let g:CtrlSpaceSymbols = { "File": "◯", "CTab": "▣", "Tabs": "▢" }
-endif
-
-" Require install silversearcher-ag
-if executable("ag")
-    let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
-endif
-" Colors
-hi link CtrlSpaceNormal   PMenu
-hi link CtrlSpaceSelected PMenuSel
-hi link CtrlSpaceSearch   Search
-hi link CtrlSpaceStatus   StatusLine
-hi link CtrlSpaceSearch IncSearch
-" We need this line to work around with neovim: https://github.com/vim-ctrlspace/vim-ctrlspace/issues/188<Paste>
-let g:CtrlSpaceDefaultMappingKey = "<C-space> "
-" Fuzzy Search
-nnoremap <silent><C-p> :CtrlSpace O<CR>
-" Automatically Saving Workspace
-let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
-let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
-let g:CtrlSpaceSaveWorkspaceOnExit = 1
-
-" ----------------------
-" Fuzzysearch - fzf
-" ----------------------
-map ; :Files<CR>
-
-" -----------------------
-" Python
-" -----------------------
-
-" python executables for different plugins
-let g:pymode_python='python'
-
-" lints
-let g:pymode_lint=0
-
-" virtualenv
-let g:pymode_virtualenv=1
-
-" breakpoints
-let g:pymode_breakpoint=1
-let g:pymode_breakpoint_key='<leader>b'
-
-" syntax highlight
-let g:pymode_syntax=1
-let g:pymode_syntax_slow_sync=1
-let g:pymode_syntax_all=1
-let g:pymode_syntax_print_as_function=g:pymode_syntax_all
-let g:pymode_syntax_highlight_async_await=g:pymode_syntax_all
-let g:pymode_syntax_highlight_equal_operator=g:pymode_syntax_all
-let g:pymode_syntax_highlight_stars_operator=g:pymode_syntax_all
-let g:pymode_syntax_highlight_self=g:pymode_syntax_all
-let g:pymode_syntax_indent_errors=g:pymode_syntax_all
-let g:pymode_syntax_string_formatting=g:pymode_syntax_all
-let g:pymode_syntax_space_errors=g:pymode_syntax_all
-let g:pymode_syntax_string_format=g:pymode_syntax_all
-let g:pymode_syntax_string_templates=g:pymode_syntax_all
-let g:pymode_syntax_doctests=g:pymode_syntax_all
-let g:pymode_syntax_builtin_objs=g:pymode_syntax_all
-let g:pymode_syntax_builtin_types=g:pymode_syntax_all
-let g:pymode_syntax_highlight_exceptions=g:pymode_syntax_all
-let g:pymode_syntax_docstrings=g:pymode_syntax_all
+" Use auocmd to force lightline update.
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 augroup vimrc_autocmds
     autocmd!
@@ -380,88 +350,83 @@ augroup vimrc_autocmds
     autocmd FileType python,rst,c,cpp set colorcolumn=80
 augroup END
 
-" code running
-let g:pymode_run=1
-let g:pymode_run_bind='<F5>'
-let g:ale_sign_column_always=0
-let g:ale_emit_conflict_warnings=0
-let g:pymode_rope_lookup_project = 0
-let g:pymode_rope = 0
-
-let b:ale_linters = ['pylakes', 'flake8', 'pylint']
-
-imap <F5> <Esc>:w<CR>:!clear;python %<CR>
-
-if executable('ag')
-    let g:ackprg = 'ag --vimgrep'
-endif
-
-let g:go_version_warning = 0
-
-" -----
-"  COC
-" -----
-
-" Better display for messages
-set cmdheight=2
-" Smaller updatetime for CursorHold & CursorHoldI
-set updatetime=300
-" don't give |ins-completion-menu| messages
-set shortmess+=c
-" always show signcolumns
-set signcolumn=yes
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+" inoremap <silent><expr> <TAB>
+      " \ pumvisible() ? "\<C-n>" :
+      " \ <SID>check_back_space() ? "\<TAB>" :
+      " \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+let g:coc_snippet_next = '<tab>'
+let g:coc_disable_startup_warning = 1
 
-" Use `[c` and `]c` to navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" Use U to show documentation in preview window
-nnoremap <silent> U :call <SID>show_documentation()<CR>
-
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Remap for format selected region
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-" Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+xmap <leader><leader>f  <Plug>(coc-format-selected)
+nmap <leader><leader>f  <Plug>(coc-format-selected)
 
-" disable vim-go :GoDef short cut (gd)
-" this is handled by LanguageClient [LC]
-let g:go_def_mapping_enabled = 0
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>ar  <Plug>(coc-rename)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+function! StatusDiagnostic() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return '' | endif
+  let msgs = []
+  if get(info, 'error', 0)
+    call add(msgs, 'E' . info['error'])
+  endif
+  if get(info, 'warning', 0)
+    call add(msgs, 'W' . info['warning'])
+  endif
+  return join(msgs, ' ') . ' ' . get(g:, 'coc_status', '')
+endfunction
+
+" Ack
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+endif
+
+lua << EOF
+  require("twilight").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+EOF

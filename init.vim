@@ -10,25 +10,45 @@ endif
 
 set rtp+=~/.local/share/nvim/plugged
 call plug#begin('~/.local/share/nvim/plugged')
+" fugitive.vim: A Git wrapper so awesome, it should be illegal
 Plug 'tpope/vim-fugitive'
+" A solid language pack for Vim.
 Plug 'sheerun/vim-polyglot'
+" Nodejs extension host for vim & neovim, load extensions like VSCode and host language servers.
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Go development plugin for Vim
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" A tree explorer plugin for vim.
 Plug 'preservim/nerdtree'
+" A light and configurable statusline/tabline plugin for Vim
 Plug 'itchyny/lightline.vim'
+" Adds file type icons to Vim plugins such as: NERDTree, vim-airline, CtrlP, unite, Denite, lightline, vim-startify and many more
 Plug 'ryanoasis/vim-devicons'
+" Vim plugin, insert or delete brackets, parens, quotes in pair
 Plug 'ntk148v/auto-pairs'
+" :flashlight: Improved incremental searching for Vim
 Plug 'haya14busa/incsearch.vim'
+" Vim plugin for intensely nerdy commenting powers
 Plug 'scrooloose/nerdcommenter'
+" Multiple cursors plugin for vim/neovim
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+" Perform search in files easily
 Plug 'eugen0329/vim-esearch'
+" :cherry_blossom: A command-line fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --no-bash' }
+" fzf :heart: vim
 Plug 'junegunn/fzf.vim'
+" hexokinase.vim - (Neo)Vim plugin for asynchronously displaying the colours in the file (#rrggbb, #rgb, rgb(a)? functions, hsl(a)? functions, web colours, custom patterns)
 Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
+" Vim plugin for the Perl module / CLI script 'ack'
 Plug 'mileszs/ack.vim'
+" Nvim Treesitter configurations and abstraction layer
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+" UltiSnips - The ultimate snippet solution for Vim. Send pull requests to SirVer/ultisnips!
 Plug 'SirVer/ultisnips'
+" vim-snipmate default snippets (Previously snipmate-snippets)
 Plug 'honza/vim-snippets'
+" 🌅  Twilight is a Lua plugin for Neovim 0.5 that dims inactive portions of the code you're editing using TreeSitter.
 Plug 'folke/twilight.nvim'
 if has('nvim') || has('patch-8.0.902')
   Plug 'mhinz/vim-signify'
@@ -36,7 +56,9 @@ else
   Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
 endif
 " Colorscheme
+" An arctic, north-bluish clean and elegant Vim theme.
 Plug 'arcticicestudio/nord-vim'
+" 🏙  A clean, dark Neovim theme written in Lua, with support for lsp, treesitter and lots of plugins. Includes additional themes for Kitty, Alacritty, iTerm and Fish.
 Plug 'folke/tokyonight.nvim'
 call plug#end()
 

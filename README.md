@@ -150,6 +150,12 @@ These are the default keymaps, in the following shortcuts, the `<leader>` key is
 
 ## 6. Screenshots
 
+|                                                                        |                                                                        |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| <img src="screenshots/nvim1.png" alt="dark" style="border-radius:1%"/> | <img src="screenshots/nvim2.png" alt="dark" style="border-radius:1%"/> |
+| <img src="screenshots/nvim3.png" alt="dark" style="border-radius:1%"/> | <img src="screenshots/nvim4.png" alt="dark" style="border-radius:1%"/> |
+| <img src="screenshots/nvim5.png" alt="dark" style="border-radius:1%"/> |                                                                        |
+
 ## 7. Contribution
 
 ## 8. Guide and resources

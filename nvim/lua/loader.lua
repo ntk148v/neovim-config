@@ -112,8 +112,8 @@ return packer.startup({
         -- Supports treesitter, dot repeat, left-right/up-down motions, hooks, and more
         use 'numToStr/Comment.nvim'
 
-        -- Show a diff using Vim its sign column.
-        use 'mhinz/vim-signify'
+        -- Git integration for buffers
+        use 'lewis6991/gitsigns.nvim'
 
         -- Colorizer
         use 'norcalli/nvim-colorizer.lua'

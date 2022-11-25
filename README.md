@@ -24,14 +24,13 @@ Table of contents
 
 - [1. Introduction](#1-introduction)
 - [2. Installation](#2-installation)
-- [3. Configuration](#3-configuration)
-- [4. Plugins \& LSP](#4-plugins--lsp)
-  - [4.1. Plugins](#41-plugins)
-  - [4.2. LSP](#42-lsp)
-- [5. Keymaps](#5-keymaps)
-- [6. Screenshots](#6-screenshots)
-- [7. Contribution](#7-contribution)
-- [8. Guide and resources](#8-guide-and-resources)
+- [3. Plugins \& LSP](#3-plugins--lsp)
+  - [3.1. Plugins](#31-plugins)
+  - [3.2. LSP](#32-lsp)
+- [4. Keymaps](#4-keymaps)
+- [5. Screenshots](#5-screenshots)
+- [6. Contribution](#6-contribution)
+- [7. Guide and resources](#7-guide-and-resources)
 
 ## 1. Introduction
 
@@ -42,9 +41,9 @@ Table of contents
 - It’s been around forever, and frankly, probably always will be.
 
 Therefore, I decided to create this repository. There are several versions:
-- [v0.1.0](): written in VimL, a single file only.
-- [v0.1.1](): written in VimL, consist of mutliple files.
-- [v0.2.0](): started this version, switch from VimL to Lua. For the reason, you may to check [neovim's official wiki](https://github.com/neovim/neovim/wiki/FAQ#why-embed-lua-instead-of-x). Follow [KISS principle](https://en.wikipedia.org/wiki/KISS_principle), this version uses the least plugins as possible. It's more like a skeleton, users can add more plugins and LSP.
+- [v0.1.0](https://github.com/ntk148v/neovim-config/tree/v0.1.0): written in VimL, a single file only.
+- [v0.1.1](https://github.com/ntk148v/neovim-config/tree/v0.1.1): written in VimL, consist of mutliple files.
+- [v0.2.0](https://github.com/ntk148v/neovim-config/tree/v0.2.0): started this version, switch from VimL to Lua. For the reason, you may to check [neovim's official wiki](https://github.com/neovim/neovim/wiki/FAQ#why-embed-lua-instead-of-x). Follow [KISS principle](https://en.wikipedia.org/wiki/KISS_principle), this version uses the least plugins as possible. It's more like a skeleton, users can add more plugins and LSP.
 
 ## 2. Installation
 
@@ -72,11 +71,9 @@ cp -Rv nvim ~/.config/
 :PackerSync
 ```
 
-## 3. Configuration
+## 3. Plugins & LSP
 
-## 4. Plugins & LSP
-
-### 4.1. Plugins
+### 3.1. Plugins
 
 | Plugin                                                                            | Description                                                                                                                                                       |
 | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -99,7 +96,7 @@ cp -Rv nvim ~/.config/
 | [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)                 | A clean, dark Neovim theme written in Lua, with support for lsp, treesitter and lots of plugins. Includes additional themes for Kitty, Alacritty, iTerm and Fish. |
 | [projekt0n/github-nvim-theme](https://github.com/projekt0n/github-nvim-theme)     | Github's Neovim themes                                                                                                                                            |
 
-### 4.2. LSP
+### 3.2. LSP
 
 This configuration provides Python and Golang dev environment. The programming language server is current supported:
 
@@ -125,7 +122,7 @@ If your language is not supported, please follow this:
 :TSInstall `<language_to_install>`
 ```
 
-## 5. Keymaps
+## 4. Keymaps
 
 These are the default keymaps, in the following shortcuts, the `<leader>` key is set up to ` ` (space) character, check: [keymaps.lua](./nvim/lua/core/keymaps.lua).
 
@@ -148,7 +145,7 @@ These are the default keymaps, in the following shortcuts, the `<leader>` key is
 | `gcc`              | Normal   | Comment/Uncomment line                        |
 | `gbc`              | Normal   | Comment/Uncomment block                       |
 
-## 6. Screenshots
+## 5. Screenshots
 
 |                                                                        |                                                                        |
 | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
@@ -156,9 +153,11 @@ These are the default keymaps, in the following shortcuts, the `<leader>` key is
 | <img src="screenshots/nvim3.png" alt="dark" style="border-radius:1%"/> | <img src="screenshots/nvim4.png" alt="dark" style="border-radius:1%"/> |
 | <img src="screenshots/nvim5.png" alt="dark" style="border-radius:1%"/> |                                                                        |
 
-## 7. Contribution
+## 6. Contribution
 
-## 8. Guide and resources
+Feel free to file an issue or open a pull request. You're welcome!
+
+## 7. Guide and resources
 
 - [nanotee/nvim-lua-guide](https://github.com/nanotee/nvim-lua-guide)
 - [brainfucksec/neovim-lua](https://github.com/brainfucksec/neovim-lua)

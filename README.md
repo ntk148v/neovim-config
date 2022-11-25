@@ -1,13 +1,39 @@
-# Neovim-config
+<div align="center">
+  <h1>Neovim configuration</h1>
+  <blockquote align="center">
+    A minimal Neovim configuration written in lua
+  </blockquote>
+  <p>
+    <a href="https://github.com/ntk148v/neovim-config/blob/master/LICENSE">
+      <img
+        alt="GitHub license"
+        src="https://img.shields.io/github/license/ntk148v/neovim-config?style=for-the-badge"
+      />
+    </a>
+    <a href="https://github.com/ntk148v/neovim-config/stargazers">
+      <img
+        alt="GitHub stars"
+        src="https://img.shields.io/github/stars/ntk148v/neovim-config?style=for-the-badge"
+      />
+    </a>
+  </p>
+  <br />
+</div>
 
-- [Neovim-config](#neovim-config)
-  - [1. Using NeoVim as an Python+Golang IDE](#1-using-neovim-as-an-pythongolang-ide)
-  - [2. Requirements](#2-requirements)
-  - [3. Installation](#3-installation)
-  - [4. Plugins](#4-plugins)
-  - [5. Screenshot](#5-screenshot)
+Table of contents
 
-## 1. Using NeoVim as an Python+Golang IDE
+- [1. Introduction](#1-introduction)
+- [2. Installation](#2-installation)
+- [3. Configuration](#3-configuration)
+- [4. Plugins \& LSP](#4-plugins--lsp)
+  - [4.1. Plugins](#41-plugins)
+  - [4.2. LSP](#42-lsp)
+- [5. Keymaps](#5-keymaps)
+- [6. Screenshots](#6-screenshots)
+- [7. Contribution](#7-contribution)
+- [8. Guide and resources](#8-guide-and-resources)
+
+## 1. Introduction
 
 [Neovim](https://neovim.io/) is a pretty cool successor to Vim, focusing on compatibility while adding asynchronous plugin functionality and trying to clean up the code base. Having been fed up at various times with both Sublime Text (2 and 3) and Atom, and after realizing how much development I do over SSH, it seemed reasonable to check out using vim (or nvim, in this case) as my IDE. The advantages essentially boil down to:
 
@@ -15,51 +41,95 @@
 - No need to ever use the mouse while coding (takes longer to learn, but is faster; this is aided by vim-easymotion and Ctrl-Space),
 - It’s been around forever, and frankly, probably always will be.
 
-Complete instructions to Neovim as your IDE - Inspired by [Jarol Rodriguez's vim-python-ide](https://github.com/jarolrod/vim-python-ide).
+Therefore, I decided to create this repository. There are several versions:
+- [v0.1.0](): written in VimL, a single file only.
+- [v0.1.1](): written in VimL, consist of mutliple files.
+- [v0.2.0](): started this version, switch from VimL to Lua. For the reason, you may to check [neovim's official wiki](https://github.com/neovim/neovim/wiki/FAQ#why-embed-lua-instead-of-x). Follow [KISS principle](https://en.wikipedia.org/wiki/KISS_principle), this version uses the least plugins as possible. It's more like a skeleton, users can add more plugins and LSP.
 
-> **NOTE**: You may want to take a look at [the previous version](https://github.com/ntk148v/neovim-config/tree/legacy).
+## 2. Installation
 
-## 2. Requirements
+- Requirements:
+  - [neovim >= 0.7.0](https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-package)
+  - git
+  - [nerdfonts](https://www.nerdfonts.com/font-downloads)
+- Backup your current neovim config, if necessary:
 
-- [Neovim](https://github.com/neovim/neovim) Version >= 0.5.0
-- [fzf](https://github.com/junegunn/fzf)
-- [ripgrep](https://github.com/BurntSushi/ripgrep)
-- Git
-- [Powerline-status](https://github.com/powerline/powerline)
-- [Nerd fonts](https://github.com/ryanoasis/nerd-fonts)
-
-## 3. Installation
-
-- Clone this repository:
-
-```bash
-git clone https://github.com/ntk148v/neovim-config ~/.config/nvim
+```shell
+mv ~/.config/nvim ~/.config/nvim.bak
 ```
 
-- Start `nvim`.
+- Get your configuration:
 
-## 4. Plugins
+```shell
+git clone https://github.com/ntk148v/neovim-config.git
+cd neovim-config.git/
+cp -Rv nvim ~/.config/
+```
 
-| Name                                                                  | Description                                                                                                                                              |
-| --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [fzf.vim](https://github.com/junegunn/fzf.vim)                        | fuzzy finder vim integration                                                                                                                             |
-| [coc.nvim](https://github.com/neoclide/coc.nvim)                      | Nodejs extension host for vim & neovim, load extensions like VSCode and host language servers.                                                           |
-| [vim-fugitive](https://github.com/tpope/vim-fugitive)                 | A Git wrapper so awesome, it should be illegal                                                                                                           |
-| [vim-polygot](https://github.com/sheerun/vim-polyglot)                | A solid language pack for Vim.                                                                                                                           |
-| [vim-go](https://github.com/fatih/vim-go)                             | Go development plugin for Vim                                                                                                                            |
-| [NERDTree](https://github.com/preservim/nerdtree)                     | A tree explorer plugin for Vim                                                                                                                           |
-| [lightline](https://github.com/itchyny/lightline.vim)                 | A light and configurable statusline/tabline plugin for Vim                                                                                               |
-| [vim-devicons](https://github.com/ryanoasis/vim-devicons)             | Adds file type icons to Vim plugins such as: NERDTree, vim-airline, CtrlP, unite, Denite, lightline, vim-startify and many more                          |
-| [auto-pairs](https://github.com/jiangmiao/auto-pairs)                 | Vim plugin, insert or delete brackets, parens, quotes in pair                                                                                            |
-| [incsearch](https://github.com/haya14busa/incsearch.vim)              | Improved incremental searching for Vim                                                                                                                   |
-| [vim-visual-multi](https://github.com/mg979/vim-visual-multi)         | Multiple cursors plugin for vim/neovim                                                                                                                   |
-| [vim-esearch](https://github.com/eugen0329/vim-esearch)               | Perform search in files easily                                                                                                                           |
-| [vim-hexokinase](https://github.com/RRethy/vim-hexokinase)            | Neo)Vim plugin for asynchronously displaying the colours in the file (#rrggbb, #rgb, rgb(a)? functions, hsl(a)? functions, web colours, custom patterns) |
-| [ack.vim](https://github.com/mileszs/ack.vim)                         | Vim plugin for the Perl module/CLI script 'ack'                                                                                                          |
-| [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | Nvim Treesitter configurations and abstraction layer                                                                                                     |
-| [UltiSnips](https://github.com/SirVer/ultisnips)                      | The ultimate snippet solution for Vim                                                                                                                    |
-| [vim-snippets](https://github.com/honza/vim-snippets)                 | vim-snipmate default snippets (Previously snipmate-snippets)                                                                                             |
-| [twilight.nvim](https://github.com/folke/twilight.nvim)               | Twilight is a Lua plugin for Neovim 0.5 that dims inactive portions of the code you're editing using TreeSitter.                                         |
-| [vim-signify](https://github.com/mhinz/vim-signify)                   | Show a diff using Vim its sign column                                                                                                                    |
+- Start Neovim, Packer should be installed automatically, then run the following command to install plugins:
 
-## 5. Screenshot
+```vim
+:PackerSync
+```
+
+## 3. Configuration
+
+## 4. Plugins & LSP
+
+### 4.1. Plugins
+
+| Plugin                                                                            | Description                                                                                                                                        |
+| --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [packer.nvim](https://github.com/wbthomason/packer.nvim)                          | A use-package inspired plugin manager for Neovim                                                                                                   |
+| [mason.nvim](https://github.com/williamboman/mason.nvim)                          | Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters. |
+| [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                        | A collection of common configurations for Neovim's built-in language server client                                                                 |
+| [gitsigns](https://github.com/lewis6991/gitsigns.nvim)                            | Super fast git decorations implemented purely in lua/teal                                                                                          |
+| [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)             | Nvim Treesitter configurations and abstraction layer                                                                                               |
+| [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                                   | Auto completion plugin                                                                                                                             |
+| [LuaSnip](https://github.com/L3MON4D3/LuaSnip)                                    | Snippet Engine for Neovim written in Lua                                                                                                           |
+| [nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua) -                    | A File Explorer written In Lua                                                                                                                     |
+| [nvim-autopairs](https://github.com/windwp/nvim-autopairs)                        | A super powerful autopairs for Neovim                                                                                                              |
+| [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)               | Lua `fork` of vim-web-devicons for neovim                                                                                                          |
+| [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)                      | A blazing fast and easy to configure neovim statusline plugin written in pure lua.                                                                 |
+| [Comment.nvim](https://github.com/numToStr/Comment.nvim)                          | Smart and powerful comment plugin for neovim. Supports treesitter, dot repeat, left-right/up-down motions, hooks, and more                         |
+| [norcalli/nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)     | The fastest Neovim colorizer.                                                                                                                      |
+| [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) | Find, Filter, Preview, Pick. All lua, all the time.                                                                                                |
+| [itmecho/neoterm.nvim](https://github.com/itmecho/neoterm.nvim)                   | Neovim lua plugin for managing a floating terminal window                                                                                          |
+
+### 4.2. LSP
+
+This configuration provides Python and Golang dev environment. The programming language server is current supported:
+
+- lua - [builtin](https://neovim.io/doc/user/lua.html).
+- python - [pyright](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright)
+- golang - [gopls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls)
+- docker - [dockerls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#dockerls)
+- bash - [bashls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bashls)
+
+Furthermore, it integrates with [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) to provide rich syntax highlighting and other language parsing magic.
+
+If your language is not supported, please follow this:
+
+- Check if LSP support is avaiable in the [lspconfig repo](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md). To install a supported language server with [mason](https://github.com/williamboman/mason.nvim):
+
+```vim
+:LspInstall `<your_language_server>`
+```
+
+- Check if your syntax is supported in the [treesitter repo](https://github.com/nvim-treesitter/nvim-treesitter). To install a language syntax hightlight, run:
+
+```vim
+:TSInstall `<language_to_install>`
+```
+
+## 5. Keymaps
+
+## 6. Screenshots
+
+## 7. Contribution
+
+## 8. Guide and resources
+
+- [nanotee/nvim-lua-guide](https://github.com/nanotee/nvim-lua-guide)
+- [brainfucksec/neovim-lua](https://github.com/brainfucksec/neovim-lua)
+- [LunarVim/Neovim-from-scratch](https://github.com/LunarVim/Neovim-from-scratch)

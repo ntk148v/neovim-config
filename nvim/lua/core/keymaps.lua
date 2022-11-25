@@ -13,7 +13,7 @@
 vim.keymap.set('n', '<leader>q', ':qa!<CR>', {})
 -- Fast saving with <leader> and s
 vim.keymap.set('n', '<leader>s', ':w<CR>', {})
--- Move around splits using Ctrl + {h,j,k,l}
+-- Move around splits
 vim.keymap.set('n', '<leader>wh', '<C-w>h', {})
 vim.keymap.set('n', '<leader>wj', '<C-w>j', {})
 vim.keymap.set('n', '<leader>wk', '<C-w>k', {})

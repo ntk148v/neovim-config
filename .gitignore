@@ -18,4 +18,4 @@ tags
 # Persistent undo
 [._]*.un~
 
-plugin/
+nvim/plugin/

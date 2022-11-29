@@ -11,7 +11,7 @@
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
 require('nvim-treesitter.configs').setup {
     -- A list of parser names, or 'all'
-    ensure_installed = {'go', 'python', 'dockerfile', 'json', 'yaml', 'markdown', 'html', 'scss', 'css'},
+    ensure_installed = {'go', 'python', 'dockerfile', 'json', 'yaml', 'markdown', 'html', 'scss', 'css', 'vim'},
 
     highlight = {
         enable = true,

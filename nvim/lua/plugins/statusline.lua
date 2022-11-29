@@ -39,7 +39,6 @@ function loadcolors()
 
     if wal_colors_file == nil then
         modules.utils_notices.add_notice('lualine.nvim: ' .. wal_colors_path .. ' not found')
-        io.close(wal_colors_file)
         return colors
     end
 

@@ -12,51 +12,75 @@
 -- Credit: shadmansaleh & his evil theme: https://github.com/nvim-lualine/lualine.nvim/blob/master/examples/evil_lualine.lua
 local lualine = require('lualine')
 local lualine_require = require('lualine_require')
--- Load pywal colors
-local modules = lualine_require.lazy_require {
-    utils_notices = 'lualine.utils.notices'
-}
-local sep = package.config:sub(1, 1)
-local wal_colors_path = table.concat({os.getenv('HOME'), '.cache', 'wal', 'colors.sh'}, sep)
-local wal_colors_file = io.open(wal_colors_path, 'r')
 
-if wal_colors_file == nil then
-    modules.utils_notices.add_notice('lualine.nvim: ' .. wal_colors_path .. ' not found')
-    error('')
-end
+function loadcolors()
+    -- Rose-pine palette
+    local rosepine = require('rose-pine.palette')
+    local colors = {
+        bg = rosepine.base,
+        fg = rosepine.text,
+        yellow = rosepine.gold,
+        cyan = rosepine.foam,
+        black = rosepine.subtled,
+        green = rosepine.pine,
+        white = rosepine.text,
+        magenta = rosepine.iris,
+        blue = rosepine.rose,
+        red = rosepine.love
+    }
 
-local ok, wal_colors_text = pcall(wal_colors_file.read, wal_colors_file, '*a')
-wal_colors_file:close()
+    -- Try to load pywal colors
+    local modules = lualine_require.lazy_require {
+        utils_notices = 'lualine.utils.notices'
+    }
+    local sep = package.config:sub(1, 1)
+    local wal_colors_path = table.concat({os.getenv('HOME'), '.cache', 'wal', 'colors.sh'}, sep)
+    local wal_colors_file = io.open(wal_colors_path, 'r')
 
-if not ok then
-    modules.utils_notices.add_notice('lualine.nvim: ' .. wal_colors_path .. ' could not be read: ' .. wal_colors_text)
-    error('')
-end
-
-local colors = {}
-
-for line in vim.gsplit(wal_colors_text, '\n') do
-    if line:match("^[a-z0-9]+='#[a-fA-F0-9]+'$") ~= nil then
-        local i = line:find('=')
-        local key = line:sub(0, i - 1)
-        local value = line:sub(i + 2, #line - 1)
-        colors[key] = value
+    if wal_colors_file == nil then
+        modules.utils_notices.add_notice('lualine.nvim: ' .. wal_colors_path .. ' not found')
+        io.close(wal_colors_file)
+        return colors
     end
+
+    local ok, wal_colors_text = pcall(wal_colors_file.read, wal_colors_file, '*a')
+    wal_colors_file:close()
+
+    if not ok then
+        modules.utils_notices.add_notice('lualine.nvim: ' .. wal_colors_path .. ' could not be read: ' ..
+                                             wal_colors_text)
+        return colors
+    end
+
+    local wal = {}
+
+    for line in vim.gsplit(wal_colors_text, '\n') do
+        if line:match("^[a-z0-9]+='#[a-fA-F0-9]+'$") ~= nil then
+            local i = line:find('=')
+            local key = line:sub(0, i - 1)
+            local value = line:sub(i + 2, #line - 1)
+            wal[key] = value
+        end
+    end
+
+    -- Color table for highlights
+    colors = {
+        bg = wal.background,
+        fg = wal.foreground,
+        yellow = wal.color3,
+        cyan = wal.color4,
+        black = wal.color0,
+        green = wal.color2,
+        white = wal.color7,
+        magenta = wal.color5,
+        blue = wal.color6,
+        red = wal.color1
+    }
+
+    return colors
 end
 
--- Color table for highlights
-local colors = {
-    bg = colors.background,
-    fg = colors.foreground,
-    yellow = colors.color3,
-    cyan = colors.color6,
-    black = colors.color0,
-    green = colors.color2,
-    white = colors.color7,
-    magenta = colors.color5,
-    blue = colors.color4,
-    red = colors.color1
-}
+local colors = loadcolors()
 
 local conditions = {
     buffer_not_empty = function()

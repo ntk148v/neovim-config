@@ -21,7 +21,6 @@ cmd([[
 	filetype plugin indent on
 ]])
 
-g.mapleader = ' '
 opt.backspace = {'eol', 'start', 'indent'}
 opt.clipboard = 'unnamedplus'
 opt.encoding = 'utf-8'

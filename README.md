@@ -135,16 +135,26 @@ These are the default keymaps, in the following shortcuts, the `<leader>` key is
 | `<leader>q`        | Normal   | Save (close all windows) and exit from Neovim |
 | `<leader>tt`       | Normal   | Open floating terminal                        |
 | `<Esc>`            | Terminal | Exit terminal                                 |
-| `<Ctrl> + n`       | Normal   | Open NvimTree                                 |
-| `<leader>f`        | Normal   | Refresh NvimTree                              |
-| `<leader>n`        | Normal   | Find file in NvimTree                         |
+| `<leader>n`        | Normal   | Open NvimTree                                 |
+| `<leader>nr`       | Normal   | Refresh NvimTree                              |
+| `<leader>nf`       | Normal   | Find file in NvimTree                         |
 | `<leader>ff`       | Normal   | Open Telescope to find files                  |
 | `<leader>fg`       | Normal   | Open Telescope to do live grep                |
 | `<leader>fb`       | Normal   | Open Telescope to list buffers                |
 | `<leader>fh`       | Normal   | Open Telescope to show help                   |
 | `<leader>wh/j/k/l` | Normal   | Move around splits                            |
-| `gcc`              | Normal   | Comment/Uncomment line                        |
-| `gbc`              | Normal   | Comment/Uncomment block                       |
+| `mm`               | Normal   | Comment/Uncomment line                        |
+| `mbm`              | Normal   | Comment/Uncomment block                       |
+| `m`                | Visual   | Comment/Uncomment line                        |
+| `mb`               | Visual   | Comment/Uncomment block                       |
+
+There are many default keymaps, you can check it using `:map` command. There are also other variants:
+
+- `:nmap` for normal mode mappings
+- `:vmap` for visual mode mappings
+- `:imap` for insert mode mappings
+
+The above list is not complete. Typing `:help map` in Vim will give you more info.
 
 ## 5. Screenshots
 

@@ -260,7 +260,7 @@ ins_left {
     end,
     icon = ' LSP:',
     color = {
-        fg = '#ffffff',
+        fg = colors.cyan,
         gui = 'bold'
     }
 }

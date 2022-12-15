@@ -73,13 +73,7 @@ return packer.startup({
 
         -- Statusline
         -- A blazing fast and easy to configure neovim statusline plugin written in pure lua.
-        use {
-            'nvim-lualine/lualine.nvim',
-            requires = {
-                'nvim-tree/nvim-web-devicons',
-                opt = true
-            }
-        }
+        use { 'nvim-lualine/lualine.nvim' }
 
         -- File explore
         -- nvim-tree.lua - A file explorer tree for neovim written in lua

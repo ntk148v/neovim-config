@@ -56,6 +56,9 @@ opt.listchars = {
     nbsp = '×'
 }
 
+-- Hide cmd line
+opt.cmdheight = 0
+
 opt.mouse = 'a'
 opt.number = true
 opt.scrolloff = 18

@@ -241,10 +241,10 @@ ins_left {function()
     return '%='
 end}
 
-ins_left {
+ins_right {
     -- Lsp server name .
     function()
-        local msg = 'No Active Lsp'
+        local msg = 'null'
         local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
         local clients = vim.lsp.get_active_clients()
         if next(clients) == nil then
@@ -258,7 +258,7 @@ ins_left {
         end
         return msg
     end,
-    icon = ' LSP:',
+    icon = ' LSP:',
     color = {
         fg = colors.cyan,
         gui = 'bold'
@@ -288,9 +288,9 @@ ins_right {
 
 ins_right {
     'branch',
-    icon = '',
+    icon = '',
     color = {
-        fg = colors.white,
+        fg = colors.blue,
         gui = 'bold'
     }
 }
@@ -299,9 +299,9 @@ ins_right {
     'diff',
     -- Is it me or the symbol for modified us really weird
     symbols = {
-        added = ' ',
-        modified = '柳 ',
-        removed = ' '
+        added = ' ',
+        modified = ' ',
+        removed = ' '
     },
     diff_color = {
         added = {

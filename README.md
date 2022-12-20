@@ -41,6 +41,7 @@ Table of contents
 - It’s been around forever, and frankly, probably always will be.
 
 Therefore, I decided to create this repository. There are several versions:
+
 - [v0.1.0](https://github.com/ntk148v/neovim-config/tree/v0.1.0): written in VimL, a single file only.
 - [v0.1.1](https://github.com/ntk148v/neovim-config/tree/v0.1.1): written in VimL, consist of mutliple files.
 - [v0.2.0](https://github.com/ntk148v/neovim-config/tree/v0.2.0): started this version, switch from VimL to Lua. For the reason, you may to check [neovim's official wiki](https://github.com/neovim/neovim/wiki/FAQ#why-embed-lua-instead-of-x). Follow [KISS principle](https://en.wikipedia.org/wiki/KISS_principle), this version uses the least plugins as possible. It's more like a skeleton, users can add more plugins and LSP.
@@ -48,9 +49,9 @@ Therefore, I decided to create this repository. There are several versions:
 ## 2. Installation
 
 - Requirements:
-  - [neovim >= 0.7.0](https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-package)
+  - Install [neovim >= 0.8.0](https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-package), or you can [build it](https://github.com/neovim/neovim/wiki/Building-Neovim#) yourself.
   - git
-  - [nerdfonts](https://www.nerdfonts.com/font-downloads)
+- I recommend using a [nerdfonts](https://www.nerdfonts.com/font-downloads)
 - Backup your current neovim config, if necessary:
 
 ```shell
@@ -173,3 +174,4 @@ Feel free to file an issue or open a pull request. You're welcome!
 - [nanotee/nvim-lua-guide](https://github.com/nanotee/nvim-lua-guide)
 - [brainfucksec/neovim-lua](https://github.com/brainfucksec/neovim-lua)
 - [LunarVim/Neovim-from-scratch](https://github.com/LunarVim/Neovim-from-scratch)
+- [LunarVim/nvim-basic-ide](https://github.com/LunarVim/nvim-basic-ide)

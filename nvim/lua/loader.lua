@@ -58,12 +58,9 @@ return packer.startup({
 
         -- Color schemes
         -- Rose-pine - Soho vibes for Neovim
-        -- NOTE(kiennt2609): Due to rose-pine's issue: https://github.com/rose-pine/neovim/issues/103
-        -- the specific commit is used. Remove it when neovim 0.8 becomes a stable version
         use {
             'rose-pine/neovim',
-            as = 'rose-pine',
-            commit = '69dca24ba7f8e74f1e6f0bacbc93481ac4047f2e'
+            as = 'rose-pine'
         }
         -- Tokyonight - A clean, dark Neovim theme written in Lua, with support for lsp,
         -- treesitter and lots of plugins. Includes additional themes for Kitty, Alacritty, iTerm and Fish.

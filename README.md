@@ -46,6 +46,8 @@ Therefore, I decided to create this repository. There are several versions:
 - [v0.1.1](https://github.com/ntk148v/neovim-config/tree/v0.1.1): written in VimL, consist of mutliple files.
 - [v0.2.0](https://github.com/ntk148v/neovim-config/tree/v0.2.0): started this version, switch from VimL to Lua. For the reason, you may to check [neovim's official wiki](https://github.com/neovim/neovim/wiki/FAQ#why-embed-lua-instead-of-x). Follow [KISS principle](https://en.wikipedia.org/wiki/KISS_principle), this version uses the least plugins as possible. It's more like a skeleton, users can add more plugins and LSP.
 
+As I mentioned, this config is meant as a starting point, it is not a complete Neovim/Vim config distribution, if you're looking for a one, check out [here](https://github.com/rockerBOO/awesome-neovim#preconfigured-configuration).
+
 ## 2. Installation
 
 - Requirements:

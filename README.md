@@ -16,6 +16,10 @@
         src="https://img.shields.io/github/stars/ntk148v/neovim-config?style=for-the-badge"
       />
     </a>
+    <img
+      alt="Neovim version"
+      src="https://img.shields.io/badge/Neovim-0.8-57A143?style=for-the-badge&logo=neovim"
+    />
   </p>
   <br />
 </div>

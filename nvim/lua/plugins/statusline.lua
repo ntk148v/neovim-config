@@ -251,7 +251,8 @@ ins_left {
         color_info = {
             fg = colors.cyan
         }
-    }
+    },
+    always_visible = true
 }
 
 -- Insert mid section. You can make any number of sections in neovim :)

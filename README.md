@@ -33,7 +33,9 @@ Complete instructions to Neovim as your IDE - Inspired by [Jarol Rodriguez's vim
 - Clone this repository:
 
 ```bash
-git clone https://github.com/ntk148v/neovim-config ~/.config/nvim
+git clone https://github.com/ntk148v/neovim-config
+cd neovim-config
+cp -Rv nvim ~/.config/
 ```
 
 - Start `nvim`.

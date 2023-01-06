@@ -18,7 +18,7 @@
     </a>
     <img
       alt="Neovim version"
-      src="https://img.shields.io/badge/Neovim-0.8-57A143?style=for-the-badge&logo=neovim"
+      src="https://img.shields.io/badge/Neovim-0.8+-57A143?style=for-the-badge&logo=neovim"
     />
   </p>
   <br />

@@ -98,9 +98,6 @@ return packer.startup({
                         'saadparwaiz1/cmp_luasnip'}
         }
 
-        -- LSP Progress lualine componenet
-        use 'arkav/lualine-lsp-progress'
-
         -- Smart and powerful comment plugin for neovim.
         -- Supports treesitter, dot repeat, left-right/up-down motions, hooks, and more
         use 'numToStr/Comment.nvim'

@@ -98,6 +98,10 @@ return packer.startup({
                         'saadparwaiz1/cmp_luasnip'}
         }
 
+        -- Use Neovim as a language server to inject LSP diagnostics,
+        -- code actions, and more via Lua.
+        use 'jose-elias-alvarez/null-ls.nvim'
+
         -- Smart and powerful comment plugin for neovim.
         -- Supports treesitter, dot repeat, left-right/up-down motions, hooks, and more
         use 'numToStr/Comment.nvim'

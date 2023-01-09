@@ -102,6 +102,7 @@ cp -Rv nvim ~/.config/
 | [rosé-pine](https://github.com/rose-pine/neovim)                                  | Soho vibes for Neovim                                                                                                                                             |
 | [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)                 | A clean, dark Neovim theme written in Lua, with support for lsp, treesitter and lots of plugins. Includes additional themes for Kitty, Alacritty, iTerm and Fish. |
 | [projekt0n/github-nvim-theme](https://github.com/projekt0n/github-nvim-theme)     | Github's Neovim themes                                                                                                                                            |
+| [null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim) | Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua. |
 
 ### 3.2. LSP
 
@@ -134,7 +135,7 @@ If your language is not supported, please follow this:
 
 ## 4. Keymaps
 
-These are the default keymaps, in the following shortcuts, the `<leader>` key is set up to ` ` (space) character, check: [keymaps.lua](./nvim/lua/core/keymaps.lua).
+These are the default keymaps, in the following shortcuts, the `<leader>` key is set up to `` (space) character, check: [keymaps.lua](./nvim/lua/core/keymaps.lua).
 
 | Shortcut           | Mode     | Description                                   |
 | ------------------ | -------- | --------------------------------------------- |

@@ -6,18 +6,21 @@
 -- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 -- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
 --
--- File: plugins.init.lua
--- Description: Custom plugins configuration
+-- File: plugins/null-ls.lua
+-- Description: null-ls configuration
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
--- Custom plugin configs
-local modules = {'plugins.statusline', 'plugins.nvim-tree', 'plugins.nvim-treesitter', 'plugins.comment',
-                 'plugins.nvim-telescope', 'plugins.nvim-autopairs', 'plugins.colorscheme', 'plugins.lsp',
-                 'plugins.null-ls', 'plugins.nvim-colorizer', 'plugins.term', 'plugins.gitsigns'}
+local null_ls = require('null-ls')
+-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
+local formatting = null_ls.builtins.formatting
+-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
+local diagnostics = null_ls.builtins.diagnostics
 
-for _, mod in ipairs(modules) do
-    local ok, err = pcall(require, mod)
-    if not ok then
-        error(('Error loading %s...\n\n%s'):format(mod, err))
-    end
-end
-
+null_ls.setup({
+    debug = false,
+    sources = {formatting.prettier.with {
+        extra_filetypes = {"toml"},
+        extra_args = {"--no-semi", "--single-quote", "--jsx-single-quote"}
+    }, formatting.black.with {
+        extra_args = {"--fast"}
+    }, formatting.stylua, formatting.google_java_format, diagnostics.flake8}
+})

@@ -40,7 +40,7 @@ autocmd('BufWritePre', {
 -- https://neovim.io/doc/user/lsp.html#vim.lsp.buf.format()
 autocmd('BufWritePre', {
     pattern = '',
-    command = 'lua vim.lsp.buf.format()'
+    command = ':silent lua vim.lsp.buf.format()'
 })
 
 -- Don't auto commenting new lines

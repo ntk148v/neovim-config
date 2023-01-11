@@ -21,32 +21,33 @@ cmd([[
 	filetype plugin indent on
 ]])
 
-opt.backspace = {'eol', 'start', 'indent'}
-opt.clipboard = 'unnamedplus'
-opt.encoding = 'utf-8'
+opt.backspace = {'eol', 'start', 'indent'} -- allow backspacing over everything in insert mode
+opt.clipboard = 'unnamedplus' -- allow neovim to access the system clipboard
+vim.opt.fileencoding = "utf-8" -- the encoding written to a file
+opt.encoding = 'utf-8' -- the encoding
 opt.matchpairs = {'(:)', '{:}', '[:]', '<:>'}
 opt.syntax = 'enable'
 
 -- indention
-opt.autoindent = true
-opt.expandtab = true
-opt.shiftwidth = indent
-opt.smartindent = true
-opt.softtabstop = indent
-opt.tabstop = indent
-opt.shiftround = true
+opt.autoindent = true -- auto indentation
+opt.expandtab = true -- convert tabs to spaces
+opt.shiftwidth = indent -- the number of spaces inserted for each indentation
+opt.smartindent = true -- make indenting smarter
+opt.softtabstop = indent -- when hitting <BS>, pretend like a tab is removed, even if spaces
+opt.tabstop = indent -- insert 2 spaces for a tab
+opt.shiftround = true -- use multiple of shiftwidth when indenting with '<' and '>'
 
 -- search
-opt.hlsearch = true
-opt.ignorecase = true
-opt.smartcase = true
+opt.hlsearch = true -- highlight all matches on previous search pattern
+opt.ignorecase = true -- ignore case in search patterns
+opt.smartcase = true -- smart case
 opt.wildignore = opt.wildignore + {'*/node_modules/*', '*/.git/*', '*/vendor/*'}
-opt.wildmenu = true
+opt.wildmenu = true -- make tab completion for files/buffers act like bash
 
 -- ui
-opt.cursorline = true
-opt.laststatus = 2
-opt.lazyredraw = true
+opt.cursorline = true -- highlight the current line
+opt.laststatus = 2 -- only the last window will always have a status line
+opt.lazyredraw = true -- don't update the display while executing macros
 opt.list = true
 opt.listchars = {
     tab = '| ',
@@ -57,49 +58,46 @@ opt.listchars = {
 }
 
 -- Hide cmd line
-opt.cmdheight = 0
+opt.cmdheight = 0 -- more space in the neovim command line for displaying messages
 
-opt.mouse = 'a'
-opt.number = true
-opt.scrolloff = 18
-opt.showmode = false
-opt.sidescrolloff = 3 -- Lines to scroll horizontally
-opt.signcolumn = 'yes'
-opt.splitbelow = true -- Open new split below
-opt.splitright = true -- Open new split to the right
-opt.wrap = true
+opt.mouse = 'a' -- allow the mouse to be used in neovim
+opt.number = true -- set numbered lines
+opt.scrolloff = 18 -- minimal number of screen lines to keep above and below the cursor
+opt.sidescrolloff = 3 -- minimal number of screen columns to keep to the left and right (horizontal) of the cursor if wrap is `false`
+opt.signcolumn = 'yes' -- always show the sign column, otherwise it would shift the text each time
+opt.splitbelow = true -- open new split below
+opt.splitright = true -- open new split to the right
+opt.wrap = true -- display long line as multiple lines
 
 -- backups
-opt.backup = false
-opt.swapfile = false
-opt.writebackup = false
+opt.backup = false -- create a backup file
+opt.swapfile = false -- creates a swapfile
+opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 
 -- autocomplete
-opt.completeopt = {'menu', 'menuone', 'noselect'}
+opt.completeopt = {'menu', 'menuone', 'noselect'} -- mostly just for cmp
 opt.shortmess = opt.shortmess + {
     c = true
-}
+} -- hide all the completion messages, e.g. "-- XXX completion (YYY)", "match 1 of 2", "The only match", "Pattern not found"
 
--- showmode
--- " By the way, -- INSERT -- is unnecessary anymore because the mode information is displayed in the statusline.
+-- By the way, -- INSERT -- is unnecessary anymore because the mode information is displayed in the statusline.
 opt.showmode = false
 
 -- perfomance
 -- remember N lines in history
-opt.history = 100
+opt.history = 100 -- keep 100 lines of history
 opt.redrawtime = 1500
-opt.timeoutlen = 250
+opt.timeoutlen = 250 -- time to wait for a mapped sequence to complete (in milliseconds)
 opt.ttimeoutlen = 10
--- signify default updatetime 4000ms is not good for async update
-opt.updatetime = 100
+opt.updatetime = 100 -- signify default updatetime 4000ms is not good for async update
 
--- theme - Enable 24-bit RGB colors
-opt.termguicolors = true
+-- theme
+opt.termguicolors = true -- enable 24-bit RGB colors
 
 -- persistent undo
 -- Don't forget to create folder $HOME/.local/share/nvim/undo
 local undodir = vim.fn.stdpath('data') .. '/undo'
-opt.undofile = true
+opt.undofile = true -- enable persistent undo
 opt.undodir = undodir
 opt.undolevels = 1000
 opt.undoreload = 10000

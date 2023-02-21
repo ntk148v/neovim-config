@@ -18,12 +18,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local modules = {'config.autocmds', 'config.options', 'config.keymaps'}
+local modules = {"config.autocmds", "config.options", "config.keymaps"}
 
 for _, mod in ipairs(modules) do
     local ok, err = pcall(require, mod)
     if not ok then
-        error(('Error loading %s...\n\n%s'):format(mod, err))
+        error(("Error loading %s...\n\n%s"):format(mod, err))
     end
 end
 
@@ -34,7 +34,7 @@ require("lazy").setup({
     }},
     lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json", -- lockfile generated after running update.
     defaults = {
-        lazy = true, -- should plugins be lazy-loaded?
+        lazy = false, -- should plugins be lazy-loaded?
         version = nil
         -- version = "*", -- enable this to try installing the latest stable versions of plugins
     },

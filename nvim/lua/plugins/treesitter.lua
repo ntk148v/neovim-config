@@ -12,9 +12,8 @@
 return { -- Treesitter interface
 {
     "nvim-treesitter/nvim-treesitter",
-    version = false, -- last release is way too old and doesn't work on Windows
+    version = false, -- last release is way too old and doesn"t work on Windows
     build = ":TSUpdate",
-    lazy = true,
     dependencies = {{
         "nvim-treesitter/nvim-treesitter-textobjects",
         init = function()
@@ -36,8 +35,8 @@ return { -- Treesitter interface
         end
     }},
     opts = {
-        -- A list of parser names, or 'all'
-        ensure_installed = {'go', 'python', 'dockerfile', 'json', 'yaml', 'markdown', 'html', 'scss', 'css', 'vim'},
+        -- A list of parser names, or "all"
+        ensure_installed = {"go", "python", "dockerfile", "json", "yaml", "markdown", "html", "scss", "css", "vim"},
 
         highlight = {
             enable = true,

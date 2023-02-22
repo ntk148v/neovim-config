@@ -6,15 +6,18 @@
 -- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 -- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
 --
--- File: core/init.lua
--- Description: Main configurations
+-- File: plugins/tree.lua
+-- Description: nvim-tree config
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
--- Import Lua modules --
-local modules = {'core.autocmd', 'core.options', 'core.keymaps'}
-
-for _, mod in ipairs(modules) do
-    local ok, err = pcall(require, mod)
-    if not ok then
-        error(('Error loading %s...\n\n%s'):format(mod, err))
-    end
-end
+-- disable netrw at the very start of your init.lua (strongly advised)
+return { -- File explore
+-- nvim-tree.lua - A file explorer tree for neovim written in lua
+{
+    "nvim-tree/nvim-tree.lua",
+    dependencies = {
+        "nvim-tree/nvim-web-devicons",
+        lazy = true,
+        opt = true
+    },
+    config = true
+}}

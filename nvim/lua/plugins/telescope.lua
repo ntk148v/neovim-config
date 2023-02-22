@@ -6,33 +6,21 @@
 -- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 -- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
 --
--- File: plugins/nvim-treesitter.lua
--- Description: nvim-treesitter configuration
+-- File: plugins/telescope.lua
+-- Description: nvim-telescope config
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
-require('nvim-treesitter.configs').setup {
-    -- A list of parser names, or 'all'
-    ensure_installed = {'go', 'python', 'dockerfile', 'json', 'yaml', 'markdown', 'html', 'scss', 'css', 'vim'},
-
-    highlight = {
-        enable = true,
-        use_languagetree = true
-    },
-    indent = {
-        enable = true
-    },
-    autotag = {
-        enable = true
-    },
-    context_commentstring = {
-        enable = true,
-        enable_autocmd = false
-    },
-    refactor = {
-        highlight_definitions = {
-            enable = true
-        },
-        highlight_current_scope = {
-            enable = false
-        }
-    }
-}
+return { -- Telescope
+-- Find, Filter, Preview, Pick. All lua, all the time.
+{
+    "nvim-telescope/telescope.nvim",
+    dependencies = {"nvim-lua/plenary.nvim", {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make"
+    }},
+    config = function(_)
+        require("telescope").setup()
+        -- To get fzf loaded and working with telescope, you need to call
+        -- load_extension, somewhere after setup function:
+        require("telescope").load_extension("fzf")
+    end
+}}

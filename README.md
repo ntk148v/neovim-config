@@ -202,7 +202,7 @@ The above list is not complete. Typing `:help map` in Vim will give you more inf
 | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | <img src="screenshots/nvim1.png" alt="dark" style="border-radius:1%"/> | <img src="screenshots/nvim2.png" alt="dark" style="border-radius:1%"/> |
 | <img src="screenshots/nvim3.png" alt="dark" style="border-radius:1%"/> | <img src="screenshots/nvim4.png" alt="dark" style="border-radius:1%"/> |
-| <img src="screenshots/nvim5.png" alt="dark" style="border-radius:1%"/> |                                                                        |
+| <img src="screenshots/nvim5.png" alt="dark" style="border-radius:1%"/> | <img src="screenshots/nvim6.png" alt="dark" style="border-radius:1%"/> |
 
 ## 7. Contribution
 

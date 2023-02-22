@@ -28,13 +28,14 @@ Table of contents
 
 - [1. Introduction](#1-introduction)
 - [2. Installation](#2-installation)
-- [3. Plugins \& LSP](#3-plugins--lsp)
-  - [3.1. Plugins](#31-plugins)
-  - [3.2. LSP](#32-lsp)
-- [4. Keymaps](#4-keymaps)
-- [5. Screenshots](#5-screenshots)
-- [6. Contribution](#6-contribution)
-- [7. Guide and resources](#7-guide-and-resources)
+- [3. File structure](#3-file-structure)
+- [4. Plugins \& LSP](#4-plugins--lsp)
+  - [4.1. Plugins](#41-plugins)
+  - [4.2. LSP](#42-lsp)
+- [5. Keymaps](#5-keymaps)
+- [6. Screenshots](#6-screenshots)
+- [7. Contribution](#7-contribution)
+- [8. Guide and resources](#8-guide-and-resources)
 
 ## 1. Introduction
 
@@ -48,7 +49,9 @@ Therefore, I decided to create this repository. There are several versions:
 
 - [v0.1.0](https://github.com/ntk148v/neovim-config/tree/v0.1.0): written in VimL, a single file only.
 - [v0.1.1](https://github.com/ntk148v/neovim-config/tree/v0.1.1): written in VimL, consist of mutliple files.
-- [v0.2.0](https://github.com/ntk148v/neovim-config/tree/v0.2.0): started this version, switch from VimL to Lua. For the reason, you may to check [neovim's official wiki](https://github.com/neovim/neovim/wiki/FAQ#why-embed-lua-instead-of-x). Follow [KISS principle](https://en.wikipedia.org/wiki/KISS_principle), this version uses the least plugins as possible. It's more like a skeleton, users can add more plugins and LSP.
+- [v0.2.0](https://github.com/ntk148v/neovim-config/tree/v0.2.0): started from this version, switch from VimL to Lua. For the reason, you may to check [neovim's official wiki](https://github.com/neovim/neovim/wiki/FAQ#why-embed-lua-instead-of-x). Follow [KISS principle](https://en.wikipedia.org/wiki/KISS_principle), this version uses the least plugins as possible. It's more like a skeleton, users can add more plugins and LSP.
+- [v0.2.1](https://github.com/ntk148v/neovim-config/tree/v0.2.1): this version contains some minor changes.
+- [v0.3.0](https://github.com/ntk148v/neovim-config/tree/v0.3.0): I decide to switch to [lazy.nvim](https://github.com/folke/lazy.nvim) as my plugin manager, instead of [packer](https://github.com/wbthomason/packer.nvim). The main reason is [lazy.nvim's support for plugin structure](https://github.com/folke/lazy.nvim#-structuring-your-plugins).
 
 As I mentioned, this config is meant as a starting point, it is not a complete Neovim/Vim config distribution, if you're looking for a one, check out [here](https://github.com/rockerBOO/awesome-neovim#preconfigured-configuration).
 
@@ -56,8 +59,8 @@ As I mentioned, this config is meant as a starting point, it is not a complete N
 
 - Requirements:
   - Install [neovim >= 0.8.0](https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-package), or you can [build it](https://github.com/neovim/neovim/wiki/Building-Neovim#) yourself.
-  - git
-- I recommend using a [nerdfonts](https://www.nerdfonts.com/font-downloads)
+  - git >= 2.19.0 (for partial clones suppot)
+  - I recommend using a [nerdfonts](https://www.nerdfonts.com/font-downloads) (optional)
 - Backup your current neovim config, if necessary:
 
 ```shell
@@ -72,19 +75,44 @@ cd neovim-config.git/
 cp -Rv nvim ~/.config/
 ```
 
-- Start Neovim, Packer should be installed automatically, then run the following command to install plugins:
+- Start Neovim, Lazy should be installed automatically, then it will install plugins.
 
-```vim
-:PackerSync
+## 3. File structure
+
+The files under config will be automatically loaded at the appropriate time, so you don't need to require those files manually.
+
+```shell
+tree ~/.config/nvim
+├── init.lua
+├── lazy-lock.json
+└── lua
+    ├── config
+    │   ├── autocmds.lua
+    │   ├── init.lua
+    │   ├── keymaps.lua
+    │   └── options.lua
+    └── plugins
+        ├── autopairs.lua
+        ├── colorizer.lua
+        ├── colorscheme.lua
+        ├── comment.lua
+        ├── gitsigns.lua
+        ├── lsp.lua
+        ├── lualine.lua
+        ├── neoterm.lua
+        ├── null-ls.lua
+        ├── telescope.lua
+        ├── tree.lua
+        └── treesitter.lua
 ```
 
-## 3. Plugins & LSP
+## 4. Plugins & LSP
 
-### 3.1. Plugins
+### 4.1. Plugins
 
 | Plugin                                                                            | Description                                                                                                                                                       |
 | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [packer.nvim](https://github.com/wbthomason/packer.nvim)                          | A use-package inspired plugin manager for Neovim                                                                                                                  |
+| [lazy.nvim](https://github.com/folke/lazy.nvim)                                   | A modern plugin manager for Neovim                                                                                                                                |
 | [mason.nvim](https://github.com/williamboman/mason.nvim)                          | Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters.                |
 | [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                        | A collection of common configurations for Neovim's built-in language server client                                                                                |
 | [gitsigns](https://github.com/lewis6991/gitsigns.nvim)                            | Super fast git decorations implemented purely in lua/teal                                                                                                         |
@@ -102,9 +130,11 @@ cp -Rv nvim ~/.config/
 | [rosé-pine](https://github.com/rose-pine/neovim)                                  | Soho vibes for Neovim                                                                                                                                             |
 | [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)                 | A clean, dark Neovim theme written in Lua, with support for lsp, treesitter and lots of plugins. Includes additional themes for Kitty, Alacritty, iTerm and Fish. |
 | [projekt0n/github-nvim-theme](https://github.com/projekt0n/github-nvim-theme)     | Github's Neovim themes                                                                                                                                            |
-| [null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim) | Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua. |
+| [null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim)                     | Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.                                                                        |
 
-### 3.2. LSP
+**You can add your custom plugin specs under `lua/plugins`. All files will be automatically loaded by `lazy.nvim`.**
+
+### 4.2. LSP
 
 This configuration provides Python and Golang dev environment. The programming language server is current supported:
 
@@ -133,7 +163,7 @@ If your language is not supported, please follow this:
 :TSInstall `<language_to_install>`
 ```
 
-## 4. Keymaps
+## 5. Keymaps
 
 These are the default keymaps, in the following shortcuts, the `<leader>` key is set up to `` (space) character, check: [keymaps.lua](./nvim/lua/core/keymaps.lua).
 
@@ -166,7 +196,7 @@ There are many default keymaps, you can check it using `:map` command. There are
 
 The above list is not complete. Typing `:help map` in Vim will give you more info.
 
-## 5. Screenshots
+## 6. Screenshots
 
 |                                                                        |                                                                        |
 | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
@@ -174,11 +204,11 @@ The above list is not complete. Typing `:help map` in Vim will give you more inf
 | <img src="screenshots/nvim3.png" alt="dark" style="border-radius:1%"/> | <img src="screenshots/nvim4.png" alt="dark" style="border-radius:1%"/> |
 | <img src="screenshots/nvim5.png" alt="dark" style="border-radius:1%"/> |                                                                        |
 
-## 6. Contribution
+## 7. Contribution
 
 Feel free to file an issue or open a pull request. You're welcome!
 
-## 7. Guide and resources
+## 8. Guide and resources
 
 - [nanotee/nvim-lua-guide](https://github.com/nanotee/nvim-lua-guide)
 - [brainfucksec/neovim-lua](https://github.com/brainfucksec/neovim-lua)

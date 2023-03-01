@@ -96,11 +96,12 @@ tree ~/.config/nvim
         ├── colorizer.lua
         ├── colorscheme.lua
         ├── comment.lua
+        ├── custom
+        │   └── lush.lua
         ├── gitsigns.lua
         ├── lsp.lua
         ├── lualine.lua
         ├── neoterm.lua
-        ├── null-ls.lua
         ├── telescope.lua
         ├── tree.lua
         └── treesitter.lua
@@ -132,7 +133,7 @@ tree ~/.config/nvim
 | [projekt0n/github-nvim-theme](https://github.com/projekt0n/github-nvim-theme)     | Github's Neovim themes                                                                                                                                            |
 | [null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim)                     | Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.                                                                        |
 
-**You can add your custom plugin specs under `lua/plugins`. All files will be automatically loaded by `lazy.nvim`.**
+**You can add your custom plugin specs under `lua/plugins/custom`. All files will be automatically loaded by `lazy.nvim`.**
 
 ### 4.2. LSP
 

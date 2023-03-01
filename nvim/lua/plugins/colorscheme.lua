@@ -13,7 +13,6 @@ return { -- Rose-pine - Soho vibes for Neovim
 {
     "rose-pine/neovim",
     name = "rose-pine",
-    lazy = false,
     opts = {
         dark_variant = "main"
     }

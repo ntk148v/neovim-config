@@ -81,6 +81,6 @@ return {{
     },
     ---@param opts TSConfig
     config = function(_, opts)
-        require("Comment").setup()
+        require("Comment").setup(opts)
     end
 }}

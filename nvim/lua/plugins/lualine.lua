@@ -188,11 +188,7 @@ return { -- Statusline
                 return {
                     fg = mode_color[vim.fn.mode()]
                 }
-            end,
-            padding = {
-                left = 1,
-                right = 1
-            }
+            end
         }
 
         ins_left {
@@ -232,11 +228,7 @@ return { -- Statusline
                     fg = colors.red
                 }
             },
-            cond = conditions.hide_in_width,
-            padding = {
-                left = 1,
-                right = 1
-            }
+            cond = conditions.hide_in_width
         }
 
         -- Insert mid section. You can make any number of sections in neovim :)

@@ -33,9 +33,10 @@ Table of contents
   - [4.1. Plugins](#41-plugins)
   - [4.2. LSP](#42-lsp)
 - [5. Keymaps](#5-keymaps)
-- [6. Screenshots](#6-screenshots)
-- [7. Contribution](#7-contribution)
-- [8. Guide and resources](#8-guide-and-resources)
+- [6. Customization](#6-customization)
+- [7. Screenshots](#7-screenshots)
+- [8. Contribution](#8-contribution)
+- [9. Guide and resources](#9-guide-and-resources)
 
 ## 1. Introduction
 
@@ -88,6 +89,8 @@ tree ~/.config/nvim
 └── lua
     ├── config
     │   ├── autocmds.lua
+    │   ├── custom
+    │   │   └── init.lua
     │   ├── init.lua
     │   ├── keymaps.lua
     │   └── options.lua
@@ -97,6 +100,7 @@ tree ~/.config/nvim
         ├── colorscheme.lua
         ├── comment.lua
         ├── custom
+        │   ├── colorscheme.lua
         │   └── lush.lua
         ├── gitsigns.lua
         ├── lsp.lua
@@ -133,8 +137,6 @@ tree ~/.config/nvim
 | [projekt0n/github-nvim-theme](https://github.com/projekt0n/github-nvim-theme)     | Github's Neovim themes                                                                                                                                            |
 | [null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim)                     | Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.                                                                        |
 
-**You can add your custom plugin specs under `lua/plugins/custom`. All files will be automatically loaded by `lazy.nvim`.**
-
 ### 4.2. LSP
 
 This configuration provides Python and Golang dev environment. The programming language server is current supported:
@@ -166,28 +168,28 @@ If your language is not supported, please follow this:
 
 ## 5. Keymaps
 
-These are the default keymaps, in the following shortcuts, the `<leader>` key is set up to `` (space) character, check: [keymaps.lua](./nvim/lua/core/keymaps.lua).
+These are the default keymaps, in the following shortcuts, the `<leader>`+` key is set up to `` (space) character, check: [keymaps.lua](./nvim/lua/core/keymaps.lua).
 
-| Shortcut           | Mode     | Description                                   |
-| ------------------ | -------- | --------------------------------------------- |
-| `kk`               | Insert   | Esc with `kk`                                 |
-| `<leader>r`        | Normal   | Reload configuration file                     |
-| `<leader>s`        | Normal   | Save file                                     |
-| `<leader>q`        | Normal   | Save (close all windows) and exit from Neovim |
-| `<leader>tt`       | Normal   | Open floating terminal                        |
-| `<Esc>`            | Terminal | Exit terminal                                 |
-| `<leader>n`        | Normal   | Open NvimTree                                 |
-| `<leader>nr`       | Normal   | Refresh NvimTree                              |
-| `<leader>nf`       | Normal   | Find file in NvimTree                         |
-| `<leader>ff`       | Normal   | Open Telescope to find files                  |
-| `<leader>fg`       | Normal   | Open Telescope to do live grep                |
-| `<leader>fb`       | Normal   | Open Telescope to list buffers                |
-| `<leader>fh`       | Normal   | Open Telescope to show help                   |
-| `<leader>wh/j/k/l` | Normal   | Move around splits                            |
-| `mm`               | Normal   | Comment/Uncomment line                        |
-| `mbm`              | Normal   | Comment/Uncomment block                       |
-| `m`                | Visual   | Comment/Uncomment line                        |
-| `mb`               | Visual   | Comment/Uncomment block                       |
+| Shortcut                       | Mode     | Description                                   |
+| ------------------------------ | -------- | --------------------------------------------- |
+| <kbd>kk</kbd>                  | Insert   | Esc with `kk`                                 |
+| `<leader>`+<kbd>r</kbd>        | Normal   | Reload configuration file                     |
+| `<leader>`+<kbd>s</kbd>        | Normal   | Save file                                     |
+| `<leader>`+<kbd>q</kbd>        | Normal   | Save (close all windows) and exit from Neovim |
+| `<leader>`+<kbd>tt</kbd>       | Normal   | Open floating terminal                        |
+| <kbd>Esc<kbd>                  | Terminal | Exit terminal                                 |
+| `<leader>`+<kbd>n</kbd>        | Normal   | Open NvimTree                                 |
+| `<leader>`+<kbd>nr</kbd>       | Normal   | Refresh NvimTree                              |
+| `<leader>`+<kbd>nf</kbd>       | Normal   | Find file in NvimTree                         |
+| `<leader>`+<kbd>ff</kbd>       | Normal   | Open Telescope to find files                  |
+| `<leader>`+<kbd>fg</kbd>       | Normal   | Open Telescope to do live grep                |
+| `<leader>`+<kbd>fb</kbd>       | Normal   | Open Telescope to list buffers                |
+| `<leader>`+<kbd>fh</kbd>       | Normal   | Open Telescope to show help                   |
+| `<leader>`+<kbd>wh/j/k/l</kbd> | Normal   | Move around splits                            |
+| <kbd>mm</kbd>                  | Normal   | Comment/Uncomment line                        |
+| <kbd>mbm</kbd>                 | Normal   | Comment/Uncomment block                       |
+| <kbd>m</kbd>                   | Visual   | Comment/Uncomment line                        |
+| <kbd>mb</kbd>                  | Visual   | Comment/Uncomment block                       |
 
 There are many default keymaps, you can check it using `:map` command. There are also other variants:
 
@@ -197,7 +199,12 @@ There are many default keymaps, you can check it using `:map` command. There are
 
 The above list is not complete. Typing `:help map` in Vim will give you more info.
 
-## 6. Screenshots
+## 6. Customization
+
+- You can add your custom plugin specs under `lua/plugins/custom`. All files will be automatically loaded by `lazy.nvim`.
+- You can also add your custom keymaps/options under `lua/config/custom`.
+
+## 7. Screenshots
 
 |                                                                        |                                                                        |
 | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
@@ -205,11 +212,11 @@ The above list is not complete. Typing `:help map` in Vim will give you more inf
 | <img src="screenshots/nvim3.png" alt="dark" style="border-radius:1%"/> | <img src="screenshots/nvim4.png" alt="dark" style="border-radius:1%"/> |
 | <img src="screenshots/nvim5.png" alt="dark" style="border-radius:1%"/> | <img src="screenshots/nvim6.png" alt="dark" style="border-radius:1%"/> |
 
-## 7. Contribution
+## 8. Contribution
 
 Feel free to file an issue or open a pull request. You're welcome!
 
-## 8. Guide and resources
+## 9. Guide and resources
 
 - [nanotee/nvim-lua-guide](https://github.com/nanotee/nvim-lua-guide)
 - [brainfucksec/neovim-lua](https://github.com/brainfucksec/neovim-lua)

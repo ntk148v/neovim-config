@@ -18,15 +18,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local modules = {"config.autocmds", "config.options", "config.keymaps"}
-
-for _, mod in ipairs(modules) do
-    local ok, err = pcall(require, mod)
-    if not ok then
-        error(("Error loading %s...\n\n%s"):format(mod, err))
-    end
-end
-
 require("lazy").setup({
     root = vim.fn.stdpath("data") .. "/lazy", -- directory where plugins will be installed
     spec = {{{
@@ -44,7 +35,7 @@ require("lazy").setup({
         -- install missing plugins on startup
         missing = true,
         -- try to load one of these colorschemes when starting an installation during startup
-        colorscheme = {"rose-pine", "blue"}
+        colorscheme = {"rose-pine", "habamax"}
     },
     checker = {
         -- automatically check for plugin updates
@@ -69,3 +60,12 @@ require("lazy").setup({
     },
     state = vim.fn.stdpath("state") .. "/lazy/state.json" -- state info for checker and other things
 })
+
+local modules = { "config.autocmds", "config.options", "config.keymaps", "config.custom"}
+
+for _, mod in ipairs(modules) do
+    local ok, err = pcall(require, mod)
+    if not ok then
+        error(("Error loading %s...\n\n%s"):format(mod, err))
+    end
+end

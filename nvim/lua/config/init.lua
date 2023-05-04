@@ -18,6 +18,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.g.mapleader = " "
+vim.opt.termguicolors = true -- enable 24-bit RGB colors
+
 require("lazy").setup({
     root = vim.fn.stdpath("data") .. "/lazy", -- directory where plugins will be installed
     spec = {{{
@@ -61,7 +64,7 @@ require("lazy").setup({
     state = vim.fn.stdpath("state") .. "/lazy/state.json" -- state info for checker and other things
 })
 
-local modules = { "config.autocmds", "config.options", "config.keymaps", "config.custom"}
+local modules = {"config.autocmds", "config.options", "config.keymaps", "config.custom"}
 
 for _, mod in ipairs(modules) do
     local ok, err = pcall(require, mod)

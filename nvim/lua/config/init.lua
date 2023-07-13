@@ -21,13 +21,23 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.opt.termguicolors = true -- enable 24-bit RGB colors
 
-require("lazy").setup({
-    root = vim.fn.stdpath("data") .. "/lazy", -- directory where plugins will be installed
-    spec = {{{
+-- build spec
+local spec = {{
+    import = "plugins"
+}}
+
+local ok, err = pcall(require, "plugins.custom")
+if ok then
+    spec = {{
         import = "plugins"
     }, {
         import = "plugins.custom"
-    }}},
+    }}
+end
+
+require("lazy").setup({
+    root = vim.fn.stdpath("data") .. "/lazy", -- directory where plugins will be installed
+    spec = spec,
     lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json", -- lockfile generated after running update.
     defaults = {
         lazy = false, -- should plugins be lazy-loaded?
@@ -68,7 +78,8 @@ local modules = {"config.autocmds", "config.options", "config.keymaps", "config.
 
 for _, mod in ipairs(modules) do
     local ok, err = pcall(require, mod)
-    if not ok then
+    -- config.custom may be empty. It's a optional module
+    if not ok and not mod == "config/custom" then
         error(("Error loading %s...\n\n%s"):format(mod, err))
     end
 end

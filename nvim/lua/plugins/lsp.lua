@@ -42,7 +42,7 @@ return { -- LSP - Quickstart configs for Nvim LSP
             dockerls = {},
             bashls = {},
             gopls = {},
-            pyright = {},
+            ruff_lsp = {},
             vimls = {},
             yamlls = {}
         },

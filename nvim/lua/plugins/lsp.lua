@@ -10,8 +10,38 @@
 -- Description: LSP setup and config
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-return { -- LSP - Quickstart configs for Nvim LSP
-{
+return {{
+    -- Mason
+    "williamboman/mason.nvim",
+    cmd = {"Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog"},
+    opts = {
+        PATH = "prepend",
+        ui = {
+            icons = {
+                package_pending = " ",
+                package_installed = "󰄳 ",
+                package_uninstalled = " 󰚌"
+            },
+
+            keymaps = {
+                toggle_server_expand = "<CR>",
+                install_server = "i",
+                update_server = "u",
+                check_server_version = "c",
+                update_all_servers = "U",
+                check_outdated_servers = "C",
+                uninstall_server = "X",
+                cancel_installation = "<C-c>"
+            }
+        },
+
+        max_concurrent_installers = 10
+    },
+    config = function(_, opts)
+        require("mason").setup(opts)
+    end
+}, {
+    -- LSP - Quickstart configs for Nvim LSP
     "neovim/nvim-lspconfig",
     event = {"BufReadPre", "BufNewFile"},
     lazy = true,
@@ -36,7 +66,6 @@ return { -- LSP - Quickstart configs for Nvim LSP
             timeout_ms = nil
         },
         -- LSP Server Settings
-        ---@type lspconfig.options
         servers = {
             jsonls = {},
             dockerls = {},
@@ -48,7 +77,6 @@ return { -- LSP - Quickstart configs for Nvim LSP
         },
         -- you can do any additional lsp server setup here
         -- return true if you don"t want this server to be setup with lspconfig
-        ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
         setup = {
             -- example to setup with typescript.nvim
             -- tsserver = function(_, opts)
@@ -59,7 +87,6 @@ return { -- LSP - Quickstart configs for Nvim LSP
             -- ["*"] = function(server, opts) end,
         }
     },
-    ---@param opts Opts
     config = function(_, opts)
         local servers = opts.servers
         local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -111,31 +138,99 @@ return { -- LSP - Quickstart configs for Nvim LSP
             automatic_installation = true
         })
         require("mason-lspconfig").setup_handlers({setup})
+    end
+}, {
+    -- load luasnips + cmp related in insert mode only
+    "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
+    dependencies = {{
+        -- snippet plugin
+        "L3MON4D3/LuaSnip",
+        dependencies = "rafamadriz/friendly-snippets",
+        opts = {
+            history = true,
+            updateevents = "TextChanged,TextChangedI"
+        },
+        config = function(_, opts)
+            require("luasnip").config.set_config(opts)
 
-        -- luasnip setup
-        local luasnip = require "luasnip"
+            -- vscode format
+            require("luasnip.loaders.from_vscode").lazy_load()
+            require("luasnip.loaders.from_vscode").lazy_load {
+                paths = vim.g.vscode_snippets_path or ""
+            }
 
-        -- nvim-cmp setup
+            -- snipmate format
+            require("luasnip.loaders.from_snipmate").load()
+            require("luasnip.loaders.from_snipmate").lazy_load {
+                paths = vim.g.snipmate_snippets_path or ""
+            }
+
+            -- lua format
+            require("luasnip.loaders.from_lua").load()
+            require("luasnip.loaders.from_lua").lazy_load {
+                paths = vim.g.lua_snippets_path or ""
+            }
+
+            vim.api.nvim_create_autocmd("InsertLeave", {
+                callback = function()
+                    if require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()] and
+                        not require("luasnip").session.jump_active then
+                        require("luasnip").unlink_current()
+                    end
+                end
+            })
+        end
+    },
+                    {"saadparwaiz1/cmp_luasnip", "hrsh7th/cmp-nvim-lua", "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer",
+                     "hrsh7th/cmp-path"}}, -- cmp sources plugins
+    opts = function()
         local cmp = require "cmp"
-        cmp.setup {
+
+        local function border(hl_name)
+            return {{"╭", hl_name}, {"─", hl_name}, {"╮", hl_name}, {"│", hl_name}, {"╯", hl_name},
+                    {"─", hl_name}, {"╰", hl_name}, {"│", hl_name}}
+        end
+
+        local options = {
+            completion = {
+                completeopt = "menu,menuone"
+            },
+
+            window = {
+                completion = {
+                    winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel",
+                    scrollbar = false
+                },
+                documentation = {
+                    border = border "CmpDocBorder",
+                    winhighlight = "Normal:CmpDoc"
+                }
+            },
+
             snippet = {
                 expand = function(args)
-                    luasnip.lsp_expand(args.body)
+                    require("luasnip").lsp_expand(args.body)
                 end
             },
-            mapping = cmp.mapping.preset.insert({
+
+            mapping = {
+                ["<C-p>"] = cmp.mapping.select_prev_item(),
+                ["<C-n>"] = cmp.mapping.select_next_item(),
                 ["<C-d>"] = cmp.mapping.scroll_docs(-4),
                 ["<C-f>"] = cmp.mapping.scroll_docs(4),
                 ["<C-Space>"] = cmp.mapping.complete(),
+                ["<C-e>"] = cmp.mapping.close(),
                 ["<CR>"] = cmp.mapping.confirm {
-                    behavior = cmp.ConfirmBehavior.Replace,
+                    behavior = cmp.ConfirmBehavior.Insert,
                     select = true
                 },
                 ["<Tab>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_next_item()
-                    elseif luasnip.expand_or_jumpable() then
-                        luasnip.expand_or_jump()
+                    elseif require("luasnip").expand_or_jumpable() then
+                        vim.fn.feedkeys(
+                            vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
                     else
                         fallback()
                     end
@@ -143,19 +238,17 @@ return { -- LSP - Quickstart configs for Nvim LSP
                 ["<S-Tab>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_prev_item()
-                    elseif luasnip.jumpable(-1) then
-                        luasnip.jump(-1)
+                    elseif require("luasnip").jumpable(-1) then
+                        vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
                     else
                         fallback()
                     end
                 end, {"i", "s"})
-            }),
+            },
             sources = {{
                 name = "nvim_lsp"
             }, {
                 name = "luasnip"
-            }, {
-                name = "path"
             }, {
                 name = "buffer",
                 option = {
@@ -169,12 +262,21 @@ return { -- LSP - Quickstart configs for Nvim LSP
                         return {buf}
                     end
                 }
+            }, {
+                name = "nvim_lua"
+            }, {
+                name = "path"
             }}
         }
+
+        return options
+    end,
+    config = function(_, opts)
+        require("cmp").setup(opts)
     end
-}, -- Use Neovim as a language server to inject LSP diagnostics,
--- code actions, and more via Lua.
-{
+}, {
+    -- Use Neovim as a language server to inject LSP diagnostics,
+    -- code actions, and more via Lua.
     "jose-elias-alvarez/null-ls.nvim",
     dependencies = {"williamboman/mason.nvim", "nvim-lua/plenary.nvim"},
     lazy = false,

@@ -10,9 +10,9 @@
 -- Description: Pacman config for lualine
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
 -- Credit: shadmansaleh & his evil theme: https://github.com/nvim-lualine/lualine.nvim/blob/master/examples/evil_lualine.lua
-return { -- Statusline
--- A blazing fast and easy to configure neovim statusline plugin written in pure lua.
-{
+return {{
+    -- Statusline
+    -- A blazing fast and easy to configure neovim statusline plugin written in pure lua.
     "nvim-lualine/lualine.nvim",
     config = function(_)
         local lualine = require("lualine")
@@ -106,7 +106,7 @@ return { -- Statusline
                 -- Disable sections and component separators
                 component_separators = "",
                 section_separators = "",
-                disabled_filetypes = {"packer", "NvimTree"},
+                disabled_filetypes = {"Lazy", "NvimTree"},
                 theme = {
                     -- We are going to use lualine_c an lualine_x as left and
                     -- right section. Both are highlighted by c theme .  So we
@@ -202,7 +202,7 @@ return { -- Statusline
 
         ins_left {
             "branch",
-            icon = "",
+            icon = " ",
             color = {
                 fg = colors.blue,
                 gui = "bold"
@@ -254,7 +254,7 @@ return { -- Statusline
                 end
                 return msg
             end,
-            icon = " LSP:",
+            icon = " LSP:",
             color = {
                 fg = colors.cyan,
                 gui = "bold"
@@ -267,7 +267,8 @@ return { -- Statusline
             symbols = {
                 error = " ",
                 warn = " ",
-                info = " "
+                info = " ",
+                hints = "󰛩 ",
             },
             diagnostics_color = {
                 color_error = {
@@ -278,6 +279,9 @@ return { -- Statusline
                 },
                 color_info = {
                     fg = colors.cyan
+                },
+                color_hints = {
+                    fg = colors.magenta
                 }
             },
             always_visible = true
@@ -296,7 +300,7 @@ return { -- Statusline
         ins_right {
             "fileformat",
             fmt = string.upper,
-            icons_enabled = false,
+            icons_enabled = true,
             color = {
                 fg = colors.green,
                 gui = "bold"

@@ -9,8 +9,8 @@
 -- File: plugins/neoterm.lua
 -- Description: Floating terminal configs
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
-return { -- Floating terminal
-{
+return {{
+    -- Floating terminal
     "itmecho/neoterm.nvim",
     opts = {
         clear_on_run = true, -- run clear command before user specified commands

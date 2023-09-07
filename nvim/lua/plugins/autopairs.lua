@@ -9,8 +9,8 @@
 -- File: plugins/autopairs.lua
 -- Description: nvim-autopairs config
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
-return { -- Autopairs
-{
+return {{
+    -- Autopairs
     "windwp/nvim-autopairs",
     opts = {
         check_ts = true,

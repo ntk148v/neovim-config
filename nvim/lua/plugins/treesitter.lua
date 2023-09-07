@@ -9,8 +9,8 @@
 -- File: plugins/treesitter.lua
 -- Description: nvim-treesitter configuration
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
-return { -- Treesitter interface
-{
+return {{
+    -- Treesitter interface
     "nvim-treesitter/nvim-treesitter",
     version = false, -- last release is way too old and doesn"t work on Windows
     build = ":TSUpdate",
@@ -61,7 +61,6 @@ return { -- Treesitter interface
             }
         }
     },
-    ---@param opts TSConfig
     config = function(_, opts)
         require("nvim-treesitter.configs").setup(opts)
     end

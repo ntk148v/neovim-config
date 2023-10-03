@@ -72,7 +72,7 @@ mv ~/.config/nvim ~/.config/nvim.bak
 
 ```shell
 git clone https://github.com/ntk148v/neovim-config.git
-cd neovim-config.git/
+cd neovim-config/
 cp -Rv nvim ~/.config/
 ```
 

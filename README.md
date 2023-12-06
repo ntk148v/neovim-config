@@ -49,7 +49,7 @@ Table of contents
 Therefore, I decided to create this repository. There are several versions:
 
 - [v0.1.0](https://github.com/ntk148v/neovim-config/tree/v0.1.0): written in VimL, a single file only.
-- [v0.1.1](https://github.com/ntk148v/neovim-config/tree/v0.1.1): written in VimL, consist of mutliple files.
+- [v0.1.1](https://github.com/ntk148v/neovim-config/tree/v0.1.1): written in VimL, consist of multiple files.
 - [v0.2.0](https://github.com/ntk148v/neovim-config/tree/v0.2.0): started from this version, switch from VimL to Lua. For the reason, you may to check [neovim's official wiki](https://github.com/neovim/neovim/wiki/FAQ#why-embed-lua-instead-of-x). Follow [KISS principle](https://en.wikipedia.org/wiki/KISS_principle), this version uses the least plugins as possible. It's more like a skeleton, users can add more plugins and LSP.
 - [v0.2.1](https://github.com/ntk148v/neovim-config/tree/v0.2.1): this version contains some minor changes.
 - [v0.3.0](https://github.com/ntk148v/neovim-config/tree/v0.3.0): I decide to switch to [lazy.nvim](https://github.com/folke/lazy.nvim) as my plugin manager, instead of [packer](https://github.com/wbthomason/packer.nvim). The main reason is [lazy.nvim's support for plugin structure](https://github.com/folke/lazy.nvim#-structuring-your-plugins).
@@ -60,7 +60,7 @@ As I mentioned, this config is meant as a starting point, it is not a complete N
 
 - Requirements:
   - Install [neovim >= 0.8.0](https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-package), or you can [build it](https://github.com/neovim/neovim/wiki/Building-Neovim#) yourself.
-  - git >= 2.19.0 (for partial clones suppot)
+  - git >= 2.19.0 (for partial clones support)
   - I recommend using a [nerdfonts](https://www.nerdfonts.com/font-downloads) (optional)
 - Backup your current neovim config, if necessary:
 
@@ -154,13 +154,13 @@ Furthermore, it integrates with [nvim-treesitter](https://github.com/nvim-treesi
 
 If your language is not supported, please follow this:
 
-- Check if LSP support is avaiable in the [lspconfig repo](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md). To install a supported language server with [mason](https://github.com/williamboman/mason.nvim):
+- Check if LSP support is available in the [lspconfig repo](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md). To install a supported language server with [mason](https://github.com/williamboman/mason.nvim):
 
 ```vim
 :LspInstall `<your_language_server>`
 ```
 
-- Check if your syntax is supported in the [treesitter repo](https://github.com/nvim-treesitter/nvim-treesitter). To install a language syntax hightlight, run:
+- Check if your syntax is supported in the [treesitter repo](https://github.com/nvim-treesitter/nvim-treesitter). To install a language syntax highlight, run:
 
 ```vim
 :TSInstall `<language_to_install>`

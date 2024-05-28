@@ -83,3 +83,6 @@ for _, mod in ipairs(modules) do
         error(("Error loading %s...\n\n%s"):format(mod, err))
     end
 end
+
+-- Disable annoying deprecated message
+vim.deprecate = function() end

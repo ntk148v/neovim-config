@@ -61,6 +61,7 @@ As I mentioned, this config is meant as a starting point, it is not a complete N
 - Requirements:
   - Install [neovim >= 0.8.0](https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-package), or you can [build it](https://github.com/neovim/neovim/wiki/Building-Neovim#) yourself.
   - git >= 2.19.0 (for partial clones support)
+  - [fd](https://github.com/sharkdp/fd) and [ripgrep](https://github.com/BurntSushi/ripgrep).
   - I recommend using a [nerdfonts](https://www.nerdfonts.com/font-downloads) (optional)
 - Backup your current neovim config, if necessary:
 

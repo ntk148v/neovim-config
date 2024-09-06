@@ -36,7 +36,8 @@ return {{
     }},
     opts = {
         -- A list of parser names, or "all"
-        ensure_installed = {"go", "python", "dockerfile", "json", "yaml", "markdown", "html", "scss", "css", "vim"},
+        ensure_installed = {"go", "python", "dockerfile", "json", "yaml", "markdown", "html", "scss", "css", "vim",
+                            "lua"},
 
         highlight = {
             enable = true,

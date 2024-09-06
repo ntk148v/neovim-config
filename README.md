@@ -69,15 +69,55 @@ As I mentioned, this config is meant as a starting point, it is not a complete N
 mv ~/.config/nvim ~/.config/nvim.bak
 ```
 
+- Neovim's configurations are located under the following paths, depending on your OS:
+
+| OS                   | PATH                                      |
+| :------------------- | :---------------------------------------- |
+| Linux, MacOS         | `$XDG_CONFIG_HOME/nvim`, `~/.config/nvim` |
+| Windows (cmd)        | `%localappdata%\nvim\`                    |
+| Windows (powershell) | `$env:LOCALAPPDATA\nvim\`                 |
+
+- [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repo so that you have your own copy that you can modify, then install by cloning the fork to your machine using one of the commands below, depending on your OS.
+
+> **NOTE**
+> Your fork's url will be something like this:
+> `https://github.com/<your_github_username>/neovim-config.git`
+
 - Get your configuration:
 
+> **NOTE**
+> If following the recommended step above (i.e., forking the repo), replace
+> `ntk148v` with `<your_github_username>` in the commands below
+
+<details><summary> Linux and Mac </summary>
+
 ```shell
-git clone https://github.com/ntk148v/neovim-config.git
-cd neovim-config/
-cp -Rv nvim ~/.config/
+git clone https://github.com/ntk148v/neovim-config.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 ```
 
+</details>
+
+<details><summary> Windows </summary>
+
+If you're using `cmd.exe`:
+
+```shell
+git clone https://github.com/ntk148v/neovim-config.git "%localappdata%\nvim"
+```
+
+If you're using `powershell.exe`
+
+```shell
+git clone https://github.com/ntk148v/neovim-config.git "${env:LOCALAPPDATA}\nvim"
+```
+
+</details>
+
 - Start Neovim, Lazy should be installed automatically, then it will install plugins.
+
+```shell
+nvim
+```
 
 ## 3. File structure
 
@@ -171,26 +211,25 @@ If your language is not supported, please follow this:
 
 These are the default keymaps, in the following shortcuts, the `<leader>`+` key is set up to `` (space) character, check: [keymaps.lua](./nvim/lua/core/keymaps.lua).
 
-| Shortcut                       | Mode     | Description                                   |
-| ------------------------------ | -------- | --------------------------------------------- |
-| <kbd>kk</kbd>                  | Insert   | Esc with `kk`                                 |
-| `<leader>`+<kbd>r</kbd>        | Normal   | Reload configuration file                     |
-| `<leader>`+<kbd>s</kbd>        | Normal   | Save file                                     |
-| `<leader>`+<kbd>q</kbd>        | Normal   | Save (close all windows) and exit from Neovim |
-| `<leader>`+<kbd>tt</kbd>       | Normal   | Open floating terminal                        |
-| <kbd>Esc<kbd>                  | Terminal | Exit terminal                                 |
-| `<leader>`+<kbd>n</kbd>        | Normal   | Open NvimTree                                 |
-| `<leader>`+<kbd>nr</kbd>       | Normal   | Refresh NvimTree                              |
-| `<leader>`+<kbd>nf</kbd>       | Normal   | Find file in NvimTree                         |
-| `<leader>`+<kbd>ff</kbd>       | Normal   | Open Telescope to find files                  |
-| `<leader>`+<kbd>fg</kbd>       | Normal   | Open Telescope to do live grep                |
-| `<leader>`+<kbd>fb</kbd>       | Normal   | Open Telescope to list buffers                |
-| `<leader>`+<kbd>fh</kbd>       | Normal   | Open Telescope to show help                   |
-| `<leader>`+<kbd>wh/j/k/l</kbd> | Normal   | Move around splits                            |
-| <kbd>mm</kbd>                  | Normal   | Comment/Uncomment line                        |
-| <kbd>mbm</kbd>                 | Normal   | Comment/Uncomment block                       |
-| <kbd>m</kbd>                   | Visual   | Comment/Uncomment line                        |
-| <kbd>mb</kbd>                  | Visual   | Comment/Uncomment block                       |
+| Shortcut                       | Mode   | Description                                   |
+| ------------------------------ | ------ | --------------------------------------------- |
+| <kbd>kk</kbd>                  | Insert | Esc with `kk`                                 |
+| `<leader>`+<kbd>r</kbd>        | Normal | Reload configuration file                     |
+| `<leader>`+<kbd>s</kbd>        | Normal | Save file                                     |
+| `<leader>`+<kbd>q</kbd>        | Normal | Save (close all windows) and exit from Neovim |
+| `<leader>`+<kbd>tt</kbd>       | Normal | Open terminal                                 |
+| `<leader>`+<kbd>n</kbd>        | Normal | Open NvimTree                                 |
+| `<leader>`+<kbd>nr</kbd>       | Normal | Refresh NvimTree                              |
+| `<leader>`+<kbd>nf</kbd>       | Normal | Find file in NvimTree                         |
+| `<leader>`+<kbd>ff</kbd>       | Normal | Open Telescope to find files                  |
+| `<leader>`+<kbd>fg</kbd>       | Normal | Open Telescope to do live grep                |
+| `<leader>`+<kbd>fb</kbd>       | Normal | Open Telescope to list buffers                |
+| `<leader>`+<kbd>fh</kbd>       | Normal | Open Telescope to show help                   |
+| `<leader>`+<kbd>wh/j/k/l</kbd> | Normal | Move around splits                            |
+| <kbd>mm</kbd>                  | Normal | Comment/Uncomment line                        |
+| <kbd>mbm</kbd>                 | Normal | Comment/Uncomment block                       |
+| <kbd>m</kbd>                   | Visual | Comment/Uncomment line                        |
+| <kbd>mb</kbd>                  | Visual | Comment/Uncomment block                       |
 
 There are many default keymaps, you can check it using `:map` command. There are also other variants:
 

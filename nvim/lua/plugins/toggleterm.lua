@@ -6,18 +6,34 @@
 -- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 -- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
 --
--- File: plugins/neoterm.lua
--- Description: Floating terminal configs
+-- File: plugins/toggleterm.lua
+-- Description: A neovim lua plugin to help easily manage multiple terminal windows
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
 return {{
     -- Floating terminal
-    "itmecho/neoterm.nvim",
+    "akinsho/toggleterm.nvim",
     opts = {
-        clear_on_run = true, -- run clear command before user specified commands
-        mode = "horizontal", -- vertical/horizontal/fullscreen
-        noinsert = false -- disable entering insert mode when opening the neoterm window
+        size = 10,
+        open_mapping = [[<c-\>]],
+        hide_numbers = true,
+        shade_filetypes = {},
+        shade_terminals = true,
+        shading_factor = 2,
+        start_in_insert = true,
+        insert_mappings = true,
+        persist_size = true,
+        close_on_exit = true,
+        shell = vim.o.shell,
+        float_opts = {
+            border = "curved",
+            winblend = 0,
+            highlights = {
+                border = "Normal",
+                background = "Normal"
+            }
+        }
     },
     config = function(_, opts)
-        require("neoterm").setup(opts)
+        require("toggleterm").setup(opts)
     end
 }}

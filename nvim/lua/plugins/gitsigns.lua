@@ -9,21 +9,30 @@
 -- File: plugins/gitsigns.lua
 -- Description: Gitsigns configuration
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
-return { {
+return {{
     -- Git integration for buffers
     "lewis6991/gitsigns.nvim",
     opts = {
         signs = {
-            add = { text = "│" },
-            change = { text = "│" },
-            delete = { text = "_" },
-            topdelete = { text = "‾" },
-            changedelete = { text = "~" },
-            untracked = { text = "┆" }
+            add = {
+                text = " "
+            },
+            change = {
+                text = " "
+            },
+            delete = {
+                text = " "
+            },
+            topdelete = {
+                text = "󱅁 "
+            },
+            changedelete = {
+                text = "󰍷 "
+            }
         },
         signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-        numhl = false,     -- Toggle with `:Gitsigns toggle_numhl`
-        linehl = false,    -- Toggle with `:Gitsigns toggle_linehl`
+        numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
+        linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
         word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
         watch_gitdir = {
             interval = 1000,
@@ -54,4 +63,4 @@ return { {
     config = function(_, opts)
         require("gitsigns").setup(opts)
     end
-} }
+}}

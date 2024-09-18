@@ -144,6 +144,7 @@ return { -- LSP
     -- Use Neovim as a language server to inject LSP diagnostics,
     -- code actions, and more via Lua.
     "nvimtools/none-ls.nvim",
+    dependencies = {"nvimtools/none-ls-extras.nvim"},
     lazy = false,
     config = function()
         local null_ls = require("null-ls")
@@ -159,7 +160,7 @@ return { -- LSP
                 extra_args = {"--no-semi", "--single-quote", "--jsx-single-quote"}
             }, formatting.black.with {
                 extra_args = {"--fast"}
-            }, formatting.stylua, formatting.google_java_format, diagnostics.flake8}
+            }, formatting.stylua, formatting.google_java_format, require("none-ls.diagnostics.ruff")}
         })
     end
 }, -- Snippets

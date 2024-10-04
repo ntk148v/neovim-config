@@ -6,7 +6,7 @@
 -- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 -- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
 --
--- File: config/options.lua
+-- File: options.lua
 -- Description: General Neovim settings and configuration
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
 local cmd = vim.cmd
@@ -108,10 +108,12 @@ opt.foldmethod = "marker"
 opt.foldlevel = 99
 
 -- Disable builtin plugins
-local disabled_built_ins = { "2html_plugin", "getscript", "getscriptPlugin", "gzip", "logipat", "netrw", "netrwPlugin",
+local disabled_built_ins = {
+    "2html_plugin", "getscript", "getscriptPlugin", "gzip", "logipat", "netrw", "netrwPlugin",
     "netrwSettings", "netrwFileHandlers", "matchit", "tar", "tarPlugin", "rrhelper",
     "spellfile_plugin", "vimball", "vimballPlugin", "zip", "zipPlugin", "tutor", "rplugin",
-    "synmenu", "optwin", "compiler", "bugreport", "ftplugin" }
+    "synmenu", "optwin", "compiler", "bugreport", "ftplugin"
+}
 
 for _, plugin in pairs(disabled_built_ins) do
     g["loaded_" .. plugin] = 1

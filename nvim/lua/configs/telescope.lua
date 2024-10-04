@@ -6,27 +6,28 @@
 -- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 -- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
 --
--- File: plugins/colorscheme.lua
--- Description: Colorscheme config
+-- File: configs/telescope.lua
+-- Description: nvim-telescope config
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
 return {
-    {
-        -- Rose-pine - Soho vibes for Neovim
-        "rose-pine/neovim",
-        name = "rose-pine",
-        opts = {
-            dark_variant = "main"
-        }
+    defaults = {
+        prompt_prefix = "   ",
+        selection_caret = " ",
+        entry_prefix = " ",
+        sorting_strategy = "ascending",
+        layout_config = {
+            horizontal = {
+                prompt_position = "top",
+                preview_width = 0.55,
+            },
+            width = 0.87,
+            height = 0.80,
+        },
+        mappings = {
+            n = { ["q"] = require("telescope.actions").close },
+        },
     },
-    {
-        -- Github - Github"s Neovim themes
-        "projekt0n/github-nvim-theme",
-        lazy = true
-    },
-    {
-        -- Tokyonight- A clean, dark Neovim theme written in Lua, with support for lsp,
-        -- treesitter and lots of plugins. Includes additional themes for Kitty, Alacritty, iTerm and Fish.
-        "folke/tokyonight.nvim",
-        lazy = true
-    }
+
+    extensions_list = { "themes", "terms" },
+    extensions = {},
 }

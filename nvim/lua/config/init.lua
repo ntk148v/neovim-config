@@ -13,8 +13,8 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system(
-        {"git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", -- latest stable release
-         lazypath})
+        { "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", -- latest stable release
+            lazypath })
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -22,25 +22,25 @@ vim.g.mapleader = " "
 vim.opt.termguicolors = true -- enable 24-bit RGB colors
 
 -- build spec
-local spec = {{
+local spec = { {
     import = "plugins"
-}}
+} }
 
 local ok, err = pcall(require, "plugins.custom")
 if ok then
-    spec = {{
+    spec = { {
         import = "plugins"
     }, {
         import = "plugins.custom"
-    }}
+    } }
 end
 
 require("lazy").setup({
-    root = vim.fn.stdpath("data") .. "/lazy", -- directory where plugins will be installed
+    root = vim.fn.stdpath("data") .. "/lazy",                 -- directory where plugins will be installed
     spec = spec,
     lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json", -- lockfile generated after running update.
     defaults = {
-        lazy = false, -- should plugins be lazy-loaded?
+        lazy = false,                                         -- should plugins be lazy-loaded?
         version = nil
         -- version = "*", -- enable this to try installing the latest stable versions of plugins
     },
@@ -48,7 +48,7 @@ require("lazy").setup({
         -- install missing plugins on startup
         missing = true,
         -- try to load one of these colorschemes when starting an installation during startup
-        colorscheme = {"rose-pine", "habamax"}
+        colorscheme = { "rose-pine", "habamax" }
     },
     checker = {
         -- automatically check for plugin updates
@@ -74,7 +74,7 @@ require("lazy").setup({
     state = vim.fn.stdpath("state") .. "/lazy/state.json" -- state info for checker and other things
 })
 
-local modules = {"config.autocmds", "config.options", "config.keymaps", "config.custom"}
+local modules = { "config.autocmds", "config.options", "config.keymaps", "config.custom" }
 
 for _, mod in ipairs(modules) do
     local ok, err = pcall(require, mod)

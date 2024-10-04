@@ -31,8 +31,8 @@ vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
 
 -- NvimTree
-vim.keymap.set("n", "<leader>n", ":NvimTreeToggle<CR>", {}) -- open/close
-vim.keymap.set("n", "<leader>nr", ":NvimTreeRefresh<CR>", {}) -- refresh
+vim.keymap.set("n", "<leader>n", ":NvimTreeToggle<CR>", {})    -- open/close
+vim.keymap.set("n", "<leader>nr", ":NvimTreeRefresh<CR>", {})  -- refresh
 vim.keymap.set("n", "<leader>nf", ":NvimTreeFindFile<CR>", {}) -- search file
 
 -- Terminal

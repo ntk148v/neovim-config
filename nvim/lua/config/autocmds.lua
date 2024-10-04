@@ -46,18 +46,18 @@ autocmd("BufEnter", {
 })
 
 autocmd("Filetype", {
-    pattern = {"xml", "html", "xhtml", "css", "scss", "javascript", "typescript", "yaml", "lua"},
+    pattern = { "xml", "html", "xhtml", "css", "scss", "javascript", "typescript", "yaml", "lua" },
     command = "setlocal shiftwidth=2 tabstop=2"
 })
 
 -- Set colorcolumn
 autocmd("Filetype", {
-    pattern = {"python", "rst", "c", "cpp"},
+    pattern = { "python", "rst", "c", "cpp" },
     command = "set colorcolumn=80"
 })
 
 autocmd("Filetype", {
-    pattern = {"gitcommit", "markdown", "text"},
+    pattern = { "gitcommit", "markdown", "text" },
     callback = function()
         vim.opt_local.wrap = true
         vim.opt_local.spell = true

@@ -10,7 +10,8 @@
 -- Description: nvim-tree config
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
 -- disable netrw at the very start of your init.lua (strongly advised)
-return {{
+return {
+    {
     -- File explore
     -- nvim-tree.lua - A file explorer tree for neovim written in lua
     "nvim-tree/nvim-tree.lua",
@@ -96,4 +97,5 @@ return {{
     config = function(_, opts)
         require("nvim-tree").setup(opts)
     end
-}}
+}
+}

@@ -11,46 +11,46 @@
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 return { -- LSP
-{
-    -- Mason
-    "williamboman/mason.nvim",
-    cmd = {"Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog"},
-    opts = {
-        PATH = "prepend",
-        ui = {
-            icons = {
-                package_pending = " ",
-                package_installed = "󰄳 ",
-                package_uninstalled = " 󰚌"
+    {
+        -- Mason
+        "williamboman/mason.nvim",
+        cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
+        opts = {
+            PATH = "prepend",
+            ui = {
+                icons = {
+                    package_pending = " ",
+                    package_installed = "󰄳 ",
+                    package_uninstalled = " 󰚌"
+                },
+
+                keymaps = {
+                    toggle_server_expand = "<CR>",
+                    install_server = "i",
+                    update_server = "u",
+                    check_server_version = "c",
+                    update_all_servers = "U",
+                    check_outdated_servers = "C",
+                    uninstall_server = "X",
+                    cancel_installation = "<C-c>"
+                }
             },
 
-            keymaps = {
-                toggle_server_expand = "<CR>",
-                install_server = "i",
-                update_server = "u",
-                check_server_version = "c",
-                update_all_servers = "U",
-                check_outdated_servers = "C",
-                uninstall_server = "X",
-                cancel_installation = "<C-c>"
-            }
+            max_concurrent_installers = 10
         },
-
-        max_concurrent_installers = 10
-    },
-    config = function(_, opts)
-        require("mason").setup(opts)
-    end
-}, {
+        config = function(_, opts)
+            require("mason").setup(opts)
+        end
+    }, {
     -- LSP - Quickstart configs for Nvim LSP
     "neovim/nvim-lspconfig",
-    event = {"BufReadPre", "BufNewFile"},
+    event = { "BufReadPre", "BufNewFile" },
     lazy = true,
     dependencies = { -- Mason
         -- Portable package manager for Neovim that runs everywhere Neovim runs.
         -- Easily install and manage LSP servers, DAP servers, linters, and formatters.
-        {"williamboman/mason.nvim"},
-        {"williamboman/mason-lspconfig.nvim"}, -- Autocomplete
+        { "williamboman/mason.nvim" },
+        { "williamboman/mason-lspconfig.nvim" }, -- Autocomplete
         opts = {
             -- Automatically format on save
             autoformat = true,
@@ -86,7 +86,7 @@ return { -- LSP
         config = function(_, opts)
             local servers = opts.servers
             local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol
-                                                                                  .make_client_capabilities())
+                .make_client_capabilities())
 
             local function setup(server)
                 local server_opts = vim.tbl_deep_extend("force", {
@@ -134,14 +134,14 @@ return { -- LSP
                 ensure_installed = ensure_installed,
                 automatic_installation = true
             })
-            require("mason-lspconfig").setup_handlers({setup})
+            require("mason-lspconfig").setup_handlers({ setup })
         end
     },
     {
         -- Use Neovim as a language server to inject LSP diagnostics,
         -- code actions, and more via Lua.
         "nvimtools/none-ls.nvim",
-        dependencies = {"nvimtools/none-ls-extras.nvim"},
+        dependencies = { "nvimtools/none-ls-extras.nvim" },
         lazy = false,
         config = function()
             local null_ls = require("null-ls")
@@ -152,36 +152,36 @@ return { -- LSP
 
             null_ls.setup({
                 debug = false,
-                sources = {formatting.prettier.with {
-                    extra_filetypes = {"toml"},
-                    extra_args = {"--no-semi", "--single-quote", "--jsx-single-quote"}
+                sources = { formatting.prettier.with {
+                    extra_filetypes = { "toml" },
+                    extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" }
                 }, formatting.black.with {
-                    extra_args = {"--fast"}
-                }, formatting.stylua, formatting.google_java_format, require("none-ls.diagnostics.ruff")}
+                    extra_args = { "--fast" }
+                }, formatting.stylua, formatting.google_java_format, require("none-ls.diagnostics.ruff") }
             })
         end
     }, -- Snippets
     {
         -- load luasnips + cmp related in insert mode only
         "hrsh7th/nvim-cmp",
-        dependencies = {{
+        dependencies = { {
             "hrsh7th/cmp-buffer",
             lazy = true
         }, -- cmp sources plugins
-        {
-            "hrsh7th/cmp-path",
-            lazy = true
-        }, {
+            {
+                "hrsh7th/cmp-path",
+                lazy = true
+            }, {
             "hrsh7th/cmp-nvim-lsp",
             lazy = true
-        }},
+        } },
         event = "InsertEnter",
         opts = function()
             local cmp = require "cmp"
 
             local function border(hl_name)
-                return {{"╭", hl_name}, {"─", hl_name}, {"╮", hl_name}, {"│", hl_name}, {"╯", hl_name},
-                        {"─", hl_name}, {"╰", hl_name}, {"│", hl_name}}
+                return { { "╭", hl_name }, { "─", hl_name }, { "╮", hl_name }, { "│", hl_name }, { "╯", hl_name },
+                    { "─", hl_name }, { "╰", hl_name }, { "│", hl_name } }
             end
 
             local options = {
@@ -226,7 +226,7 @@ return { -- LSP
                         else
                             fallback()
                         end
-                    end, {"i", "s"}),
+                    end, { "i", "s" }),
                     ["<S-Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_prev_item()
@@ -236,9 +236,9 @@ return { -- LSP
                         else
                             fallback()
                         end
-                    end, {"i", "s"})
+                    end, { "i", "s" })
                 },
-                sources = {{
+                sources = { {
                     name = "nvim_lsp"
                 }, {
                     name = "luasnip"
@@ -252,14 +252,14 @@ return { -- LSP
                             if byte_size > 1024 * 1024 then -- 1 Megabyte max
                                 return {}
                             end
-                            return {buf}
+                            return { buf }
                         end
                     }
                 }, {
                     name = "nvim_lua"
                 }, {
                     name = "path"
-                }}
+                } }
             }
 
             return options
@@ -271,14 +271,15 @@ return { -- LSP
     {
         "L3MON4D3/LuaSnip",
         lazy = true,
-        dependencies = {{
+        dependencies = { {
             "rafamadriz/friendly-snippets",
             lazy = true
-        }},
+        } },
         opts = {
             history = true,
             delete_check_events = "TextChanged",
             region_check_events = "CursorMoved"
         }
     }
-}}
+}
+}

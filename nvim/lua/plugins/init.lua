@@ -19,7 +19,7 @@ return {
             opt = true
         },
         opts = function()
-            return require("configs.tree")
+            require("configs.tree")
         end,
     },
     -- Formatter
@@ -35,7 +35,7 @@ return {
         "lewis6991/gitsigns.nvim",
         event = "User FilePost",
         opts = function()
-            return require("configs.gitsigns")
+            require("configs.gitsigns")
         end,
     },
     -- Treesitter interface
@@ -46,7 +46,7 @@ return {
         cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
         build = ":TSUpdate",
         opts = function()
-            return require("configs.treesitter")
+            require("configs.treesitter")
         end,
     },
     -- Telescope
@@ -75,7 +75,7 @@ return {
     {
         "nvim-lualine/lualine.nvim",
         opts = function()
-            return require("configs.lualine")
+            require("configs.lualine")
         end
     },
     -- colorscheme
@@ -91,7 +91,7 @@ return {
     {
         "windwp/nvim-autopairs",
         config = function()
-            return require("configs.autopairs")
+            require("configs.autopairs")
         end
     },
     -- LSP stuffs
@@ -101,7 +101,7 @@ return {
         "williamboman/mason.nvim",
         cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
         config = function()
-            return require("configs.mason")
+            require("configs.mason")
         end
     },
     {
@@ -111,7 +111,7 @@ return {
         "neovim/nvim-lspconfig",
         event = "User FilePost",
         config = function()
-            return require("configs.lspconfig")
+            require("configs.lspconfig")
         end,
     },
     {
@@ -167,7 +167,7 @@ return {
             },
         },
         opts = function()
-            return require("configs.cmp")
+            require("configs.cmp")
         end,
     },
     -- Colorizer

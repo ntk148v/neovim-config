@@ -61,7 +61,7 @@ require("options")
 require("mappings")
 require("autocmds")
 -- Load custom configs
-local ok, err = pcall(require, "configs.custom")
+local ok, _ = pcall(require, "configs.custom")
 if not ok then
     error(("Error loading %s...\n\n%s"):format("configs.custom", err))
 end

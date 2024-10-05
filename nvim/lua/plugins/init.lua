@@ -21,7 +21,7 @@ local builtin = {
             opt = true
         },
         opts = function()
-            require("configs.tree")
+            require("plugins.configs.tree")
         end,
     },
     -- Formatter
@@ -37,7 +37,7 @@ local builtin = {
         "lewis6991/gitsigns.nvim",
         event = "User FilePost",
         opts = function()
-            require("configs.gitsigns")
+            require("plugins.configs.gitsigns")
         end,
     },
     -- Treesitter interface
@@ -48,7 +48,7 @@ local builtin = {
         cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
         build = ":TSUpdate",
         opts = function()
-            require("configs.treesitter")
+            require("plugins.configs.treesitter")
         end,
     },
     -- Telescope
@@ -69,7 +69,7 @@ local builtin = {
             -- To get fzf loaded and working with telescope, you need to call
             -- load_extension, somewhere after setup function:
             require("telescope").load_extension("fzf")
-            require("configs.telescope")
+            require("plugins.configs.telescope")
         end
     },
     -- Statusline
@@ -77,7 +77,7 @@ local builtin = {
     {
         "nvim-lualine/lualine.nvim",
         opts = function()
-            require("configs.lualine")
+            require("plugins.configs.lualine")
         end
     },
     -- colorscheme
@@ -89,13 +89,6 @@ local builtin = {
             dark_variant = "main"
         }
     },
-    -- Autopairs
-    {
-        "windwp/nvim-autopairs",
-        config = function()
-            require("configs.autopairs")
-        end
-    },
     -- LSP stuffs
     -- Portable package manager for Neovim that runs everywhere Neovim runs.
     -- Easily install and manage LSP servers, DAP servers, linters, and formatters.
@@ -103,22 +96,31 @@ local builtin = {
         "williamboman/mason.nvim",
         cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
         config = function()
-            require("configs.mason")
+            require("plugins.configs.mason")
         end
     },
     {
         "williamboman/mason-lspconfig.nvim"
     },
     {
+        "nvimtools/none-ls.nvim",
+        event = { "BufReadPre", "BufNewFile" },
+        dependencies = { "nvimtools/none-ls-extras.nvim" },
+        lazy = false,
+        config = function()
+            require("plugins.configs.null-ls")
+        end
+    },
+    {
         "neovim/nvim-lspconfig",
         event = "User FilePost",
         config = function()
-            require("configs.lspconfig")
+            require("plugins.configs.lspconfig")
         end,
     },
     {
         "hrsh7th/nvim-cmp",
-        event = { "InsertEnter" },
+        event = "InsertEnter",
         dependencies = {
             {
                 -- snippet plugin
@@ -127,37 +129,12 @@ local builtin = {
                 opts = { history = true, updateevents = "TextChanged,TextChangedI" },
                 config = function(_, opts)
                     require("luasnip").config.set_config(opts)
-                    require("configs.luasnip")
+                    require("plugins.configs.luasnip")
                 end,
             },
 
             -- autopairing of (){}[] etc
-            {
-                "windwp/nvim-autopairs",
-                opts = {
-                    check_ts = true,
-                    ts_config = {
-                        lua = { "string" }, -- it will not add a pair on that treesitter node
-                        javascript = { "template_string" },
-                        java = false        -- Don't check treesitter on java
-                    },
-
-                    -- Don't add pairs if it already has a close pair in the same line
-                    enable_check_bracket_line = false,
-
-                    -- Don't add pairs if the next char is alphanumeric
-                    ignored_next_char = "[%w%.]", -- will ignore alphanumeric and `.` symbol
-                    fast_wrap = {},
-                    disable_filetype = { "TelescopePrompt", "vim" }
-                },
-                config = function(_, opts)
-                    require("nvim-autopairs").setup(opts)
-
-                    -- setup cmp for autopairs
-                    local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-                    require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
-                end,
-            },
+            { "windwp/nvim-autopairs" },
 
             -- cmp sources plugins
             {
@@ -166,10 +143,11 @@ local builtin = {
                 "hrsh7th/cmp-nvim-lsp",
                 "hrsh7th/cmp-buffer",
                 "hrsh7th/cmp-path",
+                "onsails/lspkind.nvim",
             },
         },
         opts = function()
-            require("configs.cmp")
+            require("plugins.configs.cmp")
         end,
     },
     -- Colorizer
@@ -187,20 +165,10 @@ local builtin = {
 }
 local spec = {}
 
--- Load custom plugins
--- Check if there is any custom plugins
-local ok, fault = pcall(require, "plugins.custom")
-if ok then
-    spec = {
-        builtin,
-        { import = "plugins.custom" }
-    }
-end
-
 -- Check if there is any custom plugins
 -- local ok, custom_plugins = pcall(require, "plugins.custom")
 require("lazy").setup({
-    spec = spec,
+    spec = builtin,
     lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json", -- lockfile generated after running update.
     defaults = {
         lazy = false,                                         -- should plugins be lazy-loaded?
@@ -210,7 +178,7 @@ require("lazy").setup({
     ui = {
         icons = {
             ft = "",
-            lazy = "󰂠 ",
+            lazy = "󰂠",
             loaded = "",
             not_loaded = ""
         }

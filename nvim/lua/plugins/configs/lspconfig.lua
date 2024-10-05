@@ -9,6 +9,19 @@
 -- File: configs/lspconfig.lua
 -- Description: LSP setup and config
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
+local builtin_formatting_servers = {
+    jsonls = {},
+    dockerls = {},
+    bashls = {},
+    gopls = {},
+    ruff_lsp = {},
+    vimls = {},
+    yamlls = {}
+}
+
+local exist, custom = pcall(require, "custom")
+local custom_formatting_servers = exist and type(custom) == "table" and custom.formatting_servers or {}
+
 local opts = {
     -- Automatically format on save
     autoformat = true,
@@ -21,13 +34,8 @@ local opts = {
     },
     -- LSP Server Settings
     servers = {
-        jsonls = {},
-        dockerls = {},
-        bashls = {},
-        gopls = {},
-        ruff_lsp = {},
-        vimls = {},
-        yamlls = {}
+        builtin_formatting_servers,
+        custom_formatting_servers
     },
     -- you can do any additional lsp server setup here
     -- return true if you don"t want this server to be setup with lspconfig

@@ -33,14 +33,21 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Load default configurations and plugins
 for _, source in ipairs({
-	"plugins",
-	"options",
-	"mappings",
-	"autocmds"
+    "plugins",
+    "options",
+    "mappings",
+    "autocmds"
 }) do
-	local ok, fault = pcall(require, source)
-	if not ok then
-		vim.api.nvim_err_writeln("Failed to load " .. source .. "\n\n" .. fault)
-	end
+    local ok, fault = pcall(require, source)
+    if not ok then
+        vim.api.nvim_err_writeln("Failed to load " .. source .. "\n\n" .. fault)
+    end
+end
+
+-- Load custom configurations
+local exist, custom = pcall(require, "custom")
+if exist and type(custom) == "table" and custom.configs then
+    custom.configs()
 end

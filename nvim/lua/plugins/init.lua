@@ -10,7 +10,7 @@
 -- Description: init plugins config
 
 -- Built-in plugins
-local builtin = {
+local builtin_plugins = {
     "nvim-lua/plenary.nvim",
     -- File explore
     -- nvim-tree.lua - A file explorer tree for neovim written in lua
@@ -163,12 +163,14 @@ local builtin = {
         end
     }
 }
-local spec = {}
+
+local exist, custom = pcall(require, "custom")
+local custom_plugins = exist and type(custom) == "table" and custom.plugins or {}
 
 -- Check if there is any custom plugins
 -- local ok, custom_plugins = pcall(require, "plugins.custom")
 require("lazy").setup({
-    spec = builtin,
+    spec = { builtin_plugins, custom_plugins },
     lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json", -- lockfile generated after running update.
     defaults = {
         lazy = false,                                         -- should plugins be lazy-loaded?

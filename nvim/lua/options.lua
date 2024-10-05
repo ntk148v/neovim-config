@@ -17,6 +17,8 @@ local g = vim.g
 local s = vim.s
 local indent = 4
 
+g.mapleader = " "
+
 cmd([[
 	filetype plugin indent on
 ]])

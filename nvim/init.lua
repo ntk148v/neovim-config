@@ -20,7 +20,6 @@ for _, cmd in ipairs({ "git", "rg", { "fd", "fdfind" } }) do
     end
 end
 
-vim.g.mapleader = " "
 vim.opt.termguicolors = true -- enable 24-bit RGB colors
 -- Disable annoying deprecated message
 vim.deprecate = function() end
@@ -34,34 +33,16 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local lazy_config = require("configs.lazy")
-
--- build spec
-local spec = {
-    -- import your plugins
-    { import = "plugins" },
-}
-
--- Check if there is any custom plugins
-local ok, _ = pcall(require, "plugins.custom")
-if ok then
-    spec = {
-        { import = "plugins" },
-        { import = "plugins.custom" },
-    }
+for _, source in ipairs({
+	"plugins",
+	"options",
+	"mappings",
+	"autocmds",
+    "configs.custom"
+}) do
+	local ok, fault = pcall(require, source)
+	if not ok then
+		vim.api.nvim_err_writeln("Failed to load " .. source .. "\n\n" .. fault)
+	end
 end
 
--- Load plugins
-require("lazy").setup({
-    spec = spec
-}, lazy_config)
-
--- Load main configs
-require("options")
-require("mappings")
-require("autocmds")
--- Load custom configs
-local ok, _ = pcall(require, "configs.custom")
-if not ok then
-    error(("Error loading %s...\n\n%s"):format("configs.custom", err))
-end

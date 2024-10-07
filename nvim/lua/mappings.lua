@@ -30,7 +30,6 @@ map("n", "<leader>ff", builtin.find_files, { desc = "Open Telescope to find file
 map("n", "<leader>fg", builtin.live_grep, { desc = "Open Telescope to do live grep" })
 map("n", "<leader>fb", builtin.buffers, { desc = "Open Telescope to list buffers" })
 map("n", "<leader>fh", builtin.help_tags, { desc = "Open Telescope to show help" })
-map("n", "<leader>fm", builtin.man_pages, { desc = "Open Telescope to show man page" })
 map("n", "<leader>fo", builtin.oldfiles, { desc = "Open Telescope to list recent files" })
 map("n", "<leader>cm", builtin.git_commits, { desc = "Open Telescope to list git commits" })
 -- NvimTree

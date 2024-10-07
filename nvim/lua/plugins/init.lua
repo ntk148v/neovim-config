@@ -161,7 +161,15 @@ local builtin_plugins = {
                 require("colorizer").attach_to_buffer(0)
             end, 0)
         end
-    }
+    },
+    -- Keymappings
+    {
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("which-key").setup()
+		end,
+	},
 }
 
 local exist, custom = pcall(require, "custom")

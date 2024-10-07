@@ -6,7 +6,7 @@
 -- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 -- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
 --
--- File: config/autocmds.lua
+-- File: autocmds.lua
 -- Description: Autocommand functions
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
 -- Define autocommands with Lua APIs

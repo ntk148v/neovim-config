@@ -6,7 +6,7 @@
 -- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 -- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
 --
--- File: configs/lualine.lua
+-- File: plugins/configs/lualine.lua
 -- Description: Pacman config for lualine
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
 -- Credit: shadmansaleh & his evil theme: https://github.com/nvim-lualine/lualine.nvim/blob/master/examples/evil_lualine.lua

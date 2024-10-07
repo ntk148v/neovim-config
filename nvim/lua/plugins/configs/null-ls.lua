@@ -6,7 +6,7 @@
 -- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 -- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
 --
--- File: configs/null-ls.lua
+-- File: plugins/configs/null-ls.lua
 -- Description: null-ls configuration
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
 local null_ls = require("null-ls")

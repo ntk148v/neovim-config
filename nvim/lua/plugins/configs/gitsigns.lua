@@ -6,7 +6,7 @@
 -- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 -- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
 --
--- File: configs/gitsigns.lua
+-- File: plugins/configs/gitsigns.lua
 -- Description: Gitsigns configuration
 return {
     signs = {

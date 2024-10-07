@@ -6,7 +6,7 @@
 -- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 -- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
 --
--- File: configs/luasnsip.lua
+-- File: plugins/configs/luasnsip.lua
 -- Description: luasnip configuration
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
 -- vscode format

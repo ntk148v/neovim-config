@@ -15,12 +15,15 @@ local formatting = null_ls.builtins.formatting
 -- https://github.com/nvimtools/none-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
 local diagnostics = null_ls.builtins.diagnostics
 
+-- Load custom configurations
+local exist, custom = pcall(require, "custom")
+local sources = exist
+    and type(custom) == "table"
+    and custom.setup_sources
+    and custom.setup_sources(null_ls.builtins)
+    or {}
+
 null_ls.setup({
     debug = false,
-    sources = { formatting.prettier.with {
-        extra_filetypes = { "toml" },
-        extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" }
-    }, formatting.black.with {
-        extra_args = { "--fast" }
-    }, formatting.stylua, formatting.google_java_format, require("none-ls.diagnostics.ruff") }
+    sources = sources
 })

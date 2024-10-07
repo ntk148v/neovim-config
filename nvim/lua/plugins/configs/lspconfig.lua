@@ -9,7 +9,11 @@
 -- File: plugins/configs/lspconfig.lua
 -- Description: LSP setup and config
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
-local builtin_formatting_servers = {
+local merge_tables = require("utils").merge_tables
+
+local exist, custom = pcall(require, "custom")
+local custom_formatting_servers = exist and type(custom) == "table" and custom.formatting_servers or {}
+local formatting_servers = {
     jsonls = {},
     dockerls = {},
     bashls = {},
@@ -19,8 +23,8 @@ local builtin_formatting_servers = {
     yamlls = {}
 }
 
-local exist, custom = pcall(require, "custom")
-local custom_formatting_servers = exist and type(custom) == "table" and custom.formatting_servers or {}
+-- Merge
+merge_tables(formatting_servers, custom_formatting_servers)
 
 local opts = {
     -- Automatically format on save
@@ -33,10 +37,7 @@ local opts = {
         timeout_ms = nil
     },
     -- LSP Server Settings
-    servers = {
-        builtin_formatting_servers,
-        custom_formatting_servers
-    },
+    servers = formatting_servers,
     -- you can do any additional lsp server setup here
     -- return true if you don"t want this server to be setup with lspconfig
     setup = {

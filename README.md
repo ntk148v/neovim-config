@@ -4,15 +4,15 @@
     A minimal Neovim configuration written in lua
   </blockquote>
   <p>
-    <a href="https://github.com/ntk148v/neovim-config/blob/master/LICENSE">
+        <a href="https://github.com/ntk148v/neovim-config/blob/master/LICENSE">
       <img
-        alt="GitHub license"
+        alt="License"
         src="https://img.shields.io/github/license/ntk148v/neovim-config?style=for-the-badge"
       />
     </a>
     <a href="https://github.com/ntk148v/neovim-config/stargazers">
       <img
-        alt="GitHub stars"
+        alt="Stars"
         src="https://img.shields.io/github/stars/ntk148v/neovim-config?style=for-the-badge"
       />
     </a>
@@ -20,6 +20,11 @@
       alt="Neovim version"
       src="https://img.shields.io/badge/Neovim-0.8+-57A143?style=for-the-badge&logo=neovim"
     />
+    <a href="https://github.com/ntk148v/neovim-config/releases/latest">
+        <img
+          alt="Latest release"
+          src="https://img.shields.io/github/v/release/ntk148v/neovim-config?style=for-the-badge" />
+    </a>
   </p>
   <br />
 </div>

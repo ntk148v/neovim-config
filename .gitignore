@@ -151,5 +151,5 @@ fabric.properties
 
 lazy-lock.json
 
-nvim/lua/custom/**
-nvim/lua/custom.lua
+lua/custom/**
+lua/custom.lua

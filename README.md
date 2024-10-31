@@ -118,6 +118,9 @@ git clone https://github.com/ntk148v/neovim-config.git "${env:LOCALAPPDATA}\nvim
 nvim
 ```
 
+- Restart Neovim and enjoy it.
+- Keep updated: You should keep updated using `git pull`.
+
 ## 3. File structure
 
 The files under config will be automatically loaded at the appropriate time, so you don't need to require those files manually.

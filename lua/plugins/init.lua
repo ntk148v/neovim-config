@@ -11,7 +11,7 @@
 
 -- Built-in plugins
 local builtin_plugins = {
-    "nvim-lua/plenary.nvim",
+    { "nvim-lua/plenary.nvim" },
     -- File explore
     -- nvim-tree.lua - A file explorer tree for neovim written in lua
     {
@@ -35,7 +35,7 @@ local builtin_plugins = {
     -- Git integration for buffers
     {
         "lewis6991/gitsigns.nvim",
-        event = "User FilePost",
+        event = { "BufReadPost", "BufNewFile", "BufWritePost" },
         opts = function()
             require("plugins.configs.gitsigns")
         end,
@@ -43,8 +43,8 @@ local builtin_plugins = {
     -- Treesitter interface
     {
         "nvim-treesitter/nvim-treesitter",
-        version = false, -- last release is way too old and doesn"t work on Windows
-        event = { "BufReadPost", "BufNewFile" },
+        version = false, -- last release is way too old and doesn't work on Windows
+        evevent = { "BufReadPost", "BufNewFile", "BufWritePost" },
         cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
         build = ":TSUpdate",
         opts = function()
@@ -113,7 +113,7 @@ local builtin_plugins = {
     },
     {
         "neovim/nvim-lspconfig",
-        event = "User FilePost",
+        event = "VimEnter",
         config = function()
             require("plugins.configs.lspconfig")
         end,
@@ -164,12 +164,12 @@ local builtin_plugins = {
     },
     -- Keymappings
     {
-		"folke/which-key.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("which-key").setup()
-		end,
-	},
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("which-key").setup()
+        end,
+    },
 }
 
 local exist, custom = pcall(require, "custom")

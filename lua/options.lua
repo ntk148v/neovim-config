@@ -70,7 +70,7 @@ opt.sidescrolloff = 3  -- minimal number of screen columns to keep to the left a
 opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
 opt.splitbelow = true  -- open new split below
 opt.splitright = true  -- open new split to the right
-opt.wrap = false       -- display a long line
+opt.wrap = true        -- display a wrapped line
 
 -- backups
 opt.backup = false      -- create a backup file

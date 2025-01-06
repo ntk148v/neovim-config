@@ -138,7 +138,35 @@ local config = {
         lualine_z = {},
         lualine_c = {},
         lualine_x = {}
-    }
+    },
+    tabline = {
+        lualine_a = {
+            {
+                "buffers",
+                max_length = vim.o.columns * 2 / 3,
+                right_padding = 5,
+                left_padding = 5,
+                buffers_color = {
+                    -- Same values as the general color option can be used here.
+                    active = {
+                        fg = colors.fg,
+                        bg = colors.bg,
+                        gui = "bold"
+                    }, -- Color for active buffer.
+                    inactive = {
+                        fg = colors.bg,
+                        bg = colors.fg,
+                        gui = "italic"
+                    }, -- Color for inactive buffer.
+                },
+                symbols = {
+                    modified = ' ●', -- Text to show when the buffer is modified
+                    alternate_file = '', -- Text to show to identify the alternate file
+                    directory = '', -- Text to show when the buffer is a directory
+                },
+            },
+        },
+    },
 }
 
 -- Inserts a component in lualine_c at left section
@@ -283,7 +311,7 @@ ins_right {
 }
 
 ins_right {
-    "o:encoding",     -- option component same as &encoding in viml
+    "o:encoding", -- option component same as &encoding in viml
     fmt = string.upper,
     cond = conditions.hide_in_width,
     color = {

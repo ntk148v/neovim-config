@@ -170,7 +170,7 @@ tree ~/.config/nvim
 | [norcalli/nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)     | The fastest Neovim colorizer.                                                                                                                      |
 | [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) | Find, Filter, Preview, Pick. All lua, all the time.                                                                                                |
 | [rosé-pine](https://github.com/rose-pine/neovim)                                  | Soho vibes for Neovim                                                                                                                              |
-| [nvimtools/none-ls.nvim](nvimtools/none-ls.nvim)                                  | null-ls.nvim reloaded / Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.                                 |
+| [nvimtools/none-ls.nvim](https://github.com/nvimtools/none-ls.nvim)                                  | null-ls.nvim reloaded / Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.                                 |
 | [folke/which-key.nvim](https://github.com/folke/which-key.nvim)                   | Create key bindings that stick. WhichKey helps you remember your Neovim keymaps, by showing available keybindings in a popup as you type.          |
 
 ### 4.2. LSP

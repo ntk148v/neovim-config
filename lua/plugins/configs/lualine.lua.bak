@@ -182,12 +182,12 @@ end
 ins_left {
     -- mode component
     function()
-        return ''
+        return "▶"
     end,
     color = function()
         -- auto change color according to neovims mode
         local mode_color = {
-            n = colors.fg,
+            n = colors.red,
             i = colors.green,
             v = colors.blue,
             [""] = colors.blue,
@@ -215,8 +215,8 @@ ins_left {
 }
 
 ins_left {
-    "branch",
-    icon = " ",
+    "filename",
+    cond = conditions.buffer_not_empty,
     color = {
         fg = colors.magenta,
         gui = "bold"
@@ -224,9 +224,22 @@ ins_left {
 }
 
 ins_left {
+    "branch",
+    icon = " ",
+    color = {
+        fg = colors.blue,
+        gui = "bold"
+    }
+}
+
+ins_left {
     "diff",
     -- Is it me or the symbol for modified us really weird
-    symbols = { added = ' ', modified = '󰝤 ', removed = ' ' },
+    symbols = {
+        added = " ",
+        modified = " ",
+        removed = " "
+    },
     diff_color = {
         added = {
             fg = colors.green
@@ -294,7 +307,17 @@ ins_right {
             fg = colors.magenta
         }
     },
-    always_visible = false
+    always_visible = true
+}
+
+ins_right {
+    "o:encoding", -- option component same as &encoding in viml
+    fmt = string.upper,
+    cond = conditions.hide_in_width,
+    color = {
+        fg = colors.green,
+        gui = "bold"
+    }
 }
 
 ins_right {

@@ -51,9 +51,12 @@ Table of contents
 - No need to ever use the mouse while coding (takes longer to learn, but is faster; this is aided by vim-easymotion and Ctrl-Space),
 - It’s been around forever, and frankly, probably always will be.
 
-Therefore, I decided to create this repository. There are several versions, checkout [CHANGELOG](./CHANGELOG.md).
+Therefore, I decided to create this repository.
 
-This configuration is meant as a starting point, and it fits my needs only. If you want to customize it, jump to [6. Customization](#6-customization).
+> [!IMPORTANT]
+> There are several versions, checkout [CHANGELOG](./CHANGELOG.md).
+>
+> This configuration is meant as a starting point, and it fits my needs only. If you want to customize it, jump to [6. Customization](#6-customization).
 
 ## 2. Installation
 
@@ -78,13 +81,13 @@ mv ~/.config/nvim ~/.config/nvim.bak
 
 - [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repo so that you have your own copy that you can modify, then install by cloning the fork to your machine using one of the commands below, depending on your OS.
 
-> **NOTE**
+> [!NOTE]
 > Your fork's url will be something like this:
 > `https://github.com/<your_github_username>/neovim-config.git`
 
 - Get your configuration:
 
-> **NOTE**
+> [!NOTE]
 > If following the recommended step above (i.e., forking the repo), replace
 > `ntk148v` with `<your_github_username>` in the commands below
 
@@ -170,7 +173,7 @@ tree ~/.config/nvim
 | [norcalli/nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)     | The fastest Neovim colorizer.                                                                                                                      |
 | [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) | Find, Filter, Preview, Pick. All lua, all the time.                                                                                                |
 | [rosé-pine](https://github.com/rose-pine/neovim)                                  | Soho vibes for Neovim                                                                                                                              |
-| [nvimtools/none-ls.nvim](https://github.com/nvimtools/none-ls.nvim)                                  | null-ls.nvim reloaded / Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.                                 |
+| [nvimtools/none-ls.nvim](https://github.com/nvimtools/none-ls.nvim)               | null-ls.nvim reloaded / Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.                                 |
 | [folke/which-key.nvim](https://github.com/folke/which-key.nvim)                   | Create key bindings that stick. WhichKey helps you remember your Neovim keymaps, by showing available keybindings in a popup as you type.          |
 
 ### 4.2. LSP

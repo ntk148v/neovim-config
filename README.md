@@ -1,8 +1,6 @@
 <div align="center">
   <h1>Neovim configuration</h1>
-  <blockquote align="center">
-    A minimal Neovim configuration written in lua
-  </blockquote>
+  <h4>A minimal Neovim configuration written in lua</h4>
   <p>
         <a href="https://github.com/ntk148v/neovim-config/blob/master/LICENSE">
       <img
@@ -29,17 +27,17 @@
   <br />
 </div>
 
-Table of contents
+**Table of contents**
 
 - [1. Introduction](#1-introduction)
-- [2. Installation](#2-installation)
-- [3. File structure](#3-file-structure)
-- [4. Plugins \& LSP](#4-plugins--lsp)
-  - [4.1. Plugins](#41-plugins)
-  - [4.2. LSP](#42-lsp)
-- [5. Keymaps](#5-keymaps)
-- [6. Customization](#6-customization)
-- [7. Screenshots](#7-screenshots)
+- [2. Screenshots](#2-screenshots)
+- [3. Installation](#3-installation)
+- [4. File structure](#4-file-structure)
+- [5. Plugins \& LSP](#5-plugins--lsp)
+  - [5.1. Plugins](#51-plugins)
+  - [5.2. LSP](#52-lsp)
+- [6. Keymaps](#6-keymaps)
+- [7. Customization](#7-customization)
 - [8. Contribution](#8-contribution)
 - [9. Guide and resources](#9-guide-and-resources)
 
@@ -58,7 +56,16 @@ Therefore, I decided to create this repository.
 >
 > This configuration is meant as a starting point, and it fits my needs only. If you want to customize it, jump to [6. Customization](#6-customization).
 
-## 2. Installation
+## 2. Screenshots
+
+|                                                                        |                                                                        |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| <img src="screenshots/nvim1.png" alt="dark" style="border-radius:1%"/> | <img src="screenshots/nvim2.png" alt="dark" style="border-radius:1%"/> |
+| <img src="screenshots/nvim3.png" alt="dark" style="border-radius:1%"/> | <img src="screenshots/nvim4.png" alt="dark" style="border-radius:1%"/> |
+| <img src="screenshots/nvim5.png" alt="dark" style="border-radius:1%"/> | <img src="screenshots/nvim6.png" alt="dark" style="border-radius:1%"/> |
+| <img src="screenshots/nvim7.png" alt="dark" style="border-radius:1%"/> | <img src="screenshots/nvim8.png" alt="dark" style="border-radius:1%"/> |
+
+## 3. Installation
 
 - Requirements:
   - Install [neovim >= 0.8.0](https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-package), or you can [build it](https://github.com/neovim/neovim/wiki/Building-Neovim#) yourself.
@@ -124,7 +131,7 @@ nvim
 - Restart Neovim and enjoy it.
 - Keep updated: You should keep updated using `git pull`.
 
-## 3. File structure
+## 4. File structure
 
 The files under config will be automatically loaded at the appropriate time, so you don't need to require those files manually.
 
@@ -153,9 +160,9 @@ tree ~/.config/nvim
     └── sample_custom.lua
 ```
 
-## 4. Plugins & LSP
+## 5. Plugins & LSP
 
-### 4.1. Plugins
+### 5.1. Plugins
 
 | Plugin                                                                            | Description                                                                                                                                        |
 | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -176,7 +183,7 @@ tree ~/.config/nvim
 | [nvimtools/none-ls.nvim](https://github.com/nvimtools/none-ls.nvim)               | null-ls.nvim reloaded / Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.                                 |
 | [folke/which-key.nvim](https://github.com/folke/which-key.nvim)                   | Create key bindings that stick. WhichKey helps you remember your Neovim keymaps, by showing available keybindings in a popup as you type.          |
 
-### 4.2. LSP
+### 5.2. LSP
 
 By default, the follow LSP servers are installed and configured:
 
@@ -206,7 +213,7 @@ If your language is not supported, please follow this:
 
 You can add more LSP servers and language syntax highlighting by editing the custom file.
 
-## 5. Keymaps
+## 6. Keymaps
 
 These are the default keymaps, in the following shortcuts, the `<leader>`+` key is set up to `` (space) character, check: [keymaps.lua](./nvim/lua/core/keymaps.lua).
 
@@ -236,7 +243,7 @@ There are many default keymaps, you can check it using `:map` command. There are
 
 The above list is not complete. Typing `:help map` in Vim will give you more info.
 
-## 6. Customization
+## 7. Customization
 
 You can customize this configuration by creating the `custom` module. You can choose either two ways:
 
@@ -251,14 +258,6 @@ Checkout the [sample custom](./nvim/lua/sample_custom.lua) file for the starting
 - `M.configs` is the most important section of your own configuration. This is where you can define any autocommands, require any files, or otherwise completely port your current configuration.
 - `M.formatting_servers` is used to setup auto formatting rules. You need to select the language server that will provide autoformatting capabilities
 
-## 7. Screenshots
-
-|                                                                        |                                                                        |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| <img src="screenshots/nvim1.png" alt="dark" style="border-radius:1%"/> | <img src="screenshots/nvim2.png" alt="dark" style="border-radius:1%"/> |
-| <img src="screenshots/nvim3.png" alt="dark" style="border-radius:1%"/> | <img src="screenshots/nvim4.png" alt="dark" style="border-radius:1%"/> |
-| <img src="screenshots/nvim5.png" alt="dark" style="border-radius:1%"/> | <img src="screenshots/nvim6.png" alt="dark" style="border-radius:1%"/> |
-
 ## 8. Contribution
 
 Feel free to file an issue or open a pull request. You're welcome!
@@ -269,3 +268,8 @@ Feel free to file an issue or open a pull request. You're welcome!
 - [brainfucksec/neovim-lua](https://github.com/brainfucksec/neovim-lua)
 - [LunarVim/Neovim-from-scratch](https://github.com/LunarVim/Neovim-from-scratch)
 - [LunarVim/nvim-basic-ide](https://github.com/LunarVim/nvim-basic-ide)
+
+&nbsp;
+
+<p align="center">Copyright &copy; 2022-present <a href="https://github.com/ntk148v" target="_blank">Kien Nguyen Tuan</a>
+<p align="center"><a href="https://github.com/ntk148v/neovim-config/blob/main/LICENSE"><img src="https://img.shields.io/static/v1.svg?style=for-the-badge&label=License&message=Apache2.0"/></a></p>

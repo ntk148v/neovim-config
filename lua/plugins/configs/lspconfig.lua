@@ -21,7 +21,22 @@ local formatting_servers = {
     ruff_lsp = {},
     vimls = {},
     yamlls = {},
-    lua_ls = {}
+    lua_ls = {
+        settings = {
+            Lua = {
+                diagnostics = {
+                    globals = { "vim" }
+                },
+                workspace = {
+                    library = vim.api.nvim_get_runtime_file("", true),
+                    checkThirdParty = false
+                },
+                telemetry = {
+                    enable = false
+                }
+            }
+        }
+    }
 }
 
 -- Merge

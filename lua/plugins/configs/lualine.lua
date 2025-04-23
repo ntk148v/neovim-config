@@ -177,6 +177,12 @@ local config = {
             },
         },
     },
+
+    extensions = {
+        "nvim-tree",
+        "mason",
+        "fzf"
+    }
 }
 
 -- Inserts a component in lualine_c at left section

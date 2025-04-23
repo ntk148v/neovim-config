@@ -213,7 +213,7 @@ These are the default keymaps, in the following shortcuts, the `<leader>`+` key 
 | Shortcut                       | Mode   | Description                                   |
 | ------------------------------ | ------ | --------------------------------------------- |
 | <kbd>kk</kbd>                  | Insert | Esc with `kk`                                 |
-| `<leader>`+<kbd>r</kbd>        | Normal | Reload configuration file                     |
+| `<leader>`+<kbd>rr</kbd>       | Normal | Reload configuration file                     |
 | `<leader>`+<kbd>s</kbd>        | Normal | Save file                                     |
 | `<leader>`+<kbd>q</kbd>        | Normal | Save (close all windows) and exit from Neovim |
 | `<leader>`+<kbd>n</kbd>        | Normal | Open NvimTree                                 |

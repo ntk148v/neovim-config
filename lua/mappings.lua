@@ -22,7 +22,26 @@ map("n", "<leader>wk", "<C-w>k", { desc = "switch window up" })
 map("n", "<leader>wl", "<C-w>l", { desc = "switch window down" })
 
 -- Reload configuration without restart nvim
-map("n", "<leader>r", ":source $MYVIMRC<CR>", { desc = "Reload configuration without restart nvim" })
+-- Or you don't want to use plenary.nvim, you can use this code
+-- function _G.reload_config()
+-- 	for name, _ in pairs(package.loaded) do
+-- 		if name:match("^me") then
+-- 			package.loaded[name] = nil
+-- 		end
+-- 	end
+
+-- 	dofile(vim.env.MYVIMRC)
+-- 	vim.notify("Nvim configuration reloaded!", vim.log.levels.INFO)
+-- end
+function _G.reload_config()
+  local reload = require("plenary.reload").reload_module
+  reload("me", false)
+
+  dofile(vim.env.MYVIMRC)
+  vim.notify("Nvim configuration reloaded!", vim.log.levels.INFO)
+end
+
+map("n", "<leader>rr", reload_config, { desc = "Reload configuration without restart nvim" })
 
 -- Telescope
 local builtin = require("telescope.builtin")
@@ -39,7 +58,7 @@ map("n", "<leader>nf", ":NvimTreeFindFile<CR>", { desc = "Search file in NvimTre
 
 -- LSP
 map("n", "<leader>gm", function()
-    require("conform").format { lsp_fallback = true }
+  require("conform").format { lsp_fallback = true }
 end, { desc = "General Format file" })
 
 -- global lsp mappings

@@ -34,17 +34,17 @@ map("n", "<leader>wl", "<C-w>l", { desc = "switch window down" })
 -- 	vim.notify("Nvim configuration reloaded!", vim.log.levels.INFO)
 -- end
 function _G.reload_config()
-  local reload = require("plenary.reload").reload_module
-  reload("me", false)
+    local reload = require("plenary.reload").reload_module
+    reload("me", false)
 
-  dofile(vim.env.MYVIMRC)
-  vim.notify("Nvim configuration reloaded!", vim.log.levels.INFO)
+    dofile(vim.env.MYVIMRC)
+    vim.notify("Nvim configuration reloaded!", vim.log.levels.INFO)
 end
 
 map("n", "<leader>rr", _G.reload_config, { desc = "Reload configuration without restart nvim" })
 
 -- Telescope
-local builtin = require("telescope.builtin")
+local builtin = require "telescope.builtin"
 map("n", "<leader>ff", builtin.find_files, { desc = "Open Telescope to find files" })
 map("n", "<leader>fg", builtin.live_grep, { desc = "Open Telescope to do live grep" })
 map("n", "<leader>fb", builtin.buffers, { desc = "Open Telescope to list buffers" })
@@ -52,14 +52,17 @@ map("n", "<leader>fh", builtin.help_tags, { desc = "Open Telescope to show help"
 map("n", "<leader>fo", builtin.oldfiles, { desc = "Open Telescope to list recent files" })
 map("n", "<leader>cm", builtin.git_commits, { desc = "Open Telescope to list git commits" })
 -- NvimTree
-map("n", "<leader>n", ":NvimTreeToggle<CR>", { desc = "Toggle NvimTree sidebar" })    -- open/close
-map("n", "<leader>nr", ":NvimTreeRefresh<CR>", { desc = "Refresh NvimTree" })         -- refresh
+map("n", "<leader>n", ":NvimTreeToggle<CR>", { desc = "Toggle NvimTree sidebar" }) -- open/close
+map("n", "<leader>nr", ":NvimTreeRefresh<CR>", { desc = "Refresh NvimTree" }) -- refresh
 map("n", "<leader>nf", ":NvimTreeFindFile<CR>", { desc = "Search file in NvimTree" }) -- search file
 
 -- LSP
-map("n", "<leader>gm", function()
-  require("conform").format { lsp_fallback = true }
-end, { desc = "General Format file" })
+map(
+    "n",
+    "<leader>gm",
+    function() require("conform").format { lsp_fallback = true } end,
+    { desc = "General Format file" }
+)
 
 -- global lsp mappings
 map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "LSP Diagnostic loclist" })

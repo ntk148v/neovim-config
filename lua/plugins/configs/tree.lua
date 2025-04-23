@@ -11,7 +11,7 @@
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
 return {
     filters = {
-        dotfiles = false
+        dotfiles = false,
     },
     disable_netrw = true,
     hijack_netrw = true,
@@ -20,25 +20,25 @@ return {
     sync_root_with_cwd = true,
     update_focused_file = {
         enable = true,
-        update_root = false
+        update_root = false,
     },
     view = {
         adaptive_size = false,
         side = "left",
         width = 30,
-        preserve_window_proportions = true
+        preserve_window_proportions = true,
     },
     git = {
         enable = false,
-        ignore = true
+        ignore = true,
     },
     filesystem_watchers = {
-        enable = true
+        enable = true,
     },
     actions = {
         open_file = {
-            resize_window = true
-        }
+            resize_window = true,
+        },
     },
     renderer = {
         root_folder_label = false,
@@ -46,7 +46,7 @@ return {
         highlight_opened_files = "none",
 
         indent_markers = {
-            enable = false
+            enable = false,
         },
 
         icons = {
@@ -54,7 +54,7 @@ return {
                 file = true,
                 folder = true,
                 folder_arrow = true,
-                git = false
+                git = false,
             },
 
             glyphs = {
@@ -68,7 +68,7 @@ return {
                     symlink = "",
                     symlink_open = "",
                     arrow_open = "",
-                    arrow_closed = ""
+                    arrow_closed = "",
                 },
                 git = {
                     unstaged = "✗",
@@ -77,9 +77,9 @@ return {
                     renamed = "➜",
                     untracked = "★",
                     deleted = "",
-                    ignored = "◌"
-                }
-            }
-        }
-    }
+                    ignored = "◌",
+                },
+            },
+        },
+    },
 }

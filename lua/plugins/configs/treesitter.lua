@@ -17,31 +17,40 @@ local ensure_installed = exist and type(custom) == "table" and custom.ensure_ins
 return {
     -- A list of parser names, or "all"
     ensure_installed = {
-        "go", "python", "dockerfile", "json",
-        "yaml", "markdown", "html", "scss",
-        "css", "vim", "lua", ensure_installed
+        "go",
+        "python",
+        "dockerfile",
+        "json",
+        "yaml",
+        "markdown",
+        "html",
+        "scss",
+        "css",
+        "vim",
+        "lua",
+        ensure_installed,
     },
 
     highlight = {
         enable = true,
-        use_languagetree = true
+        use_languagetree = true,
     },
     indent = {
-        enable = true
+        enable = true,
     },
     autotag = {
-        enable = true
+        enable = true,
     },
     context_commentstring = {
         enable = true,
-        enable_autocmd = false
+        enable_autocmd = false,
     },
     refactor = {
         highlight_definitions = {
-            enable = true
+            enable = true,
         },
         highlight_current_scope = {
-            enable = false
-        }
-    }
+            enable = false,
+        },
+    },
 }

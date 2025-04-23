@@ -1,15 +1,13 @@
-local M        = {}
+local M = {}
 
 M.merge_tables = function(t1, t2)
-    if type(t1) ~= "table" or type(t2) ~= "table" then
-        return
-    end
+    if type(t1) ~= "table" or type(t2) ~= "table" then return end
     for k, v in pairs(t2) do
         t1[k] = v
     end
 end
 
-M.lighten      = function(hex, factor)
+M.lighten = function(hex, factor)
     -- Remove # if present
     hex = hex:gsub("#", "")
 
@@ -27,7 +25,7 @@ M.lighten      = function(hex, factor)
     return string.format("#%02X%02X%02X", r, g, b)
 end
 
-M.darken       = function(hex, factor)
+M.darken = function(hex, factor)
     -- Remove # if present
     hex = hex:gsub("#", "")
 

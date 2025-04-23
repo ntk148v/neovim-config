@@ -25,18 +25,18 @@ local formatting_servers = {
         settings = {
             Lua = {
                 diagnostics = {
-                    globals = { "vim" }
+                    globals = { "vim" },
                 },
                 workspace = {
                     library = vim.api.nvim_get_runtime_file("", true),
-                    checkThirdParty = false
+                    checkThirdParty = false,
                 },
                 telemetry = {
-                    enable = false
-                }
-            }
-        }
-    }
+                    enable = false,
+                },
+            },
+        },
+    },
 }
 
 -- Merge
@@ -50,7 +50,7 @@ local opts = {
     -- but can be also overridden when specified
     format = {
         formatting_options = nil,
-        timeout_ms = nil
+        timeout_ms = nil,
     },
     -- LSP Server Settings
     servers = formatting_servers,
@@ -64,31 +64,26 @@ local opts = {
         -- end,
         -- Specify * to use this function as a fallback for any server
         -- ["*"] = function(server, opts) end,
-    }
+    },
 }
 
 local servers = opts.servers
-local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol
-    .make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local function setup(server)
     local server_opts = vim.tbl_deep_extend("force", {
-        capabilities = vim.deepcopy(capabilities)
+        capabilities = vim.deepcopy(capabilities),
     }, servers[server] or {})
 
     if opts.setup[server] then
-        if opts.setup[server](server, server_opts) then
-            return
-        end
+        if opts.setup[server](server, server_opts) then return end
     elseif opts.setup["*"] then
-        if opts.setup["*"](server, server_opts) then
-            return
-        end
+        if opts.setup["*"](server, server_opts) then return end
     end
     require("lspconfig")[server].setup(server_opts)
 end
 
-local mlsp = require("mason-lspconfig")
+local mlsp = require "mason-lspconfig"
 local available = mlsp.get_available_servers()
 
 local ensure_installed = {} ---@type string[]
@@ -105,8 +100,8 @@ for server, server_opts in pairs(servers) do
 end
 
 require("mason").setup()
-require("mason-lspconfig").setup({
+require("mason-lspconfig").setup {
     ensure_installed = ensure_installed,
-    automatic_installation = true
-})
-require("mason-lspconfig").setup_handlers({ setup })
+    automatic_installation = true,
+}
+require("mason-lspconfig").setup_handlers { setup }

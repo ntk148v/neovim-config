@@ -10,13 +10,13 @@
 -- Description: mason
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
 return {
-    require("mason").setup({
+    require("mason").setup {
         PATH = "prepend",
         ui = {
             icons = {
                 package_pending = " ",
                 package_installed = "󰄳 ",
-                package_uninstalled = "󰚌 "
+                package_uninstalled = "󰚌 ",
             },
 
             keymaps = {
@@ -27,10 +27,10 @@ return {
                 update_all_servers = "U",
                 check_outdated_servers = "C",
                 uninstall_server = "X",
-                cancel_installation = "<C-c>"
-            }
+                cancel_installation = "<C-c>",
+            },
         },
 
-        max_concurrent_installers = 10
-    })
+        max_concurrent_installers = 10,
+    },
 }

@@ -2,14 +2,12 @@ local M = {}
 
 -- add extra plugins here
 M.plugins = {
-    { "Shatur/neovim-ayu" }
+    { "Shatur/neovim-ayu" },
 }
 
 -- add extra configuration options here, like extra autocmds etc.
 -- feel free to create your own separate files and require them in here
-M.configs = function()
-    require("ayu").colorscheme()
-end
+M.configs = function() require("ayu").colorscheme() end
 
 -- add servers to be used for auto formatting here
 M.formatting_servers = {
@@ -26,10 +24,10 @@ M.setup_sources = function(b)
         b.formatting.autopep8,
         b.formatting.prettier.with {
             extra_filetypes = { "toml" },
-            extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" }
+            extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
         },
         b.formatting.black.with {
-            extra_args = { "--fast" }
+            extra_args = { "--fast" },
         },
         b.formatting.stylua,
     }

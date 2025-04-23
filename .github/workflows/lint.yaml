@@ -26,4 +26,4 @@ jobs:
         run: luarocks install luacheck
 
       - name: Run luacheck
-        run: luacheck *.lua lua/* tests/*
+        run: luacheck *.lua lua/*

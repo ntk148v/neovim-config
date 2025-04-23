@@ -12,6 +12,7 @@
 -- Credit: shadmansaleh & his evil theme: https://github.com/nvim-lualine/lualine.nvim/blob/master/examples/evil_lualine.lua
 local lualine = require("lualine")
 local lualine_require = require("lualine_require")
+local utils = require("utils")
 
 local function loadcolors()
     -- Rose-pine palette
@@ -144,8 +145,18 @@ local config = {
             {
                 "buffers",
                 max_length = vim.o.columns * 2 / 3,
+                show_filename_only = false,
+                mode = 0, -- 0: Shows buffer name
+                -- 1: Shows buffer index
+                -- 2: Shows buffer name + buffer index
+                -- 3: Shows buffer number
+                -- 4: Shows buffer name + buffer number
+
                 right_padding = 5,
                 left_padding = 5,
+
+                -- Automatically updates active buffer color to match color of other components (will be overidden if buffers_color is set)
+                use_mode_colors = true,
                 buffers_color = {
                     -- Same values as the general color option can be used here.
                     active = {
@@ -154,9 +165,8 @@ local config = {
                         gui = "bold"
                     }, -- Color for active buffer.
                     inactive = {
-                        fg = colors.bg,
-                        bg = colors.fg,
-                        gui = "italic"
+                        fg = utils.darken(colors.fg, 0.3),
+                        bg = utils.darken(colors.bg, 0.3),
                     }, -- Color for inactive buffer.
                 },
                 symbols = {

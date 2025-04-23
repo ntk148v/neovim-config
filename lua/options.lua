@@ -39,11 +39,8 @@ opt.tabstop = indent     -- insert 2 spaces for a tab
 opt.shiftround = true    -- use multiple of shiftwidth when indenting with "<" and ">"
 
 -- tabline
-cmd([[
-  set guioptions-=e " Use showtabline in gui vim
-  set sessionoptions+=tabpages,globals " store tabpages and globals in session
-]])
-
+opt.showtabline = 2   -- always show tabs
+opt.sessionoptions = 'curdir,folds,globals,help,tabpages,terminal,winsize'
 -- search
 opt.hlsearch = true   -- highlight all matches on previous search pattern
 opt.ignorecase = true -- ignore case in search patterns

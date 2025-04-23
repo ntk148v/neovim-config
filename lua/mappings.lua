@@ -41,7 +41,7 @@ function _G.reload_config()
   vim.notify("Nvim configuration reloaded!", vim.log.levels.INFO)
 end
 
-map("n", "<leader>rr", reload_config, { desc = "Reload configuration without restart nvim" })
+map("n", "<leader>rr", _G.reload_config, { desc = "Reload configuration without restart nvim" })
 
 -- Telescope
 local builtin = require("telescope.builtin")

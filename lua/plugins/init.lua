@@ -106,7 +106,7 @@ local builtin_plugins = {
         "nvimtools/none-ls.nvim",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = { "nvimtools/none-ls-extras.nvim" },
-        lazy = false,
+        lazy = true,
         config = function()
             require("plugins.configs.null-ls")
         end
@@ -114,6 +114,7 @@ local builtin_plugins = {
     {
         "neovim/nvim-lspconfig",
         event = "VimEnter",
+        lazy = false,
         config = function()
             require("plugins.configs.lspconfig")
         end,

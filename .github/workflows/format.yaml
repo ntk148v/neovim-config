@@ -1,6 +1,11 @@
 name: format
 
 on:
+  push:
+    branches:
+      - "ci"
+    tags:
+      - "v*"
   pull_request:
     branches:
       - "ci"

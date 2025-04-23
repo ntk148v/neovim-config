@@ -3,12 +3,12 @@ name: lint
 on:
   push:
     branches:
-      - "ci"
+      - "master"
     tags:
       - "v*"
   pull_request:
     branches:
-      - "ci"
+      - "master"
     paths:
       - "lua/**"
 

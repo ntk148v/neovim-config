@@ -1,9 +1,7 @@
 {
-  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
-  "Lua.diagnostics.disable": [
-    "redundant-parameter",
-    "param-type-mismatch",
-    "missing-parameter"
-  ],
-  "diagnostics.libraryFiles": "Disable"
+  "runtime.version": "LuaJIT",
+  "runtime.path": ["lua/?.lua", "lua/?/init.lua"],
+  "diagnostics.globals": ["vim"],
+  "workspace.checkThirdParty": false,
+  "workspace.library": ["$VIMRUNTIME", "./lua"]
 }

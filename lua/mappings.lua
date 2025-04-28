@@ -12,6 +12,8 @@
 
 -- <leader> is a space now
 local map = vim.keymap.set
+local cmd = vim.cmd
+
 map("n", "<leader>q", ":qa!<CR>", {})
 -- Fast saving with <leader> and s
 map("n", "<leader>s", ":w<CR>", {})
@@ -70,3 +72,9 @@ map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "LSP Diagnostic locli
 -- Comment
 map("n", "mm", "gcc", { desc = "Toggle comment", remap = true })
 map("v", "mm", "gc", { desc = "Toggle comment", remap = true })
+
+-- Terminal
+map("n", "tt", function()
+    local height = math.floor(vim.o.lines / 2)
+    cmd("belowright split | resize " .. height .. " | terminal")
+end, { noremap = true, silent = true })

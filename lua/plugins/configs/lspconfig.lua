@@ -103,5 +103,6 @@ require("mason").setup()
 require("mason-lspconfig").setup {
     ensure_installed = ensure_installed,
     automatic_installation = true,
+    -- Whether installed servers should automatically be enabled via `:h vim.lsp.enable()`.
+    automatic_enable = true,
 }
-require("mason-lspconfig").setup_handlers { setup }

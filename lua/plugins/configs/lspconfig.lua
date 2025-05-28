@@ -84,7 +84,18 @@ local function setup(server)
 end
 
 local mlsp = require "mason-lspconfig"
-local available = mlsp.get_available_servers()
+local available = {}
+do
+    local ok, result = pcall(mlsp.get_available_servers)
+    if ok then
+        available = result
+    else
+        vim.schedule(function()
+            vim.notify("[mason-lspconfig] Failed to get available servers: " .. tostring(result), vim.log.levels.WARN)
+        end)
+        available = {}
+    end
+end
 
 local ensure_installed = {} ---@type string[]
 for server, server_opts in pairs(servers) do

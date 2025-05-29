@@ -36,6 +36,7 @@
 - [5. Plugins \& LSP](#5-plugins--lsp)
   - [5.1. Plugins](#51-plugins)
   - [5.2. LSP](#52-lsp)
+  - [5.3. Copilot](#53-copilot)
 - [6. Keymaps](#6-keymaps)
 - [7. Customization](#7-customization)
 - [8. Contribution](#8-contribution)
@@ -164,24 +165,27 @@ tree ~/.config/nvim
 
 ### 5.1. Plugins
 
-| Plugin                                                                            | Description                                                                                                                                        |
-| --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [lazy.nvim](https://github.com/folke/lazy.nvim)                                   | A modern plugin manager for Neovim                                                                                                                 |
-| [mason.nvim](https://github.com/williamboman/mason.nvim)                          | Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters. |
-| [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                        | A collection of common configurations for Neovim's built-in language server client                                                                 |
-| [gitsigns](https://github.com/lewis6991/gitsigns.nvim)                            | Super fast git decorations implemented purely in lua/teal                                                                                          |
-| [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)             | Nvim Treesitter configurations and abstraction layer                                                                                               |
-| [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                                   | Auto completion plugin                                                                                                                             |
-| [LuaSnip](https://github.com/L3MON4D3/LuaSnip)                                    | Snippet Engine for Neovim written in Lua                                                                                                           |
-| [nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua) -                    | A File Explorer written In Lua                                                                                                                     |
-| [nvim-autopairs](https://github.com/windwp/nvim-autopairs)                        | A super powerful autopairs for Neovim                                                                                                              |
-| [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)               | Lua `fork` of vim-web-devicons for neovim                                                                                                          |
-| [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)                      | A blazing fast and easy to configure neovim statusline plugin written in pure lua.                                                                 |
-| [norcalli/nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)     | The fastest Neovim colorizer.                                                                                                                      |
-| [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) | Find, Filter, Preview, Pick. All lua, all the time.                                                                                                |
-| [rosé-pine](https://github.com/rose-pine/neovim)                                  | Soho vibes for Neovim                                                                                                                              |
-| [nvimtools/none-ls.nvim](https://github.com/nvimtools/none-ls.nvim)               | null-ls.nvim reloaded / Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.                                 |
-| [folke/which-key.nvim](https://github.com/folke/which-key.nvim)                   | Create key bindings that stick. WhichKey helps you remember your Neovim keymaps, by showing available keybindings in a popup as you type.          |
+| Plugin                                                                              | Description                                                                                                                                        |
+| ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [lazy.nvim](https://github.com/folke/lazy.nvim)                                     | A modern plugin manager for Neovim                                                                                                                 |
+| [mason.nvim](https://github.com/williamboman/mason.nvim)                            | Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters. |
+| [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                          | A collection of common configurations for Neovim's built-in language server client                                                                 |
+| [gitsigns](https://github.com/lewis6991/gitsigns.nvim)                              | Super fast git decorations implemented purely in lua/teal                                                                                          |
+| [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)               | Nvim Treesitter configurations and abstraction layer                                                                                               |
+| [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                                     | Auto completion plugin                                                                                                                             |
+| [LuaSnip](https://github.com/L3MON4D3/LuaSnip)                                      | Snippet Engine for Neovim written in Lua                                                                                                           |
+| [nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua) -                      | A File Explorer written In Lua                                                                                                                     |
+| [nvim-autopairs](https://github.com/windwp/nvim-autopairs)                          | A super powerful autopairs for Neovim                                                                                                              |
+| [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)                 | Lua `fork` of vim-web-devicons for neovim                                                                                                          |
+| [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)                        | A blazing fast and easy to configure neovim statusline plugin written in pure lua.                                                                 |
+| [norcalli/nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)       | The fastest Neovim colorizer.                                                                                                                      |
+| [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)   | Find, Filter, Preview, Pick. All lua, all the time.                                                                                                |
+| [rosé-pine](https://github.com/rose-pine/neovim)                                    | Soho vibes for Neovim                                                                                                                              |
+| [nvimtools/none-ls.nvim](https://github.com/nvimtools/none-ls.nvim)                 | null-ls.nvim reloaded / Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.                                 |
+| [folke/which-key.nvim](https://github.com/folke/which-key.nvim)                     | Create key bindings that stick. WhichKey helps you remember your Neovim keymaps, by showing available keybindings in a popup as you type.          |
+| [zbirenbaum/copilot.lua](https://github.com/zbirenbaum/copilot.lua)                 | Fully featured & enhanced replacement for copilot.vim complete with API for interacting with Github Copilot                                        |
+| [zbirenbaum/copilot-cmp](https://github.com/zbirenbaum/copilot-cmp)                 | Lua plugin to turn github copilot into a cmp source                                                                                                |
+| [CopilotC-Nvim/CopilotChat.nvim](https://github.com/CopilotC-Nvim/CopilotChat.nvim) | Chat with GitHub Copilot in Neovim                                                                                                                 |
 
 ### 5.2. LSP
 
@@ -212,6 +216,28 @@ If your language is not supported, please follow this:
 ```
 
 You can add more LSP servers and language syntax highlighting by editing the custom file.
+
+### 5.3. Copilot
+
+GitHub Copilot integration brings powerful AI code completion and chat features directly into Neovim. With Copilot, you can:
+- Get AI-powered code suggestions as you type.
+- Use Copilot as a completion source in nvim-cmp.
+- Chat with Copilot to get explanations, code snippets, or help with your code.
+- Insert Copilot-generated code snippets and solutions.
+
+By default, Copilot-related plugins are included but not loaded automatically to keep your setup lightweight. To enable Copilot features, you can lazy load the plugins when needed. For example, run:
+
+```vim
+:Lazy load copilot.lua
+```
+
+or for Copilot Chat:
+
+```vim
+:Lazy load CopilotChat.nvim
+```
+
+Once loaded, Copilot will start providing suggestions and chat capabilities. You can further configure or customize Copilot in your `custom.lua` file if desired.
 
 ## 6. Keymaps
 

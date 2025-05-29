@@ -135,6 +135,50 @@ local builtin_plugins = {
         },
         opts = function() require "plugins.configs.cmp" end,
     },
+    -- Copilot plugins
+    {
+        "zbirenbaum/copilot-cmp",
+        dependencies = {
+            "zbirenbaum/copilot.lua",
+            cmd = "Copilot",
+            build = ":Copilot auth",
+            event = "InsertEnter",
+            opts = {
+                suggestion = { enabled = false }, -- Disable standalone Copilot (let cmp handle it)
+                panel = { enabled = false },
+            },
+        },
+        opts = {},
+        config = function()
+            require("copilot").setup {}
+            require("copilot_cmp").setup {}
+        end,
+        lazy = true,
+    },
+    {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        build = ":Copilot auth",
+        event = "InsertEnter",
+        opts = {
+            suggestion = { enabled = false }, -- Disable standalone Copilot (let cmp handle it)
+            panel = { enabled = false },
+        },
+        lazy = true,
+    },
+    {
+        "CopilotC-Nvim/CopilotChat.nvim",
+        dependencies = {
+            { "zbirenbaum/copilot.lua" },
+            { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+        },
+        build = "make tiktoken", -- Only on MacOS or Linux
+        opts = {
+            -- See Configuration section for options
+            model = "claude-3.5-sonnet",
+        },
+        lazy = true,
+    },
     -- Colorizer
     {
         "norcalli/nvim-colorizer.lua",

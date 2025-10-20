@@ -90,9 +90,14 @@ do
     if ok then
         available = result
     else
-        vim.schedule(function()
-            vim.notify("[mason-lspconfig] Failed to get available servers: " .. tostring(result), vim.log.levels.WARN)
-        end)
+        vim.schedule(
+            function()
+                vim.notify(
+                    "[mason-lspconfig] Failed to get available servers: " .. tostring(result),
+                    vim.log.levels.WARN
+                )
+            end
+        )
         available = {}
     end
 end

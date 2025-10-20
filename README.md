@@ -220,6 +220,7 @@ You can add more LSP servers and language syntax highlighting by editing the cus
 ### 5.3. Copilot
 
 GitHub Copilot integration brings powerful AI code completion and chat features directly into Neovim. With Copilot, you can:
+
 - Get AI-powered code suggestions as you type.
 - Use Copilot as a completion source in nvim-cmp.
 - Chat with Copilot to get explanations, code snippets, or help with your code.
@@ -247,7 +248,7 @@ These are the default keymaps, in the following shortcuts, the `<leader>`+` key 
 | ------------------------------ | ------ | --------------------------------------------- |
 | <kbd>kk</kbd>                  | Insert | Esc with `kk`                                 |
 | <kbd>rr</kbd>                  | Normal | Reload configuration file                     |
-| <kbd>tt</kbd>                  | Normal | Create terminal                               |  |
+| <kbd>tt</kbd>                  | Normal | Create terminal                               |
 | `<leader>`+<kbd>s</kbd>        | Normal | Save file                                     |
 | `<leader>`+<kbd>q</kbd>        | Normal | Save (close all windows) and exit from Neovim |
 | `<leader>`+<kbd>n</kbd>        | Normal | Open NvimTree                                 |

@@ -62,3 +62,11 @@ autocmd("Filetype", {
         vim.opt_local.spell = true
     end,
 })
+
+autocmd({ "ColorScheme" }, {
+    callback = function()
+        vim.cmd [[hi Lualine_c_normal guibg=none]]
+        vim.cmd [[hi StatusLine guibg=none]]
+        vim.cmd [[hi StatusLineNC guibg=none]]
+    end,
+})

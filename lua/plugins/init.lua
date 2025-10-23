@@ -9,18 +9,19 @@
 -- File: plugins/init.lua
 -- Description: init plugins config
 
+local minifiles = require "plugins.configs.mini-files"
+
 -- Built-in plugins
 local builtin_plugins = {
     { "nvim-lua/plenary.nvim" },
     -- File explore
-    -- nvim-tree.lua - A file explorer tree for neovim written in lua
+    -- mini.files
     {
-        "nvim-tree/nvim-tree.lua",
-        dependencies = {
-            "nvim-tree/nvim-web-devicons",
-            opt = true,
-        },
-        opts = function() require "plugins.configs.tree" end,
+        "nvim-mini/mini.files",
+        lazy = false,
+        keys = minifiles.keys,
+        opts = minifiles.opts,
+        config = minifiles.config,
     },
     -- Formatter
     -- Lightweight yet powerful formatter plugin for Neovim

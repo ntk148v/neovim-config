@@ -53,10 +53,21 @@ map("n", "<leader>fb", builtin.buffers, { desc = "Open Telescope to list buffers
 map("n", "<leader>fh", builtin.help_tags, { desc = "Open Telescope to show help" })
 map("n", "<leader>fo", builtin.oldfiles, { desc = "Open Telescope to list recent files" })
 map("n", "<leader>cm", builtin.git_commits, { desc = "Open Telescope to list git commits" })
--- NvimTree
-map("n", "<leader>n", ":NvimTreeToggle<CR>", { desc = "Toggle NvimTree sidebar" }) -- open/close
-map("n", "<leader>nr", ":NvimTreeRefresh<CR>", { desc = "Refresh NvimTree" }) -- refresh
-map("n", "<leader>nf", ":NvimTreeFindFile<CR>", { desc = "Search file in NvimTree" }) -- search file
+
+-- Mini.files
+map(
+    "n",
+    "<leader>fm",
+    function() require("mini.files").open(vim.api.nvim_buf_get_name(0), true) end,
+    { desc = "Open mini.files (Directory of Current File)"}
+)
+
+map(
+    "n",
+    "<leader>fM",
+    function() require("mini.files").open(vim.uv.cwd(), true) end,
+    { desc = "Open mini.files (cwd)"}
+)
 
 -- LSP
 map(

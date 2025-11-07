@@ -174,7 +174,6 @@ tree ~/.config/nvim
 | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)               | Nvim Treesitter configurations and abstraction layer                                                                                               |
 | [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                                     | Auto completion plugin                                                                                                                             |
 | [LuaSnip](https://github.com/L3MON4D3/LuaSnip)                                      | Snippet Engine for Neovim written in Lua                                                                                                           |
-| [nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua) -                      | A File Explorer written In Lua                                                                                                                     |
 | [nvim-autopairs](https://github.com/windwp/nvim-autopairs)                          | A super powerful autopairs for Neovim                                                                                                              |
 | [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)                 | Lua `fork` of vim-web-devicons for neovim                                                                                                          |
 | [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)                        | A blazing fast and easy to configure neovim statusline plugin written in pure lua.                                                                 |
@@ -186,6 +185,7 @@ tree ~/.config/nvim
 | [zbirenbaum/copilot.lua](https://github.com/zbirenbaum/copilot.lua)                 | Fully featured & enhanced replacement for copilot.vim complete with API for interacting with Github Copilot                                        |
 | [zbirenbaum/copilot-cmp](https://github.com/zbirenbaum/copilot-cmp)                 | Lua plugin to turn github copilot into a cmp source                                                                                                |
 | [CopilotC-Nvim/CopilotChat.nvim](https://github.com/CopilotC-Nvim/CopilotChat.nvim) | Chat with GitHub Copilot in Neovim                                                                                                                 |
+| [nvim-mini/mini.files](https://github.com/nvim-mini/mini.files)                     | Navigate and manipulate file system. Part of 'mini.nvim' library.                                                                                  |
 
 ### 5.2. LSP
 
@@ -244,24 +244,23 @@ Once loaded, Copilot will start providing suggestions and chat capabilities. You
 
 These are the default keymaps, in the following shortcuts, the `<leader>`+` key is set up to `` (space) character, check: [keymaps.lua](./nvim/lua/core/keymaps.lua).
 
-| Shortcut                       | Mode   | Description                                   |
-| ------------------------------ | ------ | --------------------------------------------- |
-| <kbd>kk</kbd>                  | Insert | Esc with `kk`                                 |
-| <kbd>rr</kbd>                  | Normal | Reload configuration file                     |
-| <kbd>tt</kbd>                  | Normal | Create terminal                               |
-| `<leader>`+<kbd>s</kbd>        | Normal | Save file                                     |
-| `<leader>`+<kbd>q</kbd>        | Normal | Save (close all windows) and exit from Neovim |
-| `<leader>`+<kbd>n</kbd>        | Normal | Open NvimTree                                 |
-| `<leader>`+<kbd>nr</kbd>       | Normal | Refresh NvimTree                              |
-| `<leader>`+<kbd>nf</kbd>       | Normal | Find file in NvimTree                         |
-| `<leader>`+<kbd>ff</kbd>       | Normal | Open Telescope to find files                  |
-| `<leader>`+<kbd>fg</kbd>       | Normal | Open Telescope to do live grep                |
-| `<leader>`+<kbd>fb</kbd>       | Normal | Open Telescope to list buffers                |
-| `<leader>`+<kbd>fh</kbd>       | Normal | Open Telescope to show help                   |
-| `<leader>`+<kbd>fo</kbd>       | Normal | Open Telescope to show recent opened files    |
-| `<leader>`+<kbd>cm</kbd>       | Normal | Open Telescope to list git commits            |
-| `<leader>`+<kbd>wh/j/k/l</kbd> | Normal | Move around splits                            |
-| <kbd>mm</kbd>                  | Normal | Comment/Uncomment line                        |
+| Shortcut                       | Mode   | Description                                      |
+| ------------------------------ | ------ | ------------------------------------------------ |
+| <kbd>kk</kbd>                  | Insert | Esc with `kk`                                    |
+| <kbd>rr</kbd>                  | Normal | Reload configuration file                        |
+| <kbd>tt</kbd>                  | Normal | Create terminal                                  |
+| `<leader>`+<kbd>s</kbd>        | Normal | Save file                                        |
+| `<leader>`+<kbd>q</kbd>        | Normal | Save (close all windows) and exit from Neovim    |
+| `<leader>`+<kbd>fm</kbd>       | Normal | Open mini.files (Directory of the current files) |
+| `<leader>`+<kbd>fM</kbd>       | Normal | Open mini.files (cwd)                            |
+| `<leader>`+<kbd>ff</kbd>       | Normal | Open Telescope to find files                     |
+| `<leader>`+<kbd>fg</kbd>       | Normal | Open Telescope to do live grep                   |
+| `<leader>`+<kbd>fb</kbd>       | Normal | Open Telescope to list buffers                   |
+| `<leader>`+<kbd>fh</kbd>       | Normal | Open Telescope to show help                      |
+| `<leader>`+<kbd>fo</kbd>       | Normal | Open Telescope to show recent opened files       |
+| `<leader>`+<kbd>cm</kbd>       | Normal | Open Telescope to list git commits               |
+| `<leader>`+<kbd>wh/j/k/l</kbd> | Normal | Move around splits                               |
+| <kbd>mm</kbd>                  | Normal | Comment/Uncomment line                           |
 
 There are many default keymaps, you can check it using `:map` command. There are also other variants:
 

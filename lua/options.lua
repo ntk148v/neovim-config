@@ -11,50 +11,73 @@
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
 local cmd = vim.cmd
 -- Set options (global/buffer/windows-scoped)
-local opt = vim.opt
+local o = vim.opt
 -- Global variables
 local g = vim.g
 local indent = 4
 
+-- Set <space> as the leader key
+-- See `:help mapleader`
+--  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 g.mapleader = " "
+g.maplocalleader = " "
 
 cmd [[
 	filetype plugin indent on
 ]]
 
-opt.backspace = { "eol", "start", "indent" } -- allow backspacing over everything in insert mode
-opt.clipboard = "unnamedplus" -- allow neovim to access the system clipboard
-opt.fileencoding = "utf-8" -- the encoding written to a file
-opt.encoding = "utf-8" -- the encoding
-opt.matchpairs = { "(:)", "{:}", "[:]", "<:>" }
-opt.syntax = "enable"
+-- Sync clipboard between Neovim and the system.
+--  Schedule the setting after `UiEnter` because it can increase startup-time.
+--  Remove this option if you want your OS clipboard to remain independent.
+--  See `:help 'clipboard'`
+vim.schedule(function()
+    vim.o.clipboard = 'unnamedplus'
+end)
+
+-- Enable break indent
+o.breakindent = true
+
+o.backspace = { "eol", "start", "indent" } -- allow backspacing over everything in insert mode
+o.fileencoding = "utf-8"                   -- the encoding written to a file
+o.encoding = "utf-8"                       -- the encoding
+o.matchpairs = { "(:)", "{:}", "[:]", "<:>" }
+o.syntax = "enable"
 
 -- indention
-opt.autoindent = true -- auto indentation
-opt.expandtab = true -- convert tabs to spaces
-opt.shiftwidth = indent -- the number of spaces inserted for each indentation
-opt.smartindent = true -- make indenting smarter
-opt.softtabstop = indent -- when hitting <BS>, pretend like a tab is removed, even if spaces
-opt.tabstop = indent -- insert 2 spaces for a tab
-opt.shiftround = true -- use multiple of shiftwidth when indenting with "<" and ">"
+o.autoindent = true    -- auto indentation
+o.expandtab = true     -- convert tabs to spaces
+o.shiftwidth = indent  -- the number of spaces inserted for each indentation
+o.smartindent = true   -- make indenting smarter
+o.softtabstop = indent -- when hitting <BS>, pretend like a tab is removed, even if spaces
+o.tabstop = indent     -- insert 2 spaces for a tab
+o.shiftround = true    -- use multiple of shiftwidth when indenting with "<" and ">"
 
 -- tabline
-opt.showtabline = 2 -- always show tabs
-opt.sessionoptions = "curdir,folds,globals,help,tabpages,terminal,winsize"
+o.showtabline = 2 -- always show tabs
+o.sessionoptions = "curdir,folds,globals,help,tabpages,terminal,winsize"
 -- search
-opt.hlsearch = true -- highlight all matches on previous search pattern
-opt.ignorecase = true -- ignore case in search patterns
-opt.smartcase = true -- smart case
-opt.wildignore = opt.wildignore + { "*/node_modules/*", "*/.git/*", "*/vendor/*" }
-opt.wildmenu = true -- make tab completion for files/buffers act like bash
+o.hlsearch = true      -- highlight all matches on previous search pattern
+o.ignorecase = true    -- ignore case in search patterns unless \C or one or more capital letters in the search term
+o.smartcase = true     -- smart case
+o.wildignore = o.wildignore + { "*/node_modules/*", "*/.git/*", "*/vendor/*" }
+o.wildmenu = true      -- make tab completion for files/buffers act like bash
+o.inccommand = 'split' -- review substitutions live, as you type
 
 -- ui
-opt.cursorline = true -- highlight the current line
-opt.laststatus = 2 -- only the last window will always have a status line
-opt.lazyredraw = true -- don"t update the display while executing macros
-opt.list = true
+o.cursorline = true -- highlight the current line
+o.laststatus = 2    -- only the last window will always have a status line
+o.lazyredraw = true -- don"t update the display while executing macros
+-- Sets how neovim will display certain whitespace characters in the editor.
+--  See `:help 'list'`
+--  and `:help 'listchars'`
+--
+--  Notice listchars is set using `vim.opt` instead of `vim.o`.
+--  It is very similar to `vim.o` but offers an interface for conveniently interacting with tables.
+--   See `:help lua-options`
+--   and `:help lua-options-guide`
+o.list = true
 -- You can also add "space" or "eol", but I feel it"s quite annoying
-opt.listchars = {
+o.listchars = {
     tab = "┊ ",
     trail = "·",
     extends = "»",
@@ -63,53 +86,59 @@ opt.listchars = {
 }
 
 -- Hide cmd line
-opt.cmdheight = 0 -- more space in the neovim command line for displaying messages
+o.cmdheight = 0      -- more space in the neovim command line for displaying messages
 
-opt.mouse = "a" -- allow the mouse to be used in neovim
-opt.number = true -- set numbered lines
-opt.scrolloff = 18 -- minimal number of screen lines to keep above and below the cursor
-opt.sidescrolloff = 3 -- minimal number of screen columns to keep to the left and right (horizontal) of the cursor if wrap is `false`
-opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
-opt.splitbelow = true -- open new split below
-opt.splitright = true -- open new split to the right
-opt.wrap = true -- display a wrapped line
+o.mouse = "a"        -- allow the mouse to be used in neovim
+o.number = true      -- set numbered lines
+-- opt.relativenumber = true -- set relative numbered lines, to help with jumping.
+o.scrolloff = 18     -- minimal number of screen lines to keep above and below the cursor
+o.sidescrolloff = 3  -- minimal number of screen columns to keep to the left and right (horizontal) of the cursor if wrap is `false`
+o.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
+o.splitbelow = true  -- open new split below
+o.splitright = true  -- open new split to the right
+o.wrap = true        -- display a wrapped line
+
+-- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
+-- instead raise a dialog asking if you wish to save the current file(s)
+-- See `:help 'confirm'`
+o.confirm = true
 
 -- backups
-opt.backup = false -- create a backup file
-opt.swapfile = false -- creates a swapfile
-opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
+o.backup = false      -- create a backup file
+o.swapfile = false    -- creates a swapfile
+o.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 
 -- autocomplete
-opt.completeopt = { "menu", "menuone", "noselect" } -- mostly just for cmp
-opt.shortmess = opt.shortmess + {
+o.completeopt = { "menu", "menuone", "noselect" } -- mostly just for cmp
+o.shortmess = o.shortmess + {
     c = true,
 } -- hide all the completion messages, e.g. "-- XXX completion (YYY)", "match 1 of 2", "The only match", "Pattern not found"
 
 -- By the way, -- INSERT -- is unnecessary anymore because the mode information is displayed in the statusline.
-opt.showmode = false
+o.showmode = false
 
 -- perfomance
 -- remember N lines in history
-opt.history = 100 -- keep 100 lines of history
-opt.redrawtime = 1500
-opt.timeoutlen = 250 -- time to wait for a mapped sequence to complete (in milliseconds)
-opt.ttimeoutlen = 10
-opt.updatetime = 100 -- signify default updatetime 4000ms is not good for async update
+o.history = 100    -- keep 100 lines of history
+o.redrawtime = 1500
+o.timeoutlen = 250 -- time to wait for a mapped sequence to complete (in milliseconds)
+o.ttimeoutlen = 10
+o.updatetime = 100 -- signify default updatetime 4000ms is not good for async update
 
 -- theme
-opt.termguicolors = true -- enable 24-bit RGB colors
+o.termguicolors = true -- enable 24-bit RGB colors
 
 -- persistent undo
 -- Don"t forget to create folder $HOME/.local/share/nvim/undo
 local undodir = vim.fn.stdpath "data" .. "/undo"
-opt.undofile = true -- enable persistent undo
-opt.undodir = undodir
-opt.undolevels = 1000
-opt.undoreload = 10000
+o.undofile = true -- enable persistent undo
+o.undodir = undodir
+o.undolevels = 1000
+o.undoreload = 10000
 
 -- fold
-opt.foldmethod = "marker"
-opt.foldlevel = 99
+o.foldmethod = "marker"
+o.foldlevel = 99
 
 -- Disable builtin plugins
 local disabled_built_ins = {

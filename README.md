@@ -249,16 +249,18 @@ These are the default keymaps, in the following shortcuts, the `<leader>`+` key 
 | <kbd>kk</kbd>                  | Insert | Esc with `kk`                                    |
 | <kbd>rr</kbd>                  | Normal | Reload configuration file                        |
 | <kbd>tt</kbd>                  | Normal | Create terminal                                  |
-| `<leader>`+<kbd>s</kbd>        | Normal | Save file                                        |
-| `<leader>`+<kbd>q</kbd>        | Normal | Save (close all windows) and exit from Neovim    |
 | `<leader>`+<kbd>fm</kbd>       | Normal | Open mini.files (Directory of the current files) |
 | `<leader>`+<kbd>fM</kbd>       | Normal | Open mini.files (cwd)                            |
-| `<leader>`+<kbd>ff</kbd>       | Normal | Open Telescope to find files                     |
-| `<leader>`+<kbd>fg</kbd>       | Normal | Open Telescope to do live grep                   |
-| `<leader>`+<kbd>fb</kbd>       | Normal | Open Telescope to list buffers                   |
-| `<leader>`+<kbd>fh</kbd>       | Normal | Open Telescope to show help                      |
-| `<leader>`+<kbd>fo</kbd>       | Normal | Open Telescope to show recent opened files       |
-| `<leader>`+<kbd>cm</kbd>       | Normal | Open Telescope to list git commits               |
+| `<leader>`+<kbd>sh</kbd>       | Normal | Open Telescope to search help                    |
+| `<leader>`+<kbd>sk</kbd>       | Normal | Open Telescope to search keymaps                 |
+| `<leader>`+<kbd>sf</kbd>       | Normal | Open Telescope to search files                   |
+| `<leader>`+<kbd>ss</kbd>       | Normal | Open Telescope to search select telescope        |
+| `<leader>`+<kbd>sg</kbd>       | Normal | Open Telescope to search by live grep            |
+| `<leader>`+<kbd>sd</kbd>       | Normal | Open Telescope to search diagnostics             |
+| `<leader>`+<kbd>sr</kbd>       | Normal | Open Telescope to search resume                  |
+| `<leader>`+<kbd>s.</kbd>       | Normal | Open Telescope to search recent files            |
+| `<leader>`+`<leader>`          | Normal | Open Telescope to search existing buffers        |
+| `<leader>`+<kbd>sc</kbd>       | Normal | Open Telescope to list git commits               |
 | `<leader>`+<kbd>wh/j/k/l</kbd> | Normal | Move around splits                               |
 | <kbd>mm</kbd>                  | Normal | Comment/Uncomment line                           |
 

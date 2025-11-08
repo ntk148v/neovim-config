@@ -16,7 +16,7 @@ require("nvim-autopairs").setup {
     ts_config = {
         lua = { "string" }, -- it will not add a pair on that treesitter node
         javascript = { "template_string" },
-        java = false, -- Don't check treesitter on java
+        java = false,       -- Don't check treesitter on java
     },
 
     -- Don't add pairs if it already has a close pair in the same line

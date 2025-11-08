@@ -22,7 +22,7 @@ local builtin_plugins = {
             require("mini.files").setup(opts)
 
             local show_dotfiles = true
-            local filter_show = function(fs_entry) return true end
+            local filter_show = function(_) return true end
             local filter_hide = function(fs_entry) return not vim.startswith(fs_entry.name, ".") end
 
             local toggle_dotfiles = function()
@@ -226,7 +226,7 @@ local builtin_plugins = {
             { "zbirenbaum/copilot.lua" },
             { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
         },
-        build = "make tiktoken", -- Only on MacOS or Linux
+        build = "make tiktoken",                            -- Only on MacOS or Linux
         opts = {
             -- See Configuration section for options
             model = "claude-3.5-sonnet",
@@ -260,7 +260,7 @@ require("lazy").setup {
     spec = { builtin_plugins, custom_plugins },
     lockfile = vim.fn.stdpath "config" .. "/lazy-lock.json", -- lockfile generated after running update.
     defaults = {
-        lazy = false, -- should plugins be lazy-loaded?
+        lazy = false,                                        -- should plugins be lazy-loaded?
         version = nil,
         -- version = "*", -- enable this to try installing the latest stable versions of plugins
     },

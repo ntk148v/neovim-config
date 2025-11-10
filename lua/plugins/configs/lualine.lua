@@ -10,26 +10,32 @@
 -- Description: Pacman config for lualine
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
 
-local lualine = require "lualine"
-local utils = require "utils"
+local lualine = require("lualine")
+local utils = require("utils")
 
 local conditions = {
-    buffer_not_empty = function() return vim.fn.empty(vim.fn.expand "%:t") ~= 1 end,
-    hide_in_width = function() return vim.fn.winwidth(0) > 80 end,
+    buffer_not_empty = function()
+        return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
+    end,
+    hide_in_width = function()
+        return vim.fn.winwidth(0) > 80
+    end,
     check_git_workspace = function()
-        local filepath = vim.fn.expand "%:p:h"
+        local filepath = vim.fn.expand("%:p:h")
         local gitdir = vim.fn.finddir(".git", filepath .. ";")
         return gitdir and #gitdir > 0 and #gitdir < #filepath
     end,
 }
 
-local auto = require "lualine.themes.auto"
+local auto = require("lualine.themes.auto")
 local function make_transparent(theme_table)
     for _, sections in pairs(theme_table) do
         if type(sections) == "table" then
             for _, section_colors in pairs(sections) do
                 -- Set the background of every section to nil
-                if type(section_colors) == "table" and section_colors.bg then section_colors.bg = nil end
+                if type(section_colors) == "table" and section_colors.bg then
+                    section_colors.bg = nil
+                end
             end
         end
     end
@@ -126,67 +132,79 @@ local function mode()
 end
 
 -- Helpers
-local function ins_left(component) table.insert(config.sections.lualine_c, component) end
+local function ins_left(component)
+    table.insert(config.sections.lualine_c, component)
+end
 
-local function ins_right(component) table.insert(config.sections.lualine_x, component) end
+local function ins_right(component)
+    table.insert(config.sections.lualine_x, component)
+end
 
 -- Left side
-ins_left { mode }
+ins_left({ mode })
 
-ins_left {
+ins_left({
     "branch",
     icon = " ",
     color = { gui = "bold" },
-}
+})
 
-ins_left {
+ins_left({
     "diff",
     symbols = { added = " ", modified = "󰝤 ", removed = " " },
     cond = conditions.hide_in_width,
-}
+})
 
-ins_left { function() return "%=" end }
+ins_left({
+    function()
+        return "%="
+    end,
+})
 
 -- Right side
-ins_right {
+ins_right({
     function()
         local msg = "null"
         local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
         local clients = vim.lsp.get_active_clients()
-        if next(clients) == nil then return msg end
+        if next(clients) == nil then
+            return msg
+        end
         for _, client in ipairs(clients) do
             local filetypes = client.config.filetypes
-            if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then return client.name end
+            if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+                return client.name
+            end
         end
         return msg
     end,
     icon = " LSP:",
     color = { gui = "bold" },
-}
+})
 
-ins_right {
+ins_right({
     "diagnostics",
     sources = { "nvim_diagnostic" },
     symbols = { error = " ", warn = " ", info = " ", hints = "󰛩 " },
     always_visible = false,
-}
+})
 
-ins_right {
+ins_right({
     "fileformat",
     fmt = string.upper,
     icons_enabled = true,
     color = { gui = "bold" },
-}
+})
 
-ins_right {
+ins_right({
     "location",
     color = { gui = "bold" },
-}
+})
 
-ins_right {
+ins_right({
     "progress",
     color = { gui = "bold" },
-}
+})
 
 -- Initialize lualine
 lualine.setup(config)

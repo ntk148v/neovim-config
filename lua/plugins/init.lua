@@ -17,18 +17,22 @@ local builtin_plugins = {
     {
         "nvim-mini/mini.files",
         lazy = false,
-        opts = require "plugins.configs.mini-files",
+        opts = require("plugins.configs.mini-files"),
         config = function(_, opts)
             require("mini.files").setup(opts)
 
             local show_dotfiles = true
-            local filter_show = function(_) return true end
-            local filter_hide = function(fs_entry) return not vim.startswith(fs_entry.name, ".") end
+            local filter_show = function(_)
+                return true
+            end
+            local filter_hide = function(fs_entry)
+                return not vim.startswith(fs_entry.name, ".")
+            end
 
             local toggle_dotfiles = function()
                 show_dotfiles = not show_dotfiles
                 local new_filter = show_dotfiles and filter_show or filter_hide
-                require("mini.files").refresh { content = { filter = new_filter } }
+                require("mini.files").refresh({ content = { filter = new_filter } })
             end
 
             local map_split = function(buf_id, lhs, direction, close_on_file)
@@ -42,12 +46,14 @@ local builtin_plugins = {
                         end)
 
                         require("mini.files").set_target_window(new_target_window)
-                        require("mini.files").go_in { close_on_file = close_on_file }
+                        require("mini.files").go_in({ close_on_file = close_on_file })
                     end
                 end
 
                 local desc = "Open in " .. direction .. " split"
-                if close_on_file then desc = desc .. " and close" end
+                if close_on_file then
+                    desc = desc .. " and close"
+                end
                 vim.keymap.set("n", lhs, rhs, { buffer = buf_id, desc = desc })
             end
 
@@ -88,7 +94,9 @@ local builtin_plugins = {
     {
         "lewis6991/gitsigns.nvim",
         event = { "BufReadPost", "BufNewFile", "BufWritePost" },
-        opts = function() require "plugins.configs.gitsigns" end,
+        opts = function()
+            require("plugins.configs.gitsigns")
+        end,
     },
     -- Treesitter interface
     {
@@ -97,7 +105,9 @@ local builtin_plugins = {
         evevent = { "BufReadPost", "BufNewFile", "BufWritePost" },
         cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
         build = ":TSUpdate",
-        opts = function() require "plugins.configs.treesitter" end,
+        opts = function()
+            require("plugins.configs.treesitter")
+        end,
     },
     -- Telescope
     -- Find, Filter, Preview, Pick. All lua, all the time.
@@ -116,15 +126,17 @@ local builtin_plugins = {
             require("telescope").setup()
             -- To get fzf loaded and working with telescope, you need to call
             -- load_extension, somewhere after setup function:
-            require("telescope").load_extension "fzf"
-            require "plugins.configs.telescope"
+            require("telescope").load_extension("fzf")
+            require("plugins.configs.telescope")
         end,
     },
     -- Statusline
     -- A blazing fast and easy to configure neovim statusline plugin written in pure lua.
     {
         "nvim-lualine/lualine.nvim",
-        opts = function() require "plugins.configs.lualine" end,
+        opts = function()
+            require("plugins.configs.lualine")
+        end,
     },
     -- colorscheme
     {
@@ -141,7 +153,9 @@ local builtin_plugins = {
     {
         "mason-org/mason.nvim",
         cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
-        config = function() require "plugins.configs.mason" end,
+        config = function()
+            require("plugins.configs.mason")
+        end,
     },
     {
         "mason-org/mason-lspconfig.nvim",
@@ -151,13 +165,17 @@ local builtin_plugins = {
         event = { "BufReadPre", "BufNewFile" },
         dependencies = { "nvimtools/none-ls-extras.nvim" },
         lazy = true,
-        config = function() require "plugins.configs.null-ls" end,
+        config = function()
+            require("plugins.configs.null-ls")
+        end,
     },
     {
         "neovim/nvim-lspconfig",
         event = "VimEnter",
         lazy = false,
-        config = function() require "plugins.configs.lspconfig" end,
+        config = function()
+            require("plugins.configs.lspconfig")
+        end,
     },
     {
         "hrsh7th/nvim-cmp",
@@ -170,7 +188,7 @@ local builtin_plugins = {
                 opts = { history = true, updateevents = "TextChanged,TextChangedI" },
                 config = function(_, opts)
                     require("luasnip").config.set_config(opts)
-                    require "plugins.configs.luasnip"
+                    require("plugins.configs.luasnip")
                 end,
             },
 
@@ -187,7 +205,9 @@ local builtin_plugins = {
                 "onsails/lspkind.nvim",
             },
         },
-        opts = function() require "plugins.configs.cmp" end,
+        opts = function()
+            require("plugins.configs.cmp")
+        end,
     },
     -- Copilot plugins
     {
@@ -204,8 +224,8 @@ local builtin_plugins = {
         },
         opts = {},
         config = function()
-            require("copilot").setup {}
-            require("copilot_cmp").setup {}
+            require("copilot").setup({})
+            require("copilot_cmp").setup({})
         end,
         lazy = true,
     },
@@ -226,7 +246,7 @@ local builtin_plugins = {
             { "zbirenbaum/copilot.lua" },
             { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
         },
-        build = "make tiktoken",                            -- Only on MacOS or Linux
+        build = "make tiktoken", -- Only on MacOS or Linux
         opts = {
             -- See Configuration section for options
             model = "claude-3.5-sonnet",
@@ -240,14 +260,18 @@ local builtin_plugins = {
             require("colorizer").setup()
 
             -- execute colorizer as soon as possible
-            vim.defer_fn(function() require("colorizer").attach_to_buffer(0) end, 0)
+            vim.defer_fn(function()
+                require("colorizer").attach_to_buffer(0)
+            end, 0)
         end,
     },
     -- Keymappings
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
-        config = function() require("which-key").setup() end,
+        config = function()
+            require("which-key").setup()
+        end,
     },
 }
 
@@ -256,11 +280,11 @@ local custom_plugins = exist and type(custom) == "table" and custom.plugins or {
 
 -- Check if there is any custom plugins
 -- local ok, custom_plugins = pcall(require, "plugins.custom")
-require("lazy").setup {
+require("lazy").setup({
     spec = { builtin_plugins, custom_plugins },
-    lockfile = vim.fn.stdpath "config" .. "/lazy-lock.json", -- lockfile generated after running update.
+    lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json", -- lockfile generated after running update.
     defaults = {
-        lazy = false,                                        -- should plugins be lazy-loaded?
+        lazy = false, -- should plugins be lazy-loaded?
         version = nil,
         -- version = "*", -- enable this to try installing the latest stable versions of plugins
     },
@@ -299,5 +323,5 @@ require("lazy").setup {
             enabled = true,
         },
     },
-    state = vim.fn.stdpath "state" .. "/lazy/state.json", -- state info for checker and other things
-}
+    state = vim.fn.stdpath("state") .. "/lazy/state.json", -- state info for checker and other things
+})

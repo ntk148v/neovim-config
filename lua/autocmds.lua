@@ -18,10 +18,10 @@ local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
 -- Highlight on yank
 autocmd("TextYankPost", {
     callback = function()
-        vim.highlight.on_yank {
+        vim.highlight.on_yank({
             higroup = "IncSearch",
             timeout = "1000",
-        }
+        })
     end,
 })
 
@@ -65,8 +65,8 @@ autocmd("Filetype", {
 
 autocmd({ "ColorScheme" }, {
     callback = function()
-        vim.cmd [[hi Lualine_c_normal guibg=none]]
-        vim.cmd [[hi StatusLine guibg=none]]
-        vim.cmd [[hi StatusLineNC guibg=none]]
+        vim.cmd([[hi Lualine_c_normal guibg=none]])
+        vim.cmd([[hi StatusLine guibg=none]])
+        vim.cmd([[hi StatusLineNC guibg=none]])
     end,
 })

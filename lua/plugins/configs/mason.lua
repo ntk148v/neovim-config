@@ -10,7 +10,7 @@
 -- Description: mason
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
 return {
-    require("mason").setup {
+    require("mason").setup({
         PATH = "prepend",
         ui = {
             icons = {
@@ -32,5 +32,5 @@ return {
         },
 
         max_concurrent_installers = 10,
-    },
+    }),
 }

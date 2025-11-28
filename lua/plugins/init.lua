@@ -12,6 +12,18 @@
 -- Built-in plugins
 local builtin_plugins = {
     { "nvim-lua/plenary.nvim" },
+    -- Miscellaneous useful functions
+    -- mini.misc
+    {
+        "nvim-mini/mini.misc",
+        version = "*",
+        config = function(_, opts)
+            require("mini.misc").setup()
+            -- Synchronize terminal emulator background with Neovim's background to remove
+            -- possibly different color padding around Neovim instance
+            MiniMisc.setup_termbg_sync()
+        end,
+    },
     -- File explore
     -- mini.files
     {

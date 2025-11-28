@@ -186,6 +186,7 @@ tree ~/.config/nvim
 | [zbirenbaum/copilot-cmp](https://github.com/zbirenbaum/copilot-cmp)                 | Lua plugin to turn github copilot into a cmp source                                                                                                |
 | [CopilotC-Nvim/CopilotChat.nvim](https://github.com/CopilotC-Nvim/CopilotChat.nvim) | Chat with GitHub Copilot in Neovim                                                                                                                 |
 | [nvim-mini/mini.files](https://github.com/nvim-mini/mini.files)                     | Navigate and manipulate file system. Part of 'mini.nvim' library.                                                                                  |
+| [nvim-mini/mini.misc](https://github.com/nvim-mini.misc)                            | About Neovim Lua plugin with miscellaneous useful functions. Part of 'mini.nvim' library.                                                          |
 
 ### 5.2. LSP
 

@@ -84,13 +84,14 @@ local config = {
                 buffers_color = {
                     -- Same values as the general color option can be used here.
                     active = {
-                        fg = utils.darken(auto.normal.a.fg, 1.2),
+                        fg = auto.normal.a.fg,
                         bg = auto.normal.a.bg,
                         gui = "bold",
                     },
                     inactive = {
                         fg = auto.normal.a.fg,
                         bg = auto.normal.a.bg,
+                        gui = "italic",
                     },
                 },
                 symbols = {

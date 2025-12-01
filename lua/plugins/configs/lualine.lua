@@ -28,21 +28,17 @@ local conditions = {
 }
 
 local auto = require("lualine.themes.auto")
-local function make_transparent(theme_table)
-    for _, sections in pairs(theme_table) do
-        if type(sections) == "table" then
-            for _, section_colors in pairs(sections) do
-                -- Set the background of every section to nil
-                if type(section_colors) == "table" and section_colors.bg then
-                    section_colors.bg = nil
-                end
-            end
+-- Apply transparency
+for _, mode in ipairs({ "normal", "insert", "visual", "replace", "command", "inactive" }) do
+    if auto[mode] then
+        for section, hl in pairs(auto[mode]) do
+            -- reset to default (use scheme's default fg/bg)
+            hl.fg = nil
+            hl.bg = nil
+            hl.gui = nil
         end
     end
 end
-
--- Apply transparency
-make_transparent(auto)
 
 -- Config
 local config = {

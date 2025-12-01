@@ -68,5 +68,8 @@ autocmd({ "ColorScheme" }, {
         vim.cmd([[hi Lualine_c_normal guibg=none]])
         vim.cmd([[hi StatusLine guibg=none]])
         vim.cmd([[hi StatusLineNC guibg=none]])
+        vim.cmd([[hi TabLineFill guibg=none]])
+        vim.cmd([[hi TabLineSel guibg=none]])
+        vim.cmd([[hi TabLine guibg=none]])
     end,
 })

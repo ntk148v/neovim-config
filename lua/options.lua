@@ -36,6 +36,7 @@ end)
 
 -- Enable break indent
 o.breakindent = true
+o.breakindentopt = "list:-1"
 
 o.backspace = { "eol", "start", "indent" } -- allow backspacing over everything in insert mode
 o.fileencoding = "utf-8" -- the encoding written to a file
@@ -85,6 +86,14 @@ o.listchars = {
     nbsp = "×",
 }
 
+-- pum
+o.pumborder = "rounded" -- popup menu (pum) border style
+o.pumheight = 10
+
+-- window
+vim.opt.winborder = "rounded" -- rounded border for all floating windows
+vim.opt.winminwidth = 5
+
 -- Hide cmd line
 o.cmdheight = 0 -- more space in the neovim command line for displaying messages
 
@@ -96,6 +105,7 @@ o.sidescrolloff = 3 -- minimal number of screen columns to keep to the left and 
 o.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
 o.splitbelow = true -- open new split below
 o.splitright = true -- open new split to the right
+o.splitkeep = "cursor" -- stabilize the screen layout when opening, closing, or resizing window splits
 o.wrap = true -- display a wrapped line
 
 -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
@@ -109,13 +119,18 @@ o.swapfile = false -- creates a swapfile
 o.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 
 -- autocomplete
-o.completeopt = { "menu", "menuone", "noselect" } -- mostly just for cmp
+o.complete = ".,w,b,kspell"
+o.completeopt = { "menu", "menuone", "noselect", "fuzzy" } -- mostly just for cmp
 o.shortmess = o.shortmess + {
     c = true,
 } -- hide all the completion messages, e.g. "-- XXX completion (YYY)", "match 1 of 2", "The only match", "Pattern not found"
 
 -- By the way, -- INSERT -- is unnecessary anymore because the mode information is displayed in the statusline.
 o.showmode = false
+
+-- grep
+o.grepformat = "%f:%l:%c:%m"
+o.grepprg = "rg --vimgrep --smart-case"
 
 -- perfomance
 -- remember N lines in history
@@ -183,8 +198,9 @@ cmd.colorscheme("rose-pine")
 -- Enable virtual_lines feature if the current nvim version is 0.11+
 if vim.fn.has("nvim-0.11") > 0 then
     vim.diagnostic.config({
-        -- Use the default configuration
-        -- virtual_lines = true,
+        severity_sort = true,
+        underline = false,
+        update_in_insert = false,
 
         -- Alternatively, customize specific options
         virtual_lines = {

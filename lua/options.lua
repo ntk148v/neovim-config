@@ -137,8 +137,11 @@ o.undolevels = 1000
 o.undoreload = 10000
 
 -- fold
-o.foldmethod = "marker"
+o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+o.foldmethod = "expr"
 o.foldlevel = 99
+o.foldnestmax = 10
+o.foldtext = ""
 
 -- Disable builtin plugins
 local disabled_built_ins = {

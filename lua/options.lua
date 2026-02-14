@@ -86,9 +86,12 @@ o.listchars = {
     nbsp = "×",
 }
 
--- pum
-o.pumborder = "rounded" -- popup menu (pum) border style
-o.pumheight = 10
+-- Enable virtual_lines feature if the current nvim version is 0.11+
+if vim.fn.has("nvim-0.12") > 0 then
+    -- pum
+    o.pumborder = "rounded" -- popup menu (pum) border style
+    o.pumheight = 10
+end
 
 -- window
 vim.opt.winborder = "rounded" -- rounded border for all floating windows

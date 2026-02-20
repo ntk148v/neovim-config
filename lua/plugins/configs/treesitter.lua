@@ -12,11 +12,10 @@
 
 -- Load custom configurations
 local exist, custom = pcall(require, "custom")
-local ensure_installed = exist and type(custom) == "table" and custom.ensure_installed or {}
+local custom_ensure_installed = exist and type(custom) == "table" and custom.ensure_installed or {}
 
 return {
-    -- A list of parser names, or "all"
-    ensure_installed = {
+    ensure_installed = vim.list_extend({
         "go",
         "python",
         "dockerfile",
@@ -28,8 +27,7 @@ return {
         "css",
         "vim",
         "lua",
-        ensure_installed,
-    },
+    }, custom_ensure_installed),
 
     highlight = {
         enable = true,

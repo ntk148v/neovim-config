@@ -114,7 +114,7 @@ local builtin_plugins = {
     {
         "nvim-treesitter/nvim-treesitter",
         version = false, -- last release is way too old and doesn't work on Windows
-        evevent = { "BufReadPost", "BufNewFile", "BufWritePost" },
+        event = { "BufReadPost", "BufNewFile", "BufWritePost" },
         cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
         build = ":TSUpdate",
         opts = function()

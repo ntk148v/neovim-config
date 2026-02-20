@@ -11,27 +11,6 @@
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
 local cmp = require("cmp")
 
-require("nvim-autopairs").setup({
-    check_ts = true,
-    ts_config = {
-        lua = { "string" }, -- it will not add a pair on that treesitter node
-        javascript = { "template_string" },
-        java = false, -- Don't check treesitter on java
-    },
-
-    -- Don't add pairs if it already has a close pair in the same line
-    enable_check_bracket_line = false,
-
-    -- Don't add pairs if the next char is alphanumeric
-    ignored_next_char = "[%w%.]", -- will ignore alphanumeric and `.` symbol
-    fast_wrap = {},
-    disable_filetype = { "TelescopePrompt", "vim" },
-})
-
--- setup cmp for autopairs
-local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
-
 local function border(hl_name)
     return {
         { "╭", hl_name },
@@ -108,17 +87,16 @@ local options = {
         end, { "i", "s" }),
     },
     sources = {
-        { name = "copilot" }, -- Copilot source
+        { name = "copilot" },
         { name = "nvim_lsp" },
         { name = "luasnip" },
         {
             name = "buffer",
             option = {
-                -- Avoid accidentally running on big files
                 get_bufnrs = function()
                     local buf = vim.api.nvim_get_current_buf()
                     local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
-                    if byte_size > 1024 * 1024 then -- 1 Megabyte max
+                    if byte_size > 1024 * 1024 then
                         return {}
                     end
                     return { buf }

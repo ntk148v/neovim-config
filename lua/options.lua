@@ -86,7 +86,7 @@ o.listchars = {
     nbsp = "×",
 }
 
--- Enable virtual_lines feature if the current nvim version is 0.11+
+-- Enable pumborder feature if the current nvim version is 0.12+
 if vim.fn.has("nvim-0.12") > 0 then
     -- pum
     o.pumborder = "rounded" -- popup menu (pum) border style
@@ -142,9 +142,6 @@ o.redrawtime = 1500
 o.timeoutlen = 250 -- time to wait for a mapped sequence to complete (in milliseconds)
 o.ttimeoutlen = 10
 o.updatetime = 100 -- signify default updatetime 4000ms is not good for async update
-
--- theme
-o.termguicolors = true -- enable 24-bit RGB colors
 
 -- persistent undo
 -- Don"t forget to create folder $HOME/.local/share/nvim/undo

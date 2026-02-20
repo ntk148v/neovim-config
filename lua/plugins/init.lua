@@ -242,17 +242,6 @@ local builtin_plugins = {
         lazy = true,
     },
     {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        build = ":Copilot auth",
-        event = "InsertEnter",
-        opts = {
-            suggestion = { enabled = false }, -- Disable standalone Copilot (let cmp handle it)
-            panel = { enabled = false },
-        },
-        lazy = true,
-    },
-    {
         "CopilotC-Nvim/CopilotChat.nvim",
         dependencies = {
             { "zbirenbaum/copilot.lua" },

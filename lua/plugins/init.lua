@@ -183,8 +183,6 @@ local builtin_plugins = {
     },
     {
         "neovim/nvim-lspconfig",
-        event = "VimEnter",
-        lazy = false,
         config = function()
             require("plugins.configs.lspconfig")
         end,

@@ -11,51 +11,57 @@
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
 -- Define autocommands with Lua APIs
 -- See: h:api-autocmd, h:augroup
-local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
+local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
 
--- General settings
+local general = augroup("General", { clear = true })
+local ft_settings = augroup("FileTypeSettings", { clear = true })
+local colors = augroup("Colors", { clear = true })
 
--- Highlight on yank
 autocmd("TextYankPost", {
+    group = general,
     callback = function()
         vim.highlight.on_yank({
             higroup = "IncSearch",
-            timeout = "1000",
+            timeout = 1000,
         })
     end,
 })
 
--- Remove whitespace on save
 autocmd("BufWritePre", {
-    pattern = "",
-    command = ":%s/\\s\\+$//e",
+    group = general,
+    pattern = "*",
+    command = "%s/\\s\\+$//e",
 })
 
--- Auto format on save using the attached (optionally filtered) language servere clients
--- https://neovim.io/doc/user/lsp.html#vim.lsp.buf.format()
 autocmd("BufWritePre", {
-    pattern = "",
-    command = ":silent lua vim.lsp.buf.format()",
+    group = general,
+    pattern = "*",
+    callback = function()
+        require("conform").format({ lsp_fallback = true })
+    end,
 })
 
--- Don"t auto commenting new lines
 autocmd("BufEnter", {
-    pattern = "",
+    group = general,
+    pattern = "*",
     command = "set fo-=c fo-=r fo-=o",
 })
 
 autocmd("Filetype", {
+    group = ft_settings,
     pattern = { "xml", "html", "xhtml", "css", "scss", "javascript", "typescript", "yaml", "lua" },
     command = "setlocal shiftwidth=2 tabstop=2",
 })
 
--- Set colorcolumn
 autocmd("Filetype", {
+    group = ft_settings,
     pattern = { "python", "rst", "c", "cpp" },
     command = "set colorcolumn=80",
 })
 
 autocmd("Filetype", {
+    group = ft_settings,
     pattern = { "gitcommit", "markdown", "text" },
     callback = function()
         vim.opt_local.wrap = true
@@ -63,7 +69,8 @@ autocmd("Filetype", {
     end,
 })
 
-autocmd({ "ColorScheme" }, {
+autocmd("ColorScheme", {
+    group = colors,
     callback = function()
         vim.cmd([[hi Lualine_c_normal guibg=none]])
         vim.cmd([[hi StatusLine guibg=none]])

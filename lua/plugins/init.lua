@@ -107,7 +107,7 @@ local builtin_plugins = {
         "lewis6991/gitsigns.nvim",
         event = { "BufReadPost", "BufNewFile", "BufWritePost" },
         opts = function()
-            require("plugins.configs.gitsigns")
+            return require("plugins.configs.gitsigns")
         end,
     },
     -- Treesitter interface
@@ -118,7 +118,7 @@ local builtin_plugins = {
         cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
         build = ":TSUpdate",
         opts = function()
-            require("plugins.configs.treesitter")
+            return require("plugins.configs.treesitter")
         end,
     },
     -- Telescope
@@ -147,7 +147,7 @@ local builtin_plugins = {
     {
         "nvim-lualine/lualine.nvim",
         opts = function()
-            require("plugins.configs.lualine")
+            return require("plugins.configs.lualine")
         end,
     },
     -- colorscheme
@@ -218,7 +218,7 @@ local builtin_plugins = {
             },
         },
         opts = function()
-            require("plugins.configs.cmp")
+            return require("plugins.configs.cmp")
         end,
     },
     -- Copilot plugins

@@ -10,9 +10,6 @@
 -- Description: Pacman config for lualine
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
 
-local lualine = require("lualine")
-local utils = require("utils")
-
 local conditions = {
     buffer_not_empty = function()
         return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
@@ -203,5 +200,4 @@ ins_right({
     color = { gui = "bold" },
 })
 
--- Initialize lualine
-lualine.setup(config)
+return config

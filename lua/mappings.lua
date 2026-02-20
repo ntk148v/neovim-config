@@ -34,7 +34,12 @@ map("n", "<leader>wl", "<C-w>l", { desc = "Switch [W]indow down" })
 -- end
 function _G.reload_config()
     local reload = require("plenary.reload").reload_module
-    reload("me", false)
+
+    for name, _ in pairs(package.loaded) do
+        if name:match("^options") or name:match("^mappings") or name:match("^autocmds") or name:match("^plugins") or name:match("^utils") or name:match("^custom") then
+            reload(name, true)
+        end
+    end
 
     dofile(vim.env.MYVIMRC)
     vim.notify("Nvim configuration reloaded!", vim.log.levels.INFO)

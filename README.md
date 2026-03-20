@@ -16,7 +16,7 @@
     </a>
     <img
       alt="Neovim version"
-      src="https://img.shields.io/badge/Neovim-0.8+-57A143?style=for-the-badge&logo=neovim"
+      src="https://img.shields.io/badge/Neovim-0.11+-57A143?style=for-the-badge&logo=neovim"
     />
     <a href="https://github.com/ntk148v/neovim-config/releases/latest">
         <img
@@ -69,7 +69,7 @@ Therefore, I decided to create this repository.
 ## 3. Installation
 
 - Requirements:
-  - Install [neovim >= 0.8.0](https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-package), or you can [build it](https://github.com/neovim/neovim/wiki/Building-Neovim#) yourself.
+  - Install [neovim >= 0.11.0](https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-package), or you can [build it](https://github.com/neovim/neovim/wiki/Building-Neovim#) yourself.
   - git >= 2.19.0 (for partial clones support)
   - [fd](https://github.com/sharkdp/fd) and [ripgrep](https://github.com/BurntSushi/ripgrep).
   - I recommend using a [nerdfonts](https://www.nerdfonts.com/font-downloads) (optional)

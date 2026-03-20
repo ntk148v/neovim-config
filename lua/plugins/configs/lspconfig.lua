@@ -18,9 +18,10 @@ local server_configs = {
     dockerls = {},
     bashls = {},
     gopls = {},
-    ruff_lsp = {},
+    ruff = {},
     vimls = {},
     yamlls = {},
+    ty = {},
     lua_ls = {
         settings = {
             Lua = {
@@ -45,9 +46,12 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protoc
 
 for server, config in pairs(server_configs) do
     if config then
-        vim.lsp.config(server, vim.tbl_deep_extend("force", {
-            capabilities = vim.deepcopy(capabilities),
-        }, config == true and {} or config))
+        vim.lsp.config(
+            server,
+            vim.tbl_deep_extend("force", {
+                capabilities = vim.deepcopy(capabilities),
+            }, config == true and {} or config)
+        )
     end
 end
 

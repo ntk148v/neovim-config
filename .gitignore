@@ -153,3 +153,6 @@ lazy-lock.json
 
 lua/custom/**
 lua/custom.lua
+
+.qwen/
+.opencode/

@@ -159,13 +159,13 @@ ins_left({
 ins_right({
     function()
         local msg = "null"
-        local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-        local clients = vim.lsp.get_clients()
-        if next(clients) == nil then
+        local buf_ft = vim.bo.filetype
+        local clients = vim.lsp.get_clients({ bufnr = 0 })
+        if #clients == 0 then
             return msg
         end
         for _, client in ipairs(clients) do
-            local filetypes = client.config.filetypes
+            local filetypes = client.config and client.config.filetypes
             if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
                 return client.name
             end

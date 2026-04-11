@@ -1,22 +1,28 @@
 --
--- ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
--- ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
--- ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
--- ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
--- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
--- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
---
 -- File: plugins/configs/null-ls.lua
--- Description: null-ls configuration
+-- Description: none-ls.nvim configuration (null-ls successor)
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
-local null_ls = require("null-ls")
 
--- Load custom configurations
+local present, none_ls = pcall(require, "null-ls")
+if not present then
+    return {}
+end
+
+-- Load custom sources if defined
 local exist, custom = pcall(require, "custom")
-local sources = exist and type(custom) == "table" and custom.setup_sources and custom.setup_sources(null_ls.builtins)
+local custom_sources = exist
+        and type(custom) == "table"
+        and custom.setup_sources
+        and custom.setup_sources(none_ls.builtins)
     or {}
 
-null_ls.setup({
-    debug = false,
-    sources = sources,
-})
+local sources = {}
+
+-- Add custom sources
+if #custom_sources > 0 then
+    for _, source in ipairs(custom_sources) do
+        table.insert(sources, source)
+    end
+end
+
+return { sources = sources }

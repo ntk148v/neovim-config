@@ -1,74 +1,68 @@
 --
--- ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
--- ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
--- ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
--- ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
--- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
--- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
---
 -- File: plugins/configs/lspconfig.lua
--- Description: LSP setup and config
+-- Description: LSP setup using native vim.lsp (Neovim 0.11+)
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
-local merge_tables = require("utils").merge_tables
 
+local utils = require("utils")
+
+-- Load custom server configs
 local exist, custom = pcall(require, "custom")
-local custom_formatting_servers = exist and type(custom) == "table" and custom.formatting_servers or {}
+local custom_servers = exist and type(custom) == "table" and custom.formatting_servers or {}
+
+-- Default server configurations
 local server_configs = {
-  jsonls = {},
-  dockerls = {},
-  bashls = {},
-  gopls = {},
-  ruff = {},
-  vimls = {},
-  yamlls = {},
-  ty = {},
-  marksman = {},
-  lua_ls = {
-    settings = {
-      Lua = {
-        diagnostics = {
-          globals = { "vim" },
+    jsonls = {},
+    dockerls = {},
+    bashls = {},
+    gopls = {},
+    ruff = {},
+    vimls = {},
+    yamlls = {},
+    ty = {},
+    marksman = {},
+    lua_ls = {
+        settings = {
+            Lua = {
+                diagnostics = { globals = { "vim" } },
+                workspace = {
+                    library = vim.api.nvim_get_runtime_file("", true),
+                    checkThirdParty = false,
+                },
+                telemetry = { enable = false },
+            },
         },
-        workspace = {
-          library = vim.api.nvim_get_runtime_file("", true),
-          checkThirdParty = false,
-        },
-        telemetry = {
-          enable = false,
-        },
-      },
     },
-  },
 }
 
-merge_tables(server_configs, custom_formatting_servers)
+-- Merge custom server configs
+utils.merge_tables(server_configs, custom_servers)
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- Get cmp capabilities
+local ok_cmp, cmp_lsp = pcall(require, "cmp_nvim_lsp")
+local capabilities = ok_cmp and cmp_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
+    or vim.lsp.protocol.make_client_capabilities()
 
+-- Register each server with vim.lsp.config()
+local servers_to_ensure = {}
 for server, config in pairs(server_configs) do
-  if config then
-    vim.lsp.config(
-      server,
-      vim.tbl_deep_extend("force", {
-        capabilities = vim.deepcopy(capabilities),
-      }, config == true and {} or config)
-    )
-  end
-end
+    if config then
+        local final_config = vim.tbl_deep_extend("force", {
+            capabilities = vim.deepcopy(capabilities),
+        }, config == true and {} or config)
 
-local mlsp = require("mason-lspconfig")
+        -- Use native vim.lsp.config (Neovim 0.11+)
+        vim.lsp.config(server, final_config)
 
-local ensure_installed = {}
-for server, server_opts in pairs(server_configs) do
-  if server_opts then
-    server_opts = server_opts == true and {} or server_opts
-    if server_opts.mason ~= false then
-      ensure_installed[#ensure_installed + 1] = server
+        -- Track for mason installation
+        if config.mason ~= false then
+            servers_to_ensure[#servers_to_ensure + 1] = server
+        end
     end
-  end
 end
 
+-- Set up mason-lspconfig to auto-install servers
+-- mason-lspconfig's automatic_enable will call vim.lsp.enable() for us
 require("mason-lspconfig").setup({
-  ensure_installed = ensure_installed,
-  automatic_enable = true,
+    ensure_installed = servers_to_ensure,
+    automatic_enable = true,
 })

@@ -1,58 +1,58 @@
-if vim.fn.has("nvim-0.8") == 0 then
-    error("Need Neovim 0.8+ in order to use this config")
+if vim.fn.has("nvim-0.9") == 0 then
+    vim.api.nvim_err_writeln("Need Neovim 0.9+ for this config")
+    vim.cmd([[quit]])
 end
 
-for _, cmd in ipairs({ "git", "rg", { "fd", "fdfind" } }) do
-    local name = type(cmd) == "string" and cmd or vim.inspect(cmd)
-    local commands = type(cmd) == "string" and { cmd } or cmd
-    ---@cast commands string[]
-    local found = false
+-- Check for required executables efficiently
+local required_cmds = { "git", "rg" }
+local fd_cmds = { "fd", "fdfind" }
+local fd_found = false
 
-    for _, c in ipairs(commands) do
-        if vim.fn.executable(c) == 1 then
-            name = c
-            found = true
-        end
-    end
-
-    if not found then
-        error(("`%s` is not installed"):format(name))
+for _, cmd in ipairs(required_cmds) do
+    if vim.fn.executable(cmd) == 0 then
+        vim.api.nvim_err_writeln(("Required command `%s` is not installed"):format(cmd))
+        vim.cmd([[quit]])
     end
 end
 
-vim.opt.termguicolors = true -- enable 24-bit RGB colors
--- Disable annoying deprecated message
-vim.deprecate = function() end
+for _, c in ipairs(fd_cmds) do
+    if vim.fn.executable(c) == 1 then
+        fd_found = true
+        break
+    end
+end
+if not fd_found then
+    vim.api.nvim_err_writeln("Required command `fd` or `fdfind` is not installed")
+    vim.cmd([[quit]])
+end
 
--- bootstrap lazy and all plugins
+vim.opt.termguicolors = true
+
+-- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
     vim.fn.system({
         "git",
         "clone",
         "--filter=blob:none",
         "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
+        "--branch=stable",
         lazypath,
     })
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Load default configurations and plugins
-for _, source in ipairs({
-    "plugins",
-    "options",
-    "mappings",
-    "autocmds",
-}) do
-    local ok, fault = pcall(require, source)
+-- Load configurations in correct order
+-- options and mappings must load before plugins (leader key, etc.)
+for _, mod in ipairs({ "options", "mappings", "autocmds", "plugins" }) do
+    local ok, err = pcall(require, mod)
     if not ok then
-        vim.api.nvim_err_writeln("Failed to load " .. source .. "\n\n" .. fault)
+        vim.api.nvim_err_writeln("Failed to load " .. mod .. "\n\n" .. tostring(err))
     end
 end
 
--- Load custom configurations
-local exist, custom = pcall(require, "custom")
-if exist and type(custom) == "table" and custom.configs then
+-- Load custom configurations if they exist
+local ok, custom = pcall(require, "custom")
+if ok and type(custom) == "table" and type(custom.configs) == "function" then
     custom.configs()
 end

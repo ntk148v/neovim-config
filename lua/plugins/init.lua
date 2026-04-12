@@ -136,15 +136,69 @@ local mini_pick = {
     dependencies = { plenary, "nvim-mini/mini.extra" },
     cmd = "Pick",
     keys = {
-        { "<leader>sh", function() require("mini.pick").builtin.help({}) end, desc = "[S]earch [H]elp" },
-        { "<leader>sk", function() require("mini.extra").pickers.keymaps({}) end, desc = "[S]earch [K]eymaps" },
-        { "<leader>sf", function() require("mini.pick").builtin.files({}) end, desc = "[S]earch [F]iles" },
-        { "<leader>sg", function() require("mini.pick").builtin.grep_live({}) end, desc = "[S]earch by [G]rep" },
-        { "<leader>sd", function() require("mini.extra").pickers.diagnostic({}) end, desc = "[S]earch [D]iagnostics" },
-        { "<leader>sc", function() require("mini.extra").pickers.git_commits({}) end, desc = "[S]earch git commits" },
-        { "<leader>s.", function() require("mini.extra").pickers.oldfiles({}) end, desc = "[S]earch Recent Files" },
-        { "<leader><leader>", function() require("mini.pick").builtin.buffers({}) end, desc = "[ ] Find existing buffers" },
-        { "<leader>sr", function() require("mini.pick").builtin.resume({}) end, desc = "[S]earch [R]esume" },
+        {
+            "<leader>sh",
+            function()
+                require("mini.pick").builtin.help({})
+            end,
+            desc = "[S]earch [H]elp",
+        },
+        {
+            "<leader>sk",
+            function()
+                require("mini.extra").pickers.keymaps({})
+            end,
+            desc = "[S]earch [K]eymaps",
+        },
+        {
+            "<leader>sf",
+            function()
+                require("mini.pick").builtin.files({})
+            end,
+            desc = "[S]earch [F]iles",
+        },
+        {
+            "<leader>sg",
+            function()
+                require("mini.pick").builtin.grep_live({})
+            end,
+            desc = "[S]earch by [G]rep",
+        },
+        {
+            "<leader>sd",
+            function()
+                require("mini.extra").pickers.diagnostic({})
+            end,
+            desc = "[S]earch [D]iagnostics",
+        },
+        {
+            "<leader>sc",
+            function()
+                require("mini.extra").pickers.git_commits({})
+            end,
+            desc = "[S]earch git commits",
+        },
+        {
+            "<leader>s.",
+            function()
+                require("mini.extra").pickers.oldfiles({})
+            end,
+            desc = "[S]earch Recent Files",
+        },
+        {
+            "<leader><leader>",
+            function()
+                require("mini.pick").builtin.buffers({})
+            end,
+            desc = "[ ] Find existing buffers",
+        },
+        {
+            "<leader>sr",
+            function()
+                require("mini.pick").builtin.resume({})
+            end,
+            desc = "[S]earch [R]esume",
+        },
     },
     opts = {
         source = {

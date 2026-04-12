@@ -153,9 +153,8 @@ tree ~/.config/nvim
     │   │   ├── lualine.lua
     │   │   ├── luasnip.lua
     │   │   ├── mason.lua
+    │   │   ├── mini-files.lua
     │   │   ├── null-ls.lua
-    │   │   ├── telescope.lua
-    │   │   ├── tree.lua
     │   │   └── treesitter.lua
     │   └── init.lua
     └── sample_custom.lua
@@ -178,7 +177,8 @@ tree ~/.config/nvim
 | [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)                 | Lua `fork` of vim-web-devicons for neovim                                                                                                          |
 | [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)                        | A blazing fast and easy to configure neovim statusline plugin written in pure lua.                                                                 |
 | [norcalli/nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)       | The fastest Neovim colorizer.                                                                                                                      |
-| [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)   | Find, Filter, Preview, Pick. All lua, all the time.                                                                                                |
+| [nvim-mini/mini.pick](https://github.com/nvim-mini/mini.pick)                       | Fast and minimal fuzzy picker.                                                                                                                     |
+| [nvim-mini/mini.extra](https://github.com/nvim-mini/mini.extra)                     | Extra pickers for mini.pick.                                                                                                                       |
 | [rosé-pine](https://github.com/rose-pine/neovim)                                    | Soho vibes for Neovim                                                                                                                              |
 | [nvimtools/none-ls.nvim](https://github.com/nvimtools/none-ls.nvim)                 | null-ls.nvim reloaded / Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.                                 |
 | [folke/which-key.nvim](https://github.com/folke/which-key.nvim)                     | Create key bindings that stick. WhichKey helps you remember your Neovim keymaps, by showing available keybindings in a popup as you type.          |
@@ -252,16 +252,17 @@ These are the default keymaps, in the following shortcuts, the `<leader>`+` key 
 | <kbd>tt</kbd>                  | Normal | Create terminal                                  |
 | `<leader>`+<kbd>fm</kbd>       | Normal | Open mini.files (Directory of the current files) |
 | `<leader>`+<kbd>fM</kbd>       | Normal | Open mini.files (cwd)                            |
-| `<leader>`+<kbd>sh</kbd>       | Normal | Open Telescope to search help                    |
-| `<leader>`+<kbd>sk</kbd>       | Normal | Open Telescope to search keymaps                 |
-| `<leader>`+<kbd>sf</kbd>       | Normal | Open Telescope to search files                   |
-| `<leader>`+<kbd>ss</kbd>       | Normal | Open Telescope to search select telescope        |
-| `<leader>`+<kbd>sg</kbd>       | Normal | Open Telescope to search by live grep            |
-| `<leader>`+<kbd>sd</kbd>       | Normal | Open Telescope to search diagnostics             |
-| `<leader>`+<kbd>sr</kbd>       | Normal | Open Telescope to search resume                  |
-| `<leader>`+<kbd>s.</kbd>       | Normal | Open Telescope to search recent files            |
-| `<leader>`+`<leader>`          | Normal | Open Telescope to search existing buffers        |
-| `<leader>`+<kbd>sc</kbd>       | Normal | Open Telescope to list git commits               |
+| `<leader>`+<kbd>sh</kbd>       | Normal | Open mini.pick to search help                    |
+| `<leader>`+<kbd>sk</kbd>       | Normal | Open mini.pick to search keymaps                 |
+| `<leader>`+<kbd>sf</kbd>       | Normal | Open mini.pick to search files                   |
+| `<leader>`+<kbd>sg</kbd>       | Normal | Open mini.pick to search by live grep            |
+| `<leader>`+<kbd>sd</kbd>       | Normal | Open mini.pick to search diagnostics             |
+| `<leader>`+<kbd>sr</kbd>       | Normal | Open mini.pick to resume last picker             |
+| `<leader>`+<kbd>s.</kbd>       | Normal | Open mini.pick to search recent files            |
+| `<leader>`+`<leader>`          | Normal | Open mini.pick to search existing buffers        |
+| `<leader>`+<kbd>sc</kbd>       | Normal | Open mini.pick to list git commits               |
+| `<leader>`+<kbd>/</kbd>        | Normal | Fuzzily search in current buffer                 |
+| `<leader>`+<kbd>sn</kbd>       | Normal | Search Neovim config files                       |
 | `<leader>`+<kbd>wh/j/k/l</kbd> | Normal | Move around splits                               |
 | <kbd>mm</kbd>                  | Normal | Comment/Uncomment line                           |
 

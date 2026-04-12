@@ -36,26 +36,16 @@ function _G.reload_config()
 end
 map("n", "rr", _G.reload_config, { desc = "[R]eload configuration without restart" })
 
--- ─── Telescope ──────────────────────────────────────────────────────────
--- (Keybindings are now defined in plugins/init.lua via lazy.nvim `keys`)
+-- ─── Mini.pick ──────────────────────────────────────────────────────────
+-- (Primary keybindings are now defined in plugins/init.lua via lazy.nvim `keys`)
 -- Additional advanced mappings defined inline:
 
 map("n", "<leader>/", function()
-    require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-        winblend = 10,
-        previewer = false,
-    }))
+    require("mini.extra").pickers.buf_lines({ scope = "current" })
 end, { desc = "[/] Fuzzily search in current buffer" })
 
-map("n", "<leader>s/", function()
-    require("telescope.builtin").live_grep({
-        grep_open_files = true,
-        prompt_title = "Live Grep in Open Files",
-    })
-end, { desc = "[S]earch [/] in Open Files" })
-
 map("n", "<leader>sn", function()
-    require("telescope.builtin").find_files({ cwd = vim.fn.stdpath("config") })
+    require("mini.pick").builtin.files({ cwd = vim.fn.stdpath("config") })
 end, { desc = "[S]earch [N]eovim files" })
 
 -- ─── Mini.files ─────────────────────────────────────────────────────────

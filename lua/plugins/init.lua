@@ -131,38 +131,27 @@ local treesitter = {
     end,
 }
 
--- ─── Telescope ───────────────────────────────────────────────────────────
-local telescope = {
-    "nvim-telescope/telescope.nvim",
-    dependencies = {
-        plenary,
-        {
-            "nvim-telescope/telescope-fzf-native.nvim",
-            build = "make",
-            lazy = true,
+-- ─── Mini.pick ───────────────────────────────────────────────────────────
+local mini_pick = {
+    "nvim-mini/mini.pick",
+    dependencies = { plenary, "nvim-mini/mini.extra" },
+    cmd = "Pick",
+    keys = {
+        { "<leader>sh", function() require("mini.pick").builtin.help({}) end, desc = "[S]earch [H]elp" },
+        { "<leader>sk", function() require("mini.extra").pickers.keymaps({}) end, desc = "[S]earch [K]eymaps" },
+        { "<leader>sf", function() require("mini.pick").builtin.files({}) end, desc = "[S]earch [F]iles" },
+        { "<leader>sg", function() require("mini.pick").builtin.grep_live({}) end, desc = "[S]earch by [G]rep" },
+        { "<leader>sd", function() require("mini.extra").pickers.diagnostic({}) end, desc = "[S]earch [D]iagnostics" },
+        { "<leader>sc", function() require("mini.extra").pickers.git_commits({}) end, desc = "[S]earch git commits" },
+        { "<leader>s.", function() require("mini.extra").pickers.oldfiles({}) end, desc = "[S]earch Recent Files" },
+        { "<leader><leader>", function() require("mini.pick").builtin.buffers({}) end, desc = "[ ] Find existing buffers" },
+        { "<leader>sr", function() require("mini.pick").builtin.resume({}) end, desc = "[S]earch [R]esume" },
+    },
+    opts = {
+        source = {
+            show_icons = true,
         },
     },
-    cmd = "Telescope",
-    keys = {
-        { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "[S]earch [H]elp" },
-        { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "[S]earch [K]eymaps" },
-        { "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "[S]earch [F]iles" },
-        { "<leader>ss", "<cmd>Telescope<cr>", desc = "[S]earch [S]elect Telescope" },
-        { "<leader>sw", "<cmd>Telescope grep_string<cr>", desc = "[S]earch current [W]ord" },
-        { "<leader>sg", "<cmd>Telescope live_grep<cr>", desc = "[S]earch by [G]rep" },
-        { "<leader>sd", "<cmd>Telescope diagnostics<cr>", desc = "[S]earch [D]iagnostics" },
-        { "<leader>sr", "<cmd>Telescope resume<cr>", desc = "[S]earch [R]esume" },
-        { "<leader>sc", "<cmd>Telescope git_commits<cr>", desc = "[S]earch git commits" },
-        { "<leader>s.", "<cmd>Telescope oldfiles<cr>", desc = "[S]earch Recent Files" },
-        { "<leader><leader>", "<cmd>Telescope buffers<cr>", desc = "[ ] Find existing buffers" },
-    },
-    config = function()
-        local tel_config = require("plugins.configs.telescope")
-        require("telescope").setup(tel_config.defaults or {})
-        pcall(function()
-            require("telescope").load_extension("fzf")
-        end)
-    end,
 }
 
 -- ─── Statusline ──────────────────────────────────────────────────────────
@@ -247,7 +236,7 @@ local cmp = {
                 enable_check_bracket_line = false,
                 ignored_next_char = "[%w%.]",
                 fast_wrap = {},
-                disable_filetype = { "TelescopePrompt", "vim" },
+                disable_filetype = { "MiniPick", "vim" },
             },
             config = function(_, opts)
                 require("nvim-autopairs").setup(opts)
@@ -315,7 +304,7 @@ local specs = {
     conform,
     gitsigns,
     treesitter,
-    telescope,
+    mini_pick,
     lualine,
     mason,
     mason_lspconfig,

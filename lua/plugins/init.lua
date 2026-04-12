@@ -34,7 +34,7 @@ local which_key = {
 local plenary = { "nvim-lua/plenary.nvim" }
 
 local mini_misc = {
-    "echasnovski/mini.misc",
+    "nvim-mini/mini.misc",
     version = "*",
     config = function()
         require("mini.misc").setup()
@@ -43,7 +43,7 @@ local mini_misc = {
 }
 
 local mini_files = {
-    "echasnovski/mini.files",
+    "nvim-mini/mini.files",
     keys = {
         { "<leader>fm", desc = "Open mini.files (current file dir)" },
         { "<leader>fM", desc = "Open mini.files (cwd)" },

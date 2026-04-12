@@ -35,7 +35,7 @@ local plenary = { "nvim-lua/plenary.nvim" }
 
 local mini_misc = {
     "nvim-mini/mini.misc",
-    version = "*",
+    event = "UIEnter",
     config = function()
         require("mini.misc").setup()
         require("mini.misc").setup_termbg_sync()
@@ -122,7 +122,6 @@ local gitsigns = {
 -- ─── Treesitter ──────────────────────────────────────────────────────────
 local treesitter = {
     "nvim-treesitter/nvim-treesitter",
-    version = false,
     event = { "BufReadPost", "BufNewFile" },
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo", "TSUpdate" },
     build = ":TSUpdate",

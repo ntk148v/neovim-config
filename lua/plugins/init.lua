@@ -265,7 +265,17 @@ local lspconfig = {
 -- ─── Completion ──────────────────────────────────────────────────────────
 local cmp = {
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
+    event = { "InsertEnter", "LspAttach" },
+    config = function(_, opts)
+        local cmp = require("cmp")
+        -- Explicitly require sources to ensure they register themselves
+        pcall(require, "cmp_path")
+        pcall(require, "cmp_buffer")
+        pcall(require, "cmp_nvim_lsp")
+        pcall(require, "cmp_nvim_lua")
+        pcall(require, "cmp_luasnip")
+        cmp.setup(opts)
+    end,
     dependencies = {
         -- Snippet engine
         {

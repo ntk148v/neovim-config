@@ -1,5 +1,5 @@
 --
--- ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
+-- ███╗   ██║███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
 -- ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
 -- ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
 -- ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
@@ -9,7 +9,10 @@
 -- File: plugins/configs/cmp.lua
 -- Description: cmp configuration
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
-local cmp = require("cmp")
+local cmp_status_ok, cmp = pcall(require, "cmp")
+if not cmp_status_ok then
+    return {}
+end
 
 local function border(hl_name)
     return {
@@ -26,37 +29,46 @@ end
 
 local options = {
     completion = {
-        completeopt = "menu,menuone",
+        completeopt = "menu,menuone,noselect",
     },
 
     window = {
         completion = {
-            winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel",
+            -- Re-enable defaults, commenting out custom highlights that might hide text
+            -- winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel",
             scrollbar = false,
         },
         documentation = {
             border = border("CmpDocBorder"),
-            winhighlight = "Normal:CmpDoc",
+            -- winhighlight = "Normal:CmpDoc",
         },
     },
 
     snippet = {
         expand = function(args)
-            require("luasnip").lsp_expand(args.body)
+            local luasnip_ok, luasnip = pcall(require, "luasnip")
+            if luasnip_ok then
+                luasnip.lsp_expand(args.body)
+            end
         end,
     },
 
     formatting = {
         fields = { "abbr", "kind", "menu" },
-        format = require("lspkind").cmp_format({
-            maxwidth = 50,
-            ellipsis_char = "...",
-            mode = "symbol_text",
-            symbol_map = {},
-        }),
+        format = function(entry, vim_item)
+            local lspkind_ok, lspkind = pcall(require, "lspkind")
+            if lspkind_ok then
+                return lspkind.cmp_format({
+                    maxwidth = 50,
+                    ellipsis_char = "...",
+                    mode = "symbol_text",
+                })(entry, vim_item)
+            end
+            return vim_item
+        end,
     },
 
-    mapping = {
+    mapping = cmp.mapping.preset.insert({
         ["<C-p>"] = cmp.mapping.select_prev_item(),
         ["<C-n>"] = cmp.mapping.select_next_item(),
         ["<C-d>"] = cmp.mapping.scroll_docs(-4),
@@ -68,27 +80,31 @@ local options = {
             select = true,
         }),
         ["<Tab>"] = cmp.mapping(function(fallback)
+            local luasnip_ok, luasnip = pcall(require, "luasnip")
             if cmp.visible() then
                 cmp.select_next_item()
-            elseif require("luasnip").expand_or_jumpable() then
+            elseif luasnip_ok and luasnip.expand_or_jumpable() then
                 vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
             else
                 fallback()
             end
         end, { "i", "s" }),
         ["<S-Tab>"] = cmp.mapping(function(fallback)
+            local luasnip_ok, luasnip = pcall(require, "luasnip")
             if cmp.visible() then
                 cmp.select_prev_item()
-            elseif require("luasnip").jumpable(-1) then
+            elseif luasnip_ok and luasnip.jumpable(-1) then
                 vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
             else
                 fallback()
             end
         end, { "i", "s" }),
-    },
-    sources = {
+    }),
+
+    sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "luasnip" },
+    }, {
         {
             name = "buffer",
             option = {
@@ -104,6 +120,7 @@ local options = {
         },
         { name = "nvim_lua" },
         { name = "path" },
-    },
+    }),
 }
+
 return options

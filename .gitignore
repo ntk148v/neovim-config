@@ -156,3 +156,11 @@ lua/custom.lua
 
 .qwen/
 .opencode/
+node_modules/
+
+.graphify/
+graphify-out/
+.graphify_*.json
+.graphify_python
+
+nvim-pack-lock.json

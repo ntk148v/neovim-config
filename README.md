@@ -36,7 +36,6 @@
 - [5. Plugins \& LSP](#5-plugins--lsp)
   - [5.1. Plugins](#51-plugins)
   - [5.2. LSP](#52-lsp)
-
 - [6. Keymaps](#6-keymaps)
 - [7. Customization](#7-customization)
 - [8. Contribution](#8-contribution)
@@ -123,7 +122,7 @@ git clone https://github.com/ntk148v/neovim-config.git "${env:LOCALAPPDATA}\nvim
 
 </details>
 
-- Start Neovim, Lazy should be installed automatically, then it will install plugins.
+- Start Neovim, leanpack.nvim should be installed automatically, then it will install plugins.
 
 ```shell
 nvim
@@ -139,24 +138,25 @@ The files under config will be automatically loaded at the appropriate time, so 
 ```shell
 tree ~/.config/nvim
 ├── init.lua
-├── lazy-lock.json
+├── nvim-pack-lock.json
 └── lua
     ├── autocmds.lua
     ├── custom.lua
     ├── mappings.lua
     ├── options.lua
     ├── plugins
-    │   ├── configs
-    │   │   ├── cmp.lua
-    │   │   ├── gitsigns.lua
-    │   │   ├── lspconfig.lua
-    │   │   ├── lualine.lua
-    │   │   ├── luasnip.lua
-    │   │   ├── mason.lua
-    │   │   ├── mini-files.lua
-    │   │   ├── null-ls.lua
-    │   │   └── treesitter.lua
-    │   └── init.lua
+    │   ├── configs
+    │   │   ├── cmp.lua
+    │   │   ├── conform.lua
+    │   │   ├── gitsigns.lua
+    │   │   ├── lspconfig.lua
+    │   │   ├── luasnip.lua
+    │   │   ├── lualine.lua
+    │   │   ├── mason.lua
+    │   │   ├── mini-files.lua
+    │   │   ├── null-ls.lua
+    │   │   └── treesitter.lua
+    │   └── init.lua
     └── sample_custom.lua
 ```
 

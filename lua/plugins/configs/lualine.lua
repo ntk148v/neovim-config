@@ -43,7 +43,7 @@ local config = {
         theme = auto,
         component_separators = "",
         section_separators = "",
-        disabled_filetypes = { "Lazy", "NvimTree" },
+        disabled_filetypes = { "Leanpack", "NvimTree" },
     },
 
     sections = {

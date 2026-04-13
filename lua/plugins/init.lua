@@ -1,5 +1,5 @@
 --
--- ███╗   ██║███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
+-- ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
 -- ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
 -- ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
 -- ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
@@ -7,7 +7,7 @@
 -- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
 --
 -- File: plugins/init.lua
--- Description: Plugin specifications for lazy.nvim
+-- Description: Plugin specifications for leanpack.nvim
 
 -- ─── Color / Utility Plugins ─────────────────────────────────────────────
 local colorizer = {
@@ -113,6 +113,7 @@ local conform = {
 -- ─── Git ─────────────────────────────────────────────────────────────────
 local gitsigns = {
     "lewis6991/gitsigns.nvim",
+    main = "gitsigns",
     event = { "BufReadPost", "BufNewFile" },
     opts = function()
         return require("plugins.configs.gitsigns")
@@ -219,8 +220,7 @@ local lualine = {
 -- ─── Colorscheme ─────────────────────────────────────────────────────────
 local rosepine = {
     "rose-pine/neovim",
-    name = "rose-pine",
-    priority = 1000, -- load first
+    lazy = true, -- Don't load automatically, let custom.lua decide colorscheme
     opts = { dark_variant = "main" },
     config = function(_, opts)
         require("rose-pine").setup(opts)
@@ -232,8 +232,8 @@ local rosepine = {
 local mason = {
     "mason-org/mason.nvim",
     cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
-    opts = function()
-        return require("plugins.configs.mason")
+    config = function()
+        require("plugins.configs.mason")
     end,
 }
 
@@ -293,7 +293,6 @@ local cmp = {
             },
             config = function(_, opts)
                 require("nvim-autopairs").setup(opts)
-                require("nvim-autopairs.completion.cmp").on_confirm_done()(require("cmp"))
             end,
         },
 
@@ -314,8 +313,8 @@ local cmp = {
 local exist, custom = pcall(require, "custom")
 local custom_plugins = exist and type(custom) == "table" and custom.plugins or {}
 
-local specs = {
-    rosepine,
+return {
+    rosepine, -- already has priority = 1000 and lazy = false
     colorizer,
     which_key,
     plenary,
@@ -334,51 +333,3 @@ local specs = {
     -- Custom plugins (if any)
     unpack(custom_plugins),
 }
-
-require("lazy").setup({
-    spec = specs,
-
-    lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json",
-    defaults = { lazy = false, version = nil },
-
-    ui = {
-        icons = {
-            ft = "",
-            lazy = "󰂠",
-            loaded = "",
-            not_loaded = "",
-        },
-    },
-
-    install = {
-        missing = true,
-        colorscheme = { "rose-pine", "habamax" },
-    },
-
-    checker = {
-        enabled = true,
-        notify = false,
-        frequency = 86400,
-    },
-
-    change_detection = {
-        enabled = true,
-        notify = false,
-    },
-
-    performance = {
-        cache = { enabled = true },
-        reset_packpath = true,
-        rtp = {
-            reset = true,
-            disabled_plugins = {
-                "gzip",
-                "tarPlugin",
-                "tutor",
-                "zipPlugin",
-            },
-        },
-    },
-
-    state = vim.fn.stdpath("state") .. "/lazy/state.json",
-})

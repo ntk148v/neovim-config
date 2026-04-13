@@ -310,39 +310,6 @@ local cmp = {
     end,
 }
 
--- ─── Copilot ─────────────────────────────────────────────────────────────
-local copilot = {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    opts = {
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-    },
-    build = ":Copilot auth",
-}
-
-local copilot_cmp = {
-    "zbirenbaum/copilot-cmp",
-    dependencies = { copilot },
-    event = "InsertEnter",
-    opts = {},
-    config = function()
-        require("copilot_cmp").setup()
-    end,
-}
-
-local copilot_chat = {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    dependencies = { copilot, plenary },
-    cmd = { "CopilotChat", "CopilotChatOpen", "CopilotChatReset" },
-    opts = { model = "claude-3.5-sonnet" },
-}
--- Only build tiktoken on Linux/macOS
-if vim.fn.has("linux") == 1 or vim.fn.has("mac") == 1 then
-    copilot_chat.build = "make tiktoken"
-end
-
 -- ─── Build spec ──────────────────────────────────────────────────────────
 local exist, custom = pcall(require, "custom")
 local custom_plugins = exist and type(custom) == "table" and custom.plugins or {}
@@ -364,9 +331,6 @@ local specs = {
     none_ls,
     lspconfig,
     cmp,
-    copilot,
-    copilot_cmp,
-    copilot_chat,
     -- Custom plugins (if any)
     unpack(custom_plugins),
 }

@@ -42,6 +42,9 @@
 - [8. Contribution](#8-contribution)
 - [9. Guide and resources](#9-guide-and-resources)
 
+> [!IMPORTANT]
+> **I’m currently trying to switch to using [leanpack.nvim](https://github.com/ntk148v/leanpack.nvim) instead of lazy.nvim. This is a Neovim plugin manager built on top of vim.pack (Neovim ≥ 0.12.0). You can try it out on the branch [feat/leanpack.nvim](https://github.com/ntk148v/neovim-config/tree/feat/leanpack.nvim); until leanpack.nvim is fully mature, lazy.nvim will continue to be used as the main plugin manager**.
+
 ## 1. Introduction
 
 [Neovim](https://neovim.io/) is a pretty cool successor to Vim, focusing on compatibility while adding asynchronous plugin functionality and trying to clean up the code base. Having been fed up at various times with both Sublime Text (2 and 3) and Atom, and after realizing how much development I do over SSH, it seemed reasonable to check out using vim (or nvim, in this case) as my IDE. The advantages essentially boil down to:
@@ -52,10 +55,10 @@
 
 Therefore, I decided to create this repository.
 
-> [!IMPORTANT]
-> There are several versions, checkout [CHANGELOG](./CHANGELOG.md).
+> [!NOTE]
 >
-> This configuration is meant as a starting point, and it fits my needs only. If you want to customize it, jump to [6. Customization](#6-customization).
+> 1. There are several versions, checkout [CHANGELOG](./CHANGELOG.md).
+> 2. This configuration is meant as a starting point, and it fits my needs only. If you want to customize it, jump to [6. Customization](#6-customization).
 
 ## 2. Screenshots
 
@@ -182,9 +185,8 @@ tree ~/.config/nvim
 | [rosé-pine](https://github.com/rose-pine/neovim)                              | Soho vibes for Neovim                                                                                                                              |
 | [nvimtools/none-ls.nvim](https://github.com/nvimtools/none-ls.nvim)           | null-ls.nvim reloaded / Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.                                 |
 | [folke/which-key.nvim](https://github.com/folke/which-key.nvim)               | Create key bindings that stick. WhichKey helps you remember your Neovim keymaps, by showing available keybindings in a popup as you type.          |
-
-| [nvim-mini/mini.files](https://github.com/nvim-mini/mini.files) | Navigate and manipulate file system. Part of 'mini.nvim' library. |
-| [nvim-mini/mini.misc](https://github.com/nvim-mini.misc) | About Neovim Lua plugin with miscellaneous useful functions. Part of 'mini.nvim' library. |
+| [nvim-mini/mini.files](https://github.com/nvim-mini/mini.files)               | Navigate and manipulate file system. Part of 'mini.nvim' library.                                                                                  |
+| [nvim-mini/mini.misc](https://github.com/nvim-mini.misc)                      | About Neovim Lua plugin with miscellaneous useful functions. Part of 'mini.nvim' library.                                                          |
 
 ### 5.2. LSP
 

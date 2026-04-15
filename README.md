@@ -182,9 +182,8 @@ tree ~/.config/nvim
 | [rosé-pine](https://github.com/rose-pine/neovim)                              | Soho vibes for Neovim                                                                                                                              |
 | [nvimtools/none-ls.nvim](https://github.com/nvimtools/none-ls.nvim)           | null-ls.nvim reloaded / Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.                                 |
 | [folke/which-key.nvim](https://github.com/folke/which-key.nvim)               | Create key bindings that stick. WhichKey helps you remember your Neovim keymaps, by showing available keybindings in a popup as you type.          |
-
-| [nvim-mini/mini.files](https://github.com/nvim-mini/mini.files) | Navigate and manipulate file system. Part of 'mini.nvim' library. |
-| [nvim-mini/mini.misc](https://github.com/nvim-mini.misc) | About Neovim Lua plugin with miscellaneous useful functions. Part of 'mini.nvim' library. |
+| [nvim-mini/mini.files](https://github.com/nvim-mini/mini.files)               | Navigate and manipulate file system. Part of 'mini.nvim' library.                                                                                  |
+| [nvim-mini/mini.misc](https://github.com/nvim-mini.misc)                      | About Neovim Lua plugin with miscellaneous useful functions. Part of 'mini.nvim' library.                                                          |
 
 ### 5.2. LSP
 

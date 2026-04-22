@@ -39,8 +39,7 @@ utils.merge_tables(server_configs, custom_servers)
 
 -- Get blink.cmp capabilities
 local ok_blink, blink = pcall(require, "blink.cmp")
-local capabilities = ok_blink and blink.get_lsp_capabilities()
-    or vim.lsp.protocol.make_client_capabilities()
+local capabilities = ok_blink and blink.get_lsp_capabilities() or vim.lsp.protocol.make_client_capabilities()
 
 -- Register each server with vim.lsp.config()
 local servers_to_ensure = {}

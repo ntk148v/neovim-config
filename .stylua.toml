@@ -3,8 +3,8 @@ line_endings = "Unix"
 indent_type = "Spaces"
 indent_width = 4
 quote_style = "AutoPreferDouble"
-call_parentheses = "None"
-collapse_simple_statement = "None"
+call_parentheses = "Always"
+collapse_simple_statement = "Never"
 
 [sort_requires]
 enabled = true

@@ -48,54 +48,8 @@ local mini_files = {
         { "<leader>fm", desc = "Open mini.files (current file dir)" },
         { "<leader>fM", desc = "Open mini.files (cwd)" },
     },
-    opts = require("plugins.configs.mini-files"),
-    config = function(_, opts)
-        require("mini.files").setup(opts)
-
-        local show_dotfiles = true
-        local filter_show = function(_)
-            return true
-        end
-        local filter_hide = function(fs_entry)
-            return not vim.startswith(fs_entry.name, ".")
-        end
-
-        local toggle_dotfiles = function()
-            show_dotfiles = not show_dotfiles
-            local new_filter = show_dotfiles and filter_show or filter_hide
-            require("mini.files").refresh({ content = { filter = new_filter } })
-        end
-
-        local map_split = function(buf_id, lhs, direction, close_on_file)
-            local rhs = function()
-                local cur_win = require("mini.files").get_explorer_state().target_window
-                if cur_win then
-                    vim.api.nvim_win_call(cur_win, function()
-                        vim.cmd("belowright " .. direction .. " split")
-                        local new_win = vim.api.nvim_get_current_win()
-                        require("mini.files").set_target_window(new_win)
-                        require("mini.files").go_in({ close_on_file = close_on_file })
-                    end)
-                end
-            end
-            local desc = "Open in " .. direction .. " split"
-            if close_on_file then
-                desc = desc .. " and close"
-            end
-            vim.keymap.set("n", lhs, rhs, { buffer = buf_id, desc = desc })
-        end
-
-        vim.api.nvim_create_autocmd("User", {
-            pattern = "MiniFilesBufferCreate",
-            callback = function(args)
-                local buf_id = args.data.buf_id
-                vim.keymap.set("n", "g.", toggle_dotfiles, { buffer = buf_id, desc = "Toggle hidden files" })
-                map_split(buf_id, "<C-w>s", "horizontal", false)
-                map_split(buf_id, "<C-w>v", "vertical", false)
-                map_split(buf_id, "<C-w>S", "horizontal", true)
-                map_split(buf_id, "<C-w>V", "vertical", true)
-            end,
-        })
+    config = function()
+        require("plugins.configs.mini-files")
     end,
 }
 

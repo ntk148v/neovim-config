@@ -264,32 +264,20 @@ local lspconfig = {
 
 -- ─── Completion ──────────────────────────────────────────────────────────
 local cmp = {
-    "hrsh7th/nvim-cmp",
+    "saghen/blink.cmp",
+    version = "1.*",
     event = { "InsertEnter", "LspAttach" },
-    config = function(_, opts)
-        local cmp = require("cmp")
-        -- Explicitly require sources to ensure they register themselves
-        pcall(require, "cmp_path")
-        pcall(require, "cmp_buffer")
-        pcall(require, "cmp_nvim_lsp")
-        pcall(require, "cmp_nvim_lua")
-        pcall(require, "cmp_luasnip")
-        cmp.setup(opts)
-    end,
     dependencies = {
-        -- Snippet engine
+        "rafamadriz/friendly-snippets",
         {
             "L3MON4D3/LuaSnip",
-            dependencies = "rafamadriz/friendly-snippets",
-            event = "InsertEnter",
+            version = "v2.*",
             opts = { history = true, updateevents = "TextChanged,TextChangedI" },
             config = function(_, opts)
                 require("luasnip").config.set_config(opts)
                 require("plugins.configs.luasnip")
             end,
         },
-
-        -- Autopairs
         {
             "windwp/nvim-autopairs",
             event = "InsertEnter",
@@ -301,25 +289,12 @@ local cmp = {
                 fast_wrap = {},
                 disable_filetype = { "MiniPick", "vim" },
             },
-            config = function(_, opts)
-                require("nvim-autopairs").setup(opts)
-                local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-                local cmp = require("cmp")
-                cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-            end,
         },
-
-        -- Cmp sources
-        "saadparwaiz1/cmp_luasnip",
-        "hrsh7th/cmp-nvim-lua",
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "onsails/lspkind.nvim",
     },
     opts = function()
         return require("plugins.configs.cmp")
     end,
+    opts_extend = { "sources.default" },
 }
 
 -- ─── Build spec ──────────────────────────────────────────────────────────

@@ -37,9 +37,9 @@ local server_configs = {
 -- Merge custom server configs
 utils.merge_tables(server_configs, custom_servers)
 
--- Get cmp capabilities
-local ok_cmp, cmp_lsp = pcall(require, "cmp_nvim_lsp")
-local capabilities = ok_cmp and cmp_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- Get blink.cmp capabilities
+local ok_blink, blink = pcall(require, "blink.cmp")
+local capabilities = ok_blink and blink.get_lsp_capabilities()
     or vim.lsp.protocol.make_client_capabilities()
 
 -- Register each server with vim.lsp.config()

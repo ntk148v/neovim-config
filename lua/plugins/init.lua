@@ -126,8 +126,9 @@ local treesitter = {
     event = { "BufReadPost", "BufNewFile" },
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo", "TSUpdate" },
     build = ":TSUpdate",
-    opts = function()
-        return require("plugins.configs.treesitter")
+    branch = "main",
+    config = function()
+        require("plugins.configs.treesitter")
     end,
 }
 

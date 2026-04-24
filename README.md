@@ -262,7 +262,7 @@ You can customize this configuration by creating the `custom` module. You can ch
 Checkout the [sample custom](./nvim/lua/sample_custom.lua) file for the starting point. The logic is taken from [CyberNvim](https://github.com/pgosar/CyberNvim/wiki/Configuration#predefined-sections). There are a number of defined sections in the config:
 
 - `M.setup_sources` is used to add extra sources to connect to Null-ls - you can find a list of sources [here](https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md). The parameter b is just short for null_ls.builtins.
-- `M.treesitter_parsers` is used to add extra [Treesitter](https://github.com/nvim-treesitter/nvim-treesitter) highlighter.
+- `M.treesitter_parsers` is used to add extra [Treesitter](https://github.com/nvim-treesitter/nvim-treesitter) highlighter. Actually, you don't need this, the current config will automatically detect file type and download the treesitter parser.
 - `M.plugins` is where you will add your own plugin definitions.
 - `M.configs` is the most important section of your own configuration. This is where you can define any autocommands, require any files, or otherwise completely port your current configuration.
 - `M.formatting_servers` is used to setup auto formatting rules. You need to select the language server that will provide autoformatting capabilities

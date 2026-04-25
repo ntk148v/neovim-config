@@ -46,6 +46,7 @@ require("leanpack").setup({
         vim_loader = true,
         rtp_prune = true,
     },
+    profiling = true,
 })
 
 -- Load custom configurations if they exist

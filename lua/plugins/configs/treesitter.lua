@@ -38,12 +38,8 @@ require("nvim-treesitter").install(parsers)
 ---@param buf integer
 ---@param language string
 local function treesitter_try_attach(buf, language)
-    -- check if parser exists and load it
-    if not vim.treesitter.language.add(language) then
-        return
-    end
     -- enables syntax highlighting and other treesitter features
-    vim.treesitter.start(buf, language)
+    pcall(vim.treesitter.start, buf, language)
 
     -- enables treesitter based folds
     -- for more info on folds see `:help folds`
@@ -61,12 +57,19 @@ local function treesitter_try_attach(buf, language)
 end
 
 local available_parsers = require("nvim-treesitter").get_available()
+local skip_filetypes = { "minifiles", "MiniPick", "NvimTree", "lazy", "mason", "help", "qf" }
+
 vim.api.nvim_create_autocmd("FileType", {
     callback = function(args)
         local buf, filetype = args.buf, args.match
 
+        -- Skip known non-treesitter filetypes early
+        if vim.tbl_contains(skip_filetypes, filetype) or filetype == "" then
+            return
+        end
+
         local language = vim.treesitter.language.get_lang(filetype)
-        if not language then
+        if not language or language == "" or language == "minifiles" then
             return
         end
 
@@ -80,9 +83,14 @@ vim.api.nvim_create_autocmd("FileType", {
             require("nvim-treesitter").install(language):await(function()
                 treesitter_try_attach(buf, language)
             end)
-        else
-            -- try to enable treesitter features in case the parser exists but is not available from `nvim-treesitter`
-            treesitter_try_attach(buf, language)
         end
+    end,
+})
+
+-- Explicitly disable treesitter for minifiles to be extra safe
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "minifiles",
+    callback = function(args)
+        pcall(vim.treesitter.stop, args.buf)
     end,
 })

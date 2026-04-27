@@ -62,6 +62,13 @@ local mini_files = {
     },
     config = function()
         require("mini.files").setup(require("plugins.configs.mini-files"))
+        -- Disable treesitter for mini.files buffers to prevent errors
+        vim.api.nvim_create_autocmd("User", {
+            pattern = "MiniFilesBufferCreate",
+            callback = function(args)
+                pcall(vim.treesitter.stop, args.data.buf_id)
+            end,
+        })
     end,
 }
 
@@ -254,7 +261,7 @@ local cmp = {
                 enable_check_bracket_line = false,
                 ignored_next_char = "[%w%.]",
                 fast_wrap = {},
-                disable_filetype = { "MiniPick", "vim" },
+                disable_filetype = { "MiniPick", "vim", "minifiles" },
             },
         },
     },

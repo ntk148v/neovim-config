@@ -5,6 +5,10 @@
 
 local utils = require("utils")
 
+-- Ensure nvim-lspconfig is loaded so it injects default server configurations
+-- (like cmd and filetypes) into Neovim's native vim.lsp.config registry.
+require("lspconfig")
+
 -- Load custom server configs
 local exist, custom = pcall(require, "custom")
 local custom_servers = exist and type(custom) == "table" and custom.formatting_servers or {}

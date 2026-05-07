@@ -158,19 +158,27 @@ ins_left({
 -- Right side
 ins_right({
     function()
-        local msg = "null"
+        local msg = "No LSP"
         local buf_ft = vim.bo.filetype
         local clients = vim.lsp.get_clients({ bufnr = 0 })
         if #clients == 0 then
             return msg
         end
+
+        local fallback_name = nil
         for _, client in ipairs(clients) do
             local filetypes = client.config and client.config.filetypes
             if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                return client.name
+                if client.name ~= "null-ls" then
+                    return client.name -- Return the primary LSP immediately
+                end
+            end
+            if client.name == "null-ls" then
+                fallback_name = client.name
             end
         end
-        return msg
+
+        return fallback_name or msg
     end,
     icon = " LSP:",
     color = { gui = "bold" },

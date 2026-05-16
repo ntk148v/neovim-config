@@ -39,8 +39,10 @@ local options = {
     },
 
     completion = {
+        menu = { border = border("CmpBorder") },
         documentation = {
             auto_show = false,
+            window = { border = border("CmpBorder") },
         },
         list = {
             selection = {
@@ -56,7 +58,6 @@ local options = {
 
     appearance = {
         nerd_font_variant = "mono",
-        border = border("CmpBorder"),
     },
 
     sources = {

@@ -59,6 +59,9 @@ end
 local available_parsers = require("nvim-treesitter").get_available()
 local skip_filetypes = { "minifiles", "MiniPick", "NvimTree", "lazy", "mason", "help", "qf" }
 
+-- ponytail: g:treesitter_auto_install=false skips auto-download; attach installed parsers only
+local auto_install = vim.g.treesitter_auto_install ~= false
+
 vim.api.nvim_create_autocmd("FileType", {
     callback = function(args)
         local buf, filetype = args.buf, args.match
@@ -75,11 +78,11 @@ vim.api.nvim_create_autocmd("FileType", {
 
         local installed_parsers = require("nvim-treesitter").get_installed("parsers")
 
+        -- Enable the parser if it is already installed
         if vim.tbl_contains(installed_parsers, language) then
-            -- enable the parser if it is installed
             treesitter_try_attach(buf, language)
-        elseif vim.tbl_contains(available_parsers, language) then
-            -- if a parser is available in `nvim-treesitter` auto install it, and enable it after the installation is done
+        elseif auto_install and vim.tbl_contains(available_parsers, language) then
+            -- if auto-install is enabled and a parser is available, install and attach
             require("nvim-treesitter").install(language):await(function()
                 treesitter_try_attach(buf, language)
             end)

@@ -39,6 +39,7 @@ end
 -- Setup leanpack with import from lua/plugins/
 require("leanpack").setup({
     { import = "plugins" },
+    sync = true,
     defaults = {
         lazy = true,
     },
